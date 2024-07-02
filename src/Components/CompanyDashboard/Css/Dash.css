@@ -267,7 +267,7 @@
     width: 100%;
     height: auto;
     padding: 20px;
-    background-color: #16DB65;
+    background-color: #7BF2AB;
     text-align: center;
     border-radius: 20px;
     margin: 30px 0px;
@@ -1449,7 +1449,7 @@
     position: relative;
     width: 100%;
     height: 60px;
-    background-color: #04471C;
+    background-color: #058C42;
     color: #fff;
     outline: none;
     border:none;
@@ -1466,7 +1466,7 @@
     transition: all 0.3s ease-in-out;
 }
 .Submit_Sec button:hover{
-    background-color: #058C42;
+    background-color: #04471C;
 }
 
 
