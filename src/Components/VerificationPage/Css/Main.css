@@ -5,7 +5,7 @@
     width: 100%;
     height: auto;
     min-height: 100vh;
-    background-color: #000;
+    background-color: #020202;
     color: #fff;
 }
 
@@ -110,11 +110,11 @@
     background-color: rgba(255,255,255,0.2);
 }
 .Nav_Ul li a.support_btn{
-    background-color: #fff;
-    color: #000;
+    background-color: #058C42;
+     border-color: #058C42;
 }
 .Nav_Ul li a.support_btn:hover{
-    background-color: #F3F3F3;
+    background-color: #04471C;
 }
 @media screen and (max-width:1000px){
     .Showresult  .Nav_Ul li a.support_btn{
@@ -634,7 +634,7 @@
     border: none;
     outline: none;
     border-radius: 8px;
-    font-size: 20px;
+    font-size: 17px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }

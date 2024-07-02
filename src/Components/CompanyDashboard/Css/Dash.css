@@ -49,7 +49,7 @@
     z-index: 2000;
     left: 0;
     top: 0;
-    background-color: #fff;
+    background-color: #04471C;
     height: 100%;
     width: 276px;
     overflow-y: auto;
@@ -57,6 +57,7 @@
     padding:30px 25px;
     padding-top: 0px;
     transition: all 0.3s ease-in-out;
+    color: #fff;
 }
 .NavBar_Body{
     position: fixed;
@@ -191,21 +192,23 @@
     transition: all 0.3s ease-in-out;
 }
 .Nav_Main ul li a span{
-    opacity: 0.6;
+    opacity: 1;
     transition: all 0.3s ease-in-out;
 }
 .Nav_Main ul li a img{
     max-width: 15px;
-    opacity: 0.6;
+    opacity: 1;
     transition: all 0.3s ease-in-out;
 }
 .Nav_Main ul li a.ActiveLNav_Icon span,
 .Nav_Main ul li a:hover span{
     opacity: 1;
+    color: #16DB65;
 }
 .Nav_Main ul li a.ActiveLNav_Icon img,
 .Nav_Main ul li a:hover img{
     opacity: 1;
+    color: #16DB65;
 }
 .Nav_Main ul li.Mobile_LI{
     display: none !important;
@@ -223,8 +226,8 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    border:2px solid #FF9418;
-    color: #FF9418;
+    border:2px solid #16DB65;
+    color: #16DB65;
     font-weight: 500;
     font-size: 16px;
     border-radius: 5px;
@@ -232,7 +235,7 @@
     background-color: transparent !important;
 }
 .Nav_Main ul li a.mobile_Price_Btn:hover{
-    background-color: #F6F6F6 !important;
+    background-color: rgba(255,255,255,0.2) !important;
 }
 .Nav_Main ul li a span.Drop_Icon{
     position: absolute;
@@ -264,10 +267,11 @@
     width: 100%;
     height: auto;
     padding: 20px;
-    background-color: #F6F6F6;
+    background-color: #7BF2AB;
     text-align: center;
     border-radius: 20px;
     margin: 30px 0px;
+    color: #000;
 }
 .upload_Add h3{
     font-size: 20px;
@@ -275,8 +279,7 @@
     margin-bottom: 10px;
 }
 .upload_Add p{
-    font-size: 16px !important;
-    color: #3F3F3F;
+    font-size: 14px !important;
 }
 
 .upload_Add a{
@@ -284,16 +287,16 @@
     display: inline-flex;
     align-items: center;
     padding: 12px 30px;
-    background-color: #B5D8F6;
+    background-color: #04471C;
+    color: #fff;
     font-weight: 500;
      border-radius: 30px;
      font-size: 16px;
      margin-top: 10px;
      transition: all 0.3s ease-in-out;
-     border:1px solid #B5D8F6;
 }
 .upload_Add a:hover{
-    background-color: transparent;
+    background-color:#058C42;
 }
 
 .Dropdown_Menu {
@@ -483,7 +486,7 @@
 }
 .Search_Sec input:focus{
     background-color: transparent;
-    border:2px solid #0062FF;
+    border:2px solid #16DB65;
 }
 .Search_Sec input::placeholder{
     color: #000;
@@ -619,7 +622,7 @@
     position: relative;
     width: 35px;
     height: 35px;
-    border:3px solid #0062FF;
+    border:3px solid #16DB65;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
@@ -751,7 +754,7 @@
     border:none;
     background-color: transparent;
     font-size: 13px;
-    color: #055CE8;
+    color: #058C42;
 }
 
 .Copy_Url_Btn{
@@ -939,14 +942,14 @@
     grid-gap: 10px;
     outline: none;
     border:none;
-    background-color: #0062FF;
+    background-color: #04471C;
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
 .CertUpload_Btn:hover{
-    background-color: #0049C4;
+    background-color: #058C42;
 }
 @media screen and (max-width:500px){
     .CertUpload_Btn{
@@ -994,7 +997,7 @@
     }
 }
 .Upload_env_main_Foot p:first-child{
-    color: #0062FF;
+    color: #04471C;
 }
 .Upload_env_main_Foot p:last-child{
     color: #FF9418;
@@ -1123,7 +1126,7 @@
     border-radius: 8px;
     padding: 0px 15px;
     font-size: 15px;
-    border:2px solid #0062FF;
+    border:2px solid #058C42;
 }
 .Add_CCt_Input input:focus{
     background-color: #fff;
@@ -1168,17 +1171,18 @@
 }
 
 .Add_CCt_btns button.Add_Cert_Certegory{
-    background-color: #D1BFF5;
+    background-color: #058C42;
+    color: #fff;
 }
 .Add_CCt_btns button.Close_Cert_Certegory{
-    background-color: #E59E66;
+    background-color: #16DB65;
 }
 
 .Add_CCt_btns button.Add_Cert_Certegory:hover{
-    background-color: #BCA4F0;
+    background-color: #04471C;
 }
 .Add_CCt_btns button.Close_Cert_Certegory:hover{
-    background-color: #E08F4E;
+    background-color: #058C42;
 }
 
 
@@ -1311,7 +1315,7 @@
 .Cert_Form_input select:focus,
 .Uploaded_Cert_page .Cert_Form_input input,
 .Cert_Form_input input:focus{
-    border:2px solid #0062FF;
+    border:2px solid #058C42;
 }
 
 
@@ -1328,7 +1332,7 @@
     position: relative;
     width: auto;
     height: 55px;
-    background-color: #D3C1F7;
+    background-color: #16DB65;
     color: #000;
     outline: none;
     border:none;
@@ -1346,7 +1350,7 @@
     transition: all 0.3s ease-in-out;
 }
 .Add_Cart_Btn:hover{
-    background-color: #BA9FF2;
+    background-color: #058C42;
 }
 
 
@@ -1445,7 +1449,7 @@
     position: relative;
     width: 100%;
     height: 60px;
-    background-color: #0062FF;
+    background-color: #04471C;
     color: #fff;
     outline: none;
     border:none;
@@ -1462,7 +1466,7 @@
     transition: all 0.3s ease-in-out;
 }
 .Submit_Sec button:hover{
-    background-color: #0049C4;
+    background-color: #058C42;
 }
 
 
@@ -1994,7 +1998,7 @@
     height: auto;
     padding: 30px;
     margin-top: 40px;
-    background-color: #D9EBFB;
+    background-color:#D0FBE1;
     border-radius: 30px;
     border-top-right-radius: 0px;
   }
@@ -2021,7 +2025,7 @@
   }
   .Message_foot p a{
     white-space: nowrap;
-    color:#0000FF;
+    color:#04471C;
     text-decoration: underline;
   }
 
@@ -2097,7 +2101,7 @@
 	text-align: center;
 	border-radius: 10px;
 	height: auto;
-    background-color: #E4F1FC;
+    background-color: #D0FBE1;
 }
 #file-upload{
 	display: none;
@@ -2264,27 +2268,31 @@
 	padding: 10px 15px;
 	outline: none;
 	border:1px solid #CED4DA;
-	border-radius: 3px;
-	transition: all 0.3s ease-in-out;
+	border-radius: 5px;
 }
 .form-input select:focus,
 .form-input input:focus{
-	border-color: #0062FF;
+	border:2px solid #04471C;
 }
-.form-input input[type="submit"]{
+.form-input .profile_submit_btn{
 	border-color: transparent;
 	border-radius: 5px;
-	background:#0062FF;
+    height: 50px;
+	padding: 10px 15px;
+	background:#04471C;
 	color:#fff;
     transition: all 0.3s ease-in-out;
     font-weight: 700;
+    outline: none;
+    border:none;
+    cursor: pointer;
     text-transform: uppercase;
     font-size: 15px;
     width: 250px;
     cursor: pointer;
 }
-.form-input input[type="submit"]:hover{
-    background:#004ECE !important;
+.form-input .profile_submit_btn:hover{
+    background:#058C42 !important;
 }
 .d-grid{
 	position: relative;
@@ -2484,7 +2492,7 @@
 }
 
 .pricing_Top_Btns button.active_Plan_Selt_btn{
-    background-color: #C3B2E4;
+    background-color: #16DB65;
     color: #000;
 }
 
@@ -2533,7 +2541,7 @@
     font-weight: 600;
 }
 .plan_box_Top h3.plan_price{
-    color: #0062FF;
+    color:#04471C;
     font-weight: 700;
 }
 .plan_box_Top p{
@@ -2545,7 +2553,7 @@
     display: inline-flex;
     align-items: center;
     padding: 8px 20px;
-    background-color: #0062FF;
+    background-color: #058C42;
     color: #fff;
     margin-top: 10px;
     border-radius: 5px;
@@ -2553,7 +2561,7 @@
     transition: all 0.3s ease-in-out;
 }
 .plan_box_Top a:hover{
-    background-color: #0045B9;
+    background-color: #04471C;
 }
 
 .plan_box_Body{

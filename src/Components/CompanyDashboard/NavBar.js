@@ -4,6 +4,8 @@ import './Css/Dash.css';
 
 import DashLogo from './Img/DashLogo.png';
 
+import LitDashLogo from './Img/liteDashLogo.png';
+
 import HomeIcon from './Img/Homeicon.svg';
 import PortalIcon from './Img/portalicon.svg';
 import CertIcon from './Img/Certicon.svg';
@@ -59,7 +61,7 @@ export default function NavBar() {
             <nav className="Left_Dash_Nav">
                 <div className="Top_Dash_nav">
                     <Link to="/" onClick={() => handleLinkClick('/')}>
-                        <img src={DashLogo} alt="Dashboard Logo"></img>
+                        <img src={LitDashLogo} alt="Dashboard Logo"></img>
                     </Link>
                     <button className="Side_Nav_Toggler" onClick={closeSidebar}><img src={CloseIcon} alt="Close Icon"></img></button>
                 </div>
@@ -135,7 +137,7 @@ export default function NavBar() {
                         <div className="upload_Add">
                             <h3>Upgrade to Pro</h3>
                             <p>Upload up to 100 certificates a day</p>
-                            <Link to="/upgrade" className={location.pathname === '/upgrade' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/upgrade')}>Upgrade</Link>
+                            <Link to="/pricing" className={location.pathname === '/upgrade' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/upgrade')}>Upgrade</Link>
                         </div>
 
                         <li>

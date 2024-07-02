@@ -193,7 +193,7 @@ export default function Profile() {
                                     />
                                 </div>
                                 <div className="form-input">
-                                    <input type="submit" value="Save Profile" />
+                                    <button type="submit" className="profile_submit_btn">Save Profile</button>
                                 </div>
                             </form>
                         </div>
