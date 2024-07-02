@@ -203,12 +203,12 @@
 .Nav_Main ul li a.ActiveLNav_Icon span,
 .Nav_Main ul li a:hover span{
     opacity: 1;
-    color: #16DB65;
+    color: #7BF2AB;
 }
 .Nav_Main ul li a.ActiveLNav_Icon img,
 .Nav_Main ul li a:hover img{
     opacity: 1;
-    color: #16DB65;
+    color: #7BF2AB;
 }
 .Nav_Main ul li.Mobile_LI{
     display: none !important;
@@ -267,7 +267,7 @@
     width: 100%;
     height: auto;
     padding: 20px;
-    background-color: #7BF2AB;
+    background-color: #16DB65;
     text-align: center;
     border-radius: 20px;
     margin: 30px 0px;
@@ -942,14 +942,14 @@
     grid-gap: 10px;
     outline: none;
     border:none;
-    background-color: #04471C;
+    background-color: #058C42;
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
 .CertUpload_Btn:hover{
-    background-color: #058C42;
+    background-color: #04471C;
 }
 @media screen and (max-width:500px){
     .CertUpload_Btn{
