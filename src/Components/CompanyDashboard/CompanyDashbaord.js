@@ -9,6 +9,7 @@ import DeletedUploadedCert from './DeletedUploadedCert';
 import Notification from './Notification';
 import LogonInfo from './LogonInfo';
 import Profile from './Profile';
+import Pricing from './Pricing';
 
 export default function CompanyDashbaord() {
 
@@ -20,7 +21,8 @@ export default function CompanyDashbaord() {
            <div className="Large-container">
      
             <Routes>
-                {/* <Route path="/" element={<Home />} /> */}
+                <Route path="/" element={<Pricing />} />
+                <Route path="/pricing" element={<Pricing />} />
                 <Route path="/portal" element={<PortalPage />} />
                 <Route path="/uploaded-certificates" element={<UploadedCert />} />
                 <Route path="/deleted-certificates" element={<DeletedUploadedCert />} />
