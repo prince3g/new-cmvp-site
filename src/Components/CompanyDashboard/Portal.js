@@ -174,10 +174,10 @@ export default function PortalPage() {
                             </div>
                             <div className="R_CC_Mn">
                                 <div className="R_CC_Mn_Main">
-                                    <h4>Upload certificate image (optional)</h4>
+                                    <h4>Upload file (optional)</h4>
                                     <p>
-                                        <b>Note:</b> Image won't be displayed on user portal and it’s totally
-                                        optional. If you don’t want to upload image click on the submit button to
+                                        <b>Note:</b> File uploaded won't be displayed on user portal and it’s totally
+                                        optional. If you don’t want to upload a file click on the submit button to
                                         continue.
                                     </p>
 
@@ -202,7 +202,7 @@ export default function PortalPage() {
                                                     className="photo_Icon"
                                                     alt="Photo Icon"
                                                 />
-                                                <span>Drag and drop image to upload</span>
+                                                <span>Drag and drop file (pdf, Jpeg, PNG)</span>
                                             </>
                                         )}
                                     </div>

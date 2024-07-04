@@ -35,7 +35,7 @@ export default function Pricing() {
         <div className="Pricing_Sec">
             <div className="Pricing_top">
                 <h2>Subscription Plans</h2>
-                <p>Subscription plans for certificate management verification portal (CMVP).</p>
+                <p>Subscription plans for certificate management and verification portal (CMVP).</p>
             </div>
 
             <div className="Plans_Sec">
@@ -80,12 +80,12 @@ export default function Pricing() {
                                 <td><span><img src={MinusIcon}></img></span></td>
                             </tr>
                             <tr>
-                                <td>Upload up to 50 certificates daily</td>
+                                <td>Upload up to 10 certificates daily</td>
                                 <td><span className="Check_Span"><img src={CheckIcon}></img></span></td>
                                 <td><span><img src={MinusIcon}></img></span></td>
                             </tr>
                             <tr>
-                                <td>Upload files (certificate image)</td>
+                                <td>Upload files (pdf, Jpeg, PNG)</td>
                                 <td><span className="Check_Span"><img src={CheckIcon}></img></span></td>
                                 <td><span><img src={MinusIcon}></img></span></td>
                             </tr>
@@ -95,7 +95,7 @@ export default function Pricing() {
                                 <td><span><img src={MinusIcon}></img></span></td>
                             </tr>
                             <tr>
-                                <td>5 maximum login users</td>
+                                <td>3 maximum login users</td>
                                 <td><span className="Check_Span"><img src={CheckIcon}></img></span></td>
                                 <td><span><img src={MinusIcon}></img></span></td>
                             </tr>
@@ -153,7 +153,7 @@ export default function Pricing() {
                                 <td><span><img src={MinusIcon}></img></span></td>
                             </tr>
                             <tr>
-                                <td>Upload files (certificate image)</td>
+                                <td>Upload files (pdf, Jpeg, PNG)</td>
                                 <td><span><img src={MinusIcon}></img></span></td>
                                 <td><span className="Check_Span"><img src={CheckIcon}></img></span></td>
                             </tr>
@@ -216,12 +216,12 @@ export default function Pricing() {
                                 <td><span><img src={MinusIcon}></img></span></td>
                             </tr>
                             <tr>
-                                <td>Upload up to 50 certificates daily</td>
+                                <td>Upload up to 100 certificates daily</td>
                                 <td><span className="Check_Span"><img src={CheckIcon}></img></span></td>
                                 <td><span><img src={MinusIcon}></img></span></td>
                             </tr>
                             <tr>
-                                <td>Upload files (certificate image)</td>
+                                <td>Upload files (pdf, Jpeg, PNG)</td>
                                 <td><span className="Check_Span"><img src={CheckIcon}></img></span></td>
                                 <td><span><img src={MinusIcon}></img></span></td>
                             </tr>
