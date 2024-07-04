@@ -80,6 +80,11 @@ export default function Pricing() {
                                 <td><span><img src={MinusIcon}></img></span></td>
                             </tr>
                             <tr>
+                                <td>Add upto 2 certificate cartegories</td>
+                                <td><span className="Check_Span"><img src={CheckIcon}></img></span></td>
+                                <td><span><img src={MinusIcon}></img></span></td>
+                            </tr>
+                            <tr>
                                 <td>Upload up to 10 certificates daily</td>
                                 <td><span className="Check_Span"><img src={CheckIcon}></img></span></td>
                                 <td><span><img src={MinusIcon}></img></span></td>
@@ -147,6 +152,13 @@ export default function Pricing() {
                                 <td><span className="Check_Span"><img src={CheckIcon}></img></span></td>
                                 <td><span><img src={MinusIcon}></img></span></td>
                             </tr>
+
+                            <tr>
+                                <td>Add upto 5 certificate cartegories</td>
+                                <td><span className="Check_Span"><img src={CheckIcon}></img></span></td>
+                                <td><span><img src={MinusIcon}></img></span></td>
+                            </tr>
+
                             <tr>
                                 <td>Upload up to 50 certificates daily</td>
                                 <td><span className="Check_Span"><img src={CheckIcon}></img></span></td>
@@ -215,6 +227,13 @@ export default function Pricing() {
                                 <td><span className="Check_Span"><img src={CheckIcon}></img></span></td>
                                 <td><span><img src={MinusIcon}></img></span></td>
                             </tr>
+
+                            <tr>
+                                <td>Add upto 20 certificate cartegories</td>
+                                <td><span className="Check_Span"><img src={CheckIcon}></img></span></td>
+                                <td><span><img src={MinusIcon}></img></span></td>
+                            </tr>
+
                             <tr>
                                 <td>Upload up to 100 certificates daily</td>
                                 <td><span className="Check_Span"><img src={CheckIcon}></img></span></td>
@@ -231,7 +250,7 @@ export default function Pricing() {
                                 <td><span><img src={MinusIcon}></img></span></td>
                             </tr>
                             <tr>
-                                <td>5 maximum login users</td>
+                                <td>10 maximum login users</td>
                                 <td><span className="Check_Span"><img src={CheckIcon}></img></span></td>
                                 <td><span><img src={MinusIcon}></img></span></td>
                             </tr>
