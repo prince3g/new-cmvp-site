@@ -10,7 +10,7 @@ import ArrowLeft from './Img/arrow-left.svg';
 import PhotoIcon from './Img/photo-icon.svg';
 
 export default function PortalPage() {
-    const [copyMessage, setCopyMessage] = useState('Copy portal Url');
+    const [copyMessage, setCopyMessage] = useState('Copy verification Url');
     const [imagePreview, setImagePreview] = useState(null);
     const [isDragging, setIsDragging] = useState(false);
     const [isCertificateSectionVisible, setIsCertificateSectionVisible] = useState(false);

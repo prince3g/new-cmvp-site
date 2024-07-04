@@ -44,7 +44,7 @@ export default function Profile() {
     };
 
 
-    const [copyMessage, setCopyMessage] = useState('Copy portal Url');
+    const [copyMessage, setCopyMessage] = useState('Copy verification Url');
 
     const handleCopy = () => {
         const copyText = document.getElementById("portalUrl");
