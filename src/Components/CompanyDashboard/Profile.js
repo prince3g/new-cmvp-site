@@ -6,18 +6,18 @@ import PhotoEditIcon from './Img/edit_icon.svg';
 import AngleDownIcon from './Img/angle-down.svg';
 
 export default function Profile() {
-    const [firstName, setFirstName] = useState("Prince");
-    const [lastName, setLastName] = useState("Godson");
-    const [email, setEmail] = useState("princegodson24@gmail.com");
-    const [phone, setPhone] = useState("09037494084");
-    const [city, setCity] = useState("");
-    const [yearIncorporated, setYearIncorporated] = useState("");
-    const [registrationNumber, setRegistrationNumber] = useState("");
-    const [nationality, setNationality] = useState("");
-    const [staffNumber, setStaffNumber] = useState("");
-    const [address, setAddress] = useState("");
-    const [country, setCountry] = useState("");
-    const [state, setState] = useState("");
+    const [firstName, setFirstName] = useState("Company ABC");
+    const [lastName, setLastName] = useState("Consulting");
+    const [email, setEmail] = useState("John");
+    const [phone, setPhone] = useState("Doe");
+    const [city, setCity] = useState("123 Business Road");
+    const [yearIncorporated, setYearIncorporated] = useState("2005");
+    const [registrationNumber, setRegistrationNumber] = useState("123456789");
+    const [nationality, setNationality] = useState("Nigeria");
+    const [staffNumber, setStaffNumber] = useState("50");
+    const [address, setAddress] = useState("Lagos");
+    const [country, setCountry] = useState("Nigeria");
+    const [state, setState] = useState("Lagos");
     const [imgSrc, setImgSrc] = useState(userImg);
 
     const handleFileChange = (e) => {
@@ -164,7 +164,7 @@ export default function Profile() {
                                         <p>Contact Person's Telephone</p>
                                         <input
                                             type="text"
-                                            placeholder="Enter Company Address"
+                                            placeholder="Enter Contact Person's Telephone"
                                             value={city}
                                             onChange={(e) => setCity(e.target.value)}
                                         />
