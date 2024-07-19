@@ -6,16 +6,16 @@ import PhotoEditIcon from './Img/edit_icon.svg';
 import AngleDownIcon from './Img/angle-down.svg';
 
 export default function Profile() {
-    const [firstName, setFirstName] = useState("Company ABC");
-    const [lastName, setLastName] = useState("Consulting");
-    const [email, setEmail] = useState("John");
-    const [phone, setPhone] = useState("Doe");
-    const [city, setCity] = useState("123 Business Road");
+    const [companyName, setCompanyName] = useState("Company ABC");
+    const [businessType, setBusinessType] = useState("Consulting");
+    const [contactFirstName, setContactFirstName] = useState("John");
+    const [contactLastName, setContactLastName] = useState("Doe");
+    const [contactTelephone, setContactTelephone] = useState("123 Business Road");
     const [yearIncorporated, setYearIncorporated] = useState("2005");
     const [registrationNumber, setRegistrationNumber] = useState("123456789");
     const [nationality, setNationality] = useState("Nigeria");
     const [staffNumber, setStaffNumber] = useState("50");
-    const [address, setAddress] = useState("Lagos");
+    const [cityAddress, setCityAddress] = useState("Lagos");
     const [country, setCountry] = useState("Nigeria");
     const [state, setState] = useState("Lagos");
     const [imgSrc, setImgSrc] = useState(userImg);
@@ -35,16 +35,16 @@ export default function Profile() {
         e.preventDefault();
         // Handle form submission logic
         console.log({
-            firstName,
-            lastName,
-            email,
-            phone,
-            city,
+            companyName,
+            businessType,
+            contactFirstName,
+            contactLastName,
+            contactTelephone,
             yearIncorporated,
             registrationNumber,
             nationality,
             staffNumber,
-            address,
+            cityAddress,
             country,
             state
         });
@@ -131,33 +131,33 @@ export default function Profile() {
                                             <p>Company Name</p>
                                             <input
                                                 type="text"
-                                                value={firstName}
-                                                onChange={(e) => setFirstName(e.target.value)}
+                                                value={companyName}
+                                                onChange={(e) => setCompanyName(e.target.value)}
                                             />
                                         </div>
                                         <div className="form-input">
-                                            <p>Business type</p>
+                                            <p>Business Type</p>
                                             <input
                                                 type="text"
-                                                value={lastName}
-                                                onChange={(e) => setLastName(e.target.value)}
+                                                value={businessType}
+                                                onChange={(e) => setBusinessType(e.target.value)}
                                             />
                                         </div>
                                     </div>
                                     <div className="form-input">
-                                        <p>Contact Person's First name</p>
+                                        <p>Contact Person's First Name</p>
                                         <input
                                             type="text"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
+                                            value={contactFirstName}
+                                            onChange={(e) => setContactFirstName(e.target.value)}
                                         />
                                     </div>
                                     <div className="form-input">
                                         <p>Contact Person's Last Name</p>
                                         <input
                                             type="text"
-                                            value={phone}
-                                            onChange={(e) => setPhone(e.target.value)}
+                                            value={contactLastName}
+                                            onChange={(e) => setContactLastName(e.target.value)}
                                         />
                                     </div>
                                     <div className="form-input">
@@ -165,8 +165,8 @@ export default function Profile() {
                                         <input
                                             type="text"
                                             placeholder="Enter Contact Person's Telephone"
-                                            value={city}
-                                            onChange={(e) => setCity(e.target.value)}
+                                            value={contactTelephone}
+                                            onChange={(e) => setContactTelephone(e.target.value)}
                                         />
                                     </div>
                                     <div className="form-input">
@@ -210,8 +210,8 @@ export default function Profile() {
                                         <input
                                             type="text"
                                             placeholder="Enter City Address"
-                                            value={address}
-                                            onChange={(e) => setAddress(e.target.value)}
+                                            value={cityAddress}
+                                            onChange={(e) => setCityAddress(e.target.value)}
                                         />
                                     </div>
                                     <div className="form-input">
