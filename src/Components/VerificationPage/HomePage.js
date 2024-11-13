@@ -11,6 +11,8 @@ import CertIcon1 from './Img/cert-icon1.svg';
 import ArrowIcon from './Img/arrow.svg';
 
 import SearchReasult from './Search_Reasult';
+// import config from '../config';
+import config from '../../config.js'
 
 import CengGlobalLogo from './Img/cenglobal_logo.png';
 
@@ -34,6 +36,13 @@ export default function HomePage() {
         setShowResult(false);
     };
 
+
+    console.log("config")
+    console.log(config)
+    console.log("config")
+
+
+    
     return (
         <div className={`hero-sec ${showResult ? 'Showresult' : ''}`}>
             <NavBar />
