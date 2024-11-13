@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import AngleDownIcon from './Img/angle-down.svg';
 import DownloadIcon from './Img/download_icon.svg';
 import VerifiedIcon from './Img/verified-badge2.svg';
 import ArrowLeft from './Img/arrow-left.svg';
 import PhotoIcon from './Img/photo-icon.svg';
+import config from '../../config.js'
 
 export default function UploadedCert() {
     const [isUploadBoxTogglerActive, setIsUploadBoxTogglerActive] = useState(false);
@@ -11,15 +13,21 @@ export default function UploadedCert() {
     const [isCertificateSectionVisible, setIsCertificateSectionVisible] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
     const [imagePreview, setImagePreview] = useState(null);
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [loading, setLoading] = useState(false); // Loader state
+    const [loadingDownload, setLoadingDownload] = useState(false); // Loader state for download
+
+    const [certificateList, setCertificateList] = useState([]);
 
     const [certificateData, setCertificateData] = useState({
-        number: "00321",
-        title: "Website development",
-        type: "Welding",
-        issuedTo: "Prince Godson",
-        dateOfIssue: "16th, May 2020",
-        issueNumber: "038",
-        issuedBy: "Mr. Daniel"
+        organization_id: 1,
+        certificate_id: "",
+        title: "",
+        type: "",
+        client_name: "",
+        dateOfIssue: "",
+        issueNumber: "",
+        issuedBy: ""
     });
 
     const toggleUploadEnvVisibility = () => {
@@ -38,6 +46,7 @@ export default function UploadedCert() {
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
         if (file) {
+            setSelectedFile(file);
             const reader = new FileReader();
             reader.onloadend = () => {
                 setImagePreview(reader.result);
@@ -61,6 +70,7 @@ export default function UploadedCert() {
         setIsDragging(false);
         const file = event.dataTransfer.files[0];
         if (file) {
+            setSelectedFile(file);
             const reader = new FileReader();
             reader.onloadend = () => {
                 setImagePreview(reader.result);
@@ -77,6 +87,36 @@ export default function UploadedCert() {
         }));
     };
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setLoading(true);
+    
+        const formData = new FormData();
+        formData.append("organization", certificateData.organization_id); 
+        formData.append("certificate_id", certificateData.number);  // `number` on frontend -> `certificate_id` on backend
+        formData.append("client_name", certificateData.client_name);   // `issuedTo` -> `client_name`
+        formData.append("issue_date", certificateData.dateOfIssue); 
+        formData.append("expiry_date", "");  // Optional
+        if (selectedFile) {
+            formData.append("pdf_file", selectedFile);
+        }
+    
+        try {
+            const response = await axios.post(`${config.API_BASE_URL}/api/certificates/create/`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+            alert("Certificate created successfully!");
+        } catch (error) {
+            console.error("Error creating certificate:", error);
+            alert("Failed to create certificate. Please try again.");
+        } finally {
+            setLoading(false);
+        }
+    };
+    
 
     const [selectedCategory, setSelectedCategory] = useState('');
 
@@ -84,6 +124,93 @@ export default function UploadedCert() {
         setSelectedCategory(event.target.value);
         // Perform any other actions based on the selected value
     };
+
+
+    useEffect(() => {
+        // Fetch certificate data on component mount
+        const fetchCertificateData = async () => {
+            try {
+                const response = await axios.get(`${config.API_BASE_URL}/api/certificates/create/`, {
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`
+                    }
+                });
+                setCertificateList(response.data.results);
+            } catch (error) {
+                console.error("Error fetching certificate data:", error);
+            }
+        };
+
+        fetchCertificateData();
+    }, []);
+
+   // Soft delete certificate by id with confirmation
+const handleSoftDelete = async (certificate_id) => {
+    // Ask for confirmation before proceeding with deletion
+    const isConfirmed = window.confirm("Are you sure you want to delete this certificate? This action cannot be undone.");
+
+    if (!isConfirmed) {
+        return; // Exit the function if the user cancels the deletion
+    }
+
+    try {
+        // Make the request to perform the soft delete
+        await axios.post(`${config.API_BASE_URL}/api/certificates/${certificate_id}/delete/`, null, {
+
+            
+            // headers: {
+            //     // "Authorization": `Bearer ${localStorage.getItem("token")}`
+            //     "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMxNTA0NzMwLCJpYXQiOjE3MzE1MDQ0MzAsImp0aSI6IjM3ZDk0M2VlZmFmMzRkNTc5YmU4MmIwY2YwMTE2MGU1IiwidXNlcl9pZCI6Mn0.RS28FEgjmx0Mg9W30P9yYToFIe3oNqhaU9KJyRiuIGM`
+            // }
+        });
+
+        // Remove the deleted certificate from the state list
+        setCertificateList(certificateList.filter(cert => cert.certificate_id !== certificate_id));
+        alert("Certificate has been deleted (soft delete).");
+    } catch (error) {
+        console.error("Error deleting certificate:", error);
+        alert("Failed to delete certificate. Please try again.");
+    }
+};
+
+   
+
+    const handleDownloadReceipt = async (receiptUrl, name) => {
+        setLoadingDownload(true); // Start loader for download state
+
+        try {
+            const response = await axios.get(receiptUrl, {
+                responseType: 'blob', // Ensure response is treated as a Blob
+            });
+
+            // Fallback if Content-Type is not provided
+            const contentType = response.data.type || 'application/pdf';
+            const blob = new Blob([response.data], { type: contentType });
+            
+            // Create URL for the Blob
+            const downloadUrl = window.URL.createObjectURL(blob);
+            
+            // Create a temporary link element
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = name; // Set the file name
+            
+            // Append link to the document and initiate download
+            document.body.appendChild(link);
+            link.click();
+            
+            // Clean up the URL and link element
+            window.URL.revokeObjectURL(downloadUrl);
+            document.body.removeChild(link);
+
+        } catch (error) {
+            console.error('Error downloading receipt:', error);
+            alert("An error occurred during the download. Please try again.");
+        } finally {
+            setLoadingDownload(false); // Stop loader
+        }
+    };
+
 
     return (
         <div className="Uploaded_Cert_page">
@@ -95,7 +222,7 @@ export default function UploadedCert() {
                                 <img src={ArrowLeft} alt="Arrow Left" />
                             </button>
                         </div>
-                        <form className="Main_CC_Mn">
+                        <form className="Main_CC_Mn" onSubmit={handleSubmit}>
                             <div className="L_CC_Mn">
                                 <div className="L_CC_Mn_main">
                                     <h3>Upload certificate</h3>
@@ -103,10 +230,10 @@ export default function UploadedCert() {
                                         <div className="Cert_Form_input">
                                             <input
                                                 type="text"
-                                                name="number"
+                                                name="number"  // Maps to `certificate_id`
                                                 value={certificateData.number}
                                                 onChange={handleInputChange}
-                                                placeholder="Certificate number"
+                                                placeholder="Certificate ID"
                                             />
                                         </div>
                                         <div className="Cert_Form_input">
@@ -130,19 +257,19 @@ export default function UploadedCert() {
                                         <div className="Cert_Form_input">
                                             <input
                                                 type="text"
-                                                name="issuedTo"
-                                                value={certificateData.issuedTo}
+                                                name="client_name"  // Maps to `client_name`
+                                                value={certificateData.client_name}
                                                 onChange={handleInputChange}
-                                                placeholder="Issue to"
+                                                placeholder="Issued To"
                                             />
                                         </div>
                                         <div className="Cert_Form_input">
                                             <input
-                                                type="text"
-                                                name="dateOfIssue"
+                                                type="date"
+                                                name="dateOfIssue"  // Maps to `issue_date`
                                                 value={certificateData.dateOfIssue}
                                                 onChange={handleInputChange}
-                                                placeholder="Date of issue"
+                                                placeholder="Date of Issue"
                                             />
                                         </div>
                                         <div className="Cert_Form_input">
@@ -168,7 +295,7 @@ export default function UploadedCert() {
                             </div>
                             <div className="R_CC_Mn">
                                 <div className="R_CC_Mn_Main">
-                                <h4>Upload file (optional)</h4>
+                                    <h4>Upload file (optional)</h4>
                                     <p>
                                         <b>Note:</b> File uploaded won't be displayed on user portal and it’s totally
                                         optional. If you don’t want to upload a file click on the submit button to
@@ -200,7 +327,9 @@ export default function UploadedCert() {
                                     />
 
                                     <div className="Submit_Sec">
-                                        <button type="submit">Save changes</button>
+                                        <button type="submit" disabled={loading}>
+                                            {loading ? "Submitting..." : "Save changes"}
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -223,88 +352,72 @@ export default function UploadedCert() {
             </div>
 
             <div className={`Upload_env_main ${isUploadEnvHidden ? 'Hide_Envi_Box' : ''}`}>
-            <div className="Cert_Carti_Sel_Sec">
-                        <h3>Training certificate</h3>
-                        <div className="Cart_select_Sec">
-                        <select value={selectedCategory} onChange={handleChange}>
-                            <option value="">Select certificate category</option>
-                            <option value="training">Training certificate</option>
-                            <option value="inspection">Inspection certificate</option>
-                        </select>
-                    </div>
-                    </div>
+    <div className="Cert_Carti_Sel_Sec">
+        <h3>Training certificate</h3>
+        <div className="Cart_select_Sec">
+            <select value={selectedCategory} onChange={handleChange}>
+                <option value="">Select certificate category</option>
+                <option value="training">Training certificate</option>
+                <option value="inspection">Inspection certificate</option>
+            </select>
+        </div>
+    </div>
 
-                <div className="Table_Sec">
-                   
-                    <table className="Upload_Table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Certificate number</th>
-                                <th>Certificate title</th>
-                                <th>Type of Examination / Event</th>
-                                <th>Issued to</th>
-                                <th>Date of issue</th>
-                                <th>Issue number</th>
-                                <th>Issued by</th>
-                                <th>Status</th>
-                                <th>Uploaded Downloaded / E-copy </th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr key="1">
-                                <td><span className="serial_Number_span">TR 0001</span></td>
-                                <td>00321</td>
-                                <td>Website development</td>
-                                <td>Welding</td>
-                                <td>Prince Godson</td>
-                                <td>16th, May 2020</td>
-                                <td>038</td>
-                                <td>Mr. Daniel</td>
-                                <td>
-                                    <span className="Status_Respn"><img src={VerifiedIcon} alt="Verified Icon" /> Verified</span>
-                                </td>
-                                <td>
-                                    <div className="Uploaded_Cert_Div">
-                                       <button>Download <img src={DownloadIcon} alt="Download Icon" /></button>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div className="td_Btns">
-                                        <button onClick={handlePreviewButtonClick}>Preview</button>
-                                        <button>Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
+    <div className="Table_Sec">
+        <table className="Upload_Table">
+            <thead>
+                <tr>
+                    <th>S/N</th>
+                    <th>Certificate number</th>
+                    <th>Client name</th>
+                    <th>Date of issue</th>
+                    <th>Issue number</th>
+                    <th>Issued by</th>
+                    <th>Status</th>
+                    <th>Uploaded / E-copy</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {certificateList.map((cert, index) => (
+                    <tr key={index}>
+                        <td><span className="serial_Number_span">{index + 1}</span></td>
+                        <td>{cert.certificate_id}</td>
+                        <td>{cert.client_name}</td>
+                        <td>{new Date(cert.issue_date).toLocaleDateString()}</td>
+                        <td>{cert.issueNumber || "N/A"}</td>
+                        <td>{cert.issuedBy || "Proliance LTD"}</td>
+                        <td>
+                            <span className="Status_Respn"><img src={VerifiedIcon} alt="Verified Icon" /> Verified</span>
+                        </td>
+                        <td>
+                            <div className="Uploaded_Cert_Div">
+                                {cert.pdf_file ? (
+                                    <button 
+                                        onClick={() => handleDownloadReceipt(cert.pdf_file, `${cert.client_name}.pdf`)}
+                                        disabled={loadingDownload} // Disable if downloading
+                                    >
+                                        {loadingDownload ? 'Downloading...' : 'Download' } 
+                                        <img src={DownloadIcon} alt="Download Icon" />
+                                    </button>
+                                ) : (
+                                    <span>Not uploaded</span>
+                                )}
+                            </div>
+                        </td>
+                        <td>
+                            <div className="td_Btns">
+                                <button onClick={handlePreviewButtonClick}>Preview</button>
+                                <button onClick={() => handleSoftDelete(cert.certificate_id)}>Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    </div>
+</div>
 
-                            <tr key="2">
-                            <td><span className="serial_Number_span">TR 0002</span></td>
-                                <td>00321</td>
-                                <td>Website development</td>
-                                <td>Welding</td>
-                                <td>Prince Godson</td>
-                                <td>16th, May 2020</td>
-                                <td>038</td>
-                                <td>Mr. Daniel</td>
-                                <td>
-                                    <span className="Status_Respn"><img src={VerifiedIcon} alt="Verified Icon" /> Verified</span>
-                                </td>
-                                <td>
-                                    Not uploaded
-                                </td>
-                                <td>
-                                    <div className="td_Btns">
-                                        <button onClick={handlePreviewButtonClick}>Preview</button>
-                                        <button>Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </div>
     );
 }

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import './Css/Dash.css';
 
 import CopyIcon from './Img/copyicon.svg';
@@ -8,30 +9,78 @@ import DropArrow1 from './Img/droparrow1.svg';
 import DropArrow2 from './Img/droparrow2.svg';
 import ArrowLeft from './Img/arrow-left.svg';
 import PhotoIcon from './Img/photo-icon.svg';
+import config from '../../config.js';
 
 export default function PortalPage() {
+    const [uploadedCount, setUploadedCount] = useState(0);
+    const [deletedCount, setDeletedCount] = useState(0);
     const [copyMessage, setCopyMessage] = useState('Copy verification Url');
     const [imagePreview, setImagePreview] = useState(null);
     const [isDragging, setIsDragging] = useState(false);
     const [isCertificateSectionVisible, setIsCertificateSectionVisible] = useState(false);
     const [isUploadEnvHidden, setIsUploadEnvHidden] = useState(false);
     const [isUploadBoxTogglerActive, setIsUploadBoxTogglerActive] = useState(false);
-    const [isAddCertCartiVisible, setIsAddCertCartiVisible] = useState(false); // State for visibility of Add_Cert_Carti
+    const [isAddCertCartiVisible, setIsAddCertCartiVisible] = useState(false);
     const [categoryName, setCategoryName] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [certificateData, setCertificateData] = useState({
+        organization_id: 1,
+        certificate_id: "",
+        title: "",
+        type: "",
+        client_name: "",
+        dateOfIssue: "",
+        issueNumber: "",
+        issuedBy: ""
+    });
+
+    useEffect(() => {
+        // Fetch the uploaded certificates count
+        const fetchUploadedCertificates = async () => {
+            try {
+                const response = await axios.get(`${config.API_BASE_URL}/api/certificates/create/`, {
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`
+                    }
+                });
+                setUploadedCount(response.data.count);
+            } catch (error) {
+                console.error("Error fetching uploaded certificates count:", error);
+            }
+        };
+
+        // Fetch the deleted certificates count
+        const fetchDeletedCertificates = async () => {
+            try {
+                const response = await axios.get(`${config.API_BASE_URL}/api/certificates/soft-deleted-certificates/`, {
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`
+                    }
+                });
+                setDeletedCount(response.data.length);
+            } catch (error) {
+                console.error("Error fetching deleted certificates count:", error);
+            }
+        };
+
+        fetchUploadedCertificates();
+        fetchDeletedCertificates();
+    }, []);
 
     const handleCopy = () => {
         const copyText = document.getElementById("portalUrl");
         copyText.select();
         document.execCommand("copy");
 
-        // Temporarily change the text to "Copied!"
         setCopyMessage('Copied!');
-        setTimeout(() => setCopyMessage('Copy portal Url'), 2000); // Revert back after 2 seconds
+        setTimeout(() => setCopyMessage('Copy portal Url'), 2000);
     };
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
         if (file) {
+            setSelectedFile(file);
             const reader = new FileReader();
             reader.onloadend = () => {
                 setImagePreview(reader.result);
@@ -84,7 +133,6 @@ export default function PortalPage() {
 
     const handleChange = (event) => {
         setCategoryName(event.target.value);
-        // Perform any other actions based on the selected value
     };
 
     const showAddCertCarti = () => {
@@ -93,8 +141,47 @@ export default function PortalPage() {
 
     const hideAddCertCarti = () => {
         setIsAddCertCartiVisible(false);
-        setCategoryName(''); // Clear the input field value
+        setCategoryName('');
     };
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setCertificateData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setLoading(true);
+    
+        const formData = new FormData();
+        formData.append("organization", certificateData.organization_id); 
+        formData.append("certificate_id", certificateData.number);
+        formData.append("client_name", certificateData.client_name);
+        formData.append("issue_date", certificateData.dateOfIssue); 
+        formData.append("expiry_date", "");  // Optional
+        if (selectedFile) {
+            formData.append("pdf_file", selectedFile);
+        }
+    
+        try {
+            const response = await axios.post(`${config.API_BASE_URL}/api/certificates/create/`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+            alert("Certificate created successfully!");
+        } catch (error) {
+            console.error("Error creating certificate:", error);
+            alert("Failed to create certificate. Please try again.");
+        } finally {
+            setLoading(false);
+        }
+    };
+    
 
     return (
         <div className="PortalPage">
@@ -105,15 +192,14 @@ export default function PortalPage() {
                             <div className="Add_CCt_Input">
                                 <input
                                     type="text"
-                                    name=""
-                                    placeholder="Enter cartegory name"
+                                    placeholder="Enter category name"
                                     value={categoryName}
                                     onChange={handleChange}
                                 />
                             </div>
                             <div className="Add_CCt_btns">
                                 <button className="Add_Cert_Certegory" onClick={showAddCertCarti}>
-                                    Add cartegory
+                                    Add category
                                 </button>
                                 <button className="Close_Cert_Certegory" onClick={hideAddCertCarti}>
                                     Close
@@ -126,48 +212,76 @@ export default function PortalPage() {
                     <div className="site-container">
                         <div className="Top_CC_Mn">
                             <button className="Close_Certificate_Sec" onClick={handleCloseButtonClick}>
-                                <img src={ArrowLeft} alt="Arrow Left"></img>
+                                <img src={ArrowLeft} alt="Arrow Left" />
                             </button>
                         </div>
-                        <form className="Main_CC_Mn">
+                        <form className="Main_CC_Mn" onSubmit={handleSubmit}>
                             <div className="L_CC_Mn">
                                 <div className="L_CC_Mn_main">
                                     <h3>Upload certificate</h3>
                                     <div className="Certificate_Form">
-                                        <div className="Cert_Form_input Cert_Form_input_Selct">
-                                            <select value={categoryName} onChange={handleChange}>
-                                                <option value="">Select certificate category</option>
-                                                <option value="training">Training certificate</option>
-                                                <option value="inspection">Inspection certificate</option>
-                                            </select>
-                                            <div className="Add_Cart_Btn" onClick={showAddCertCarti}>
-                                                Add cartegory
-                                            </div>
-                                        </div>
                                         <div className="Cert_Form_input">
-                                            <input type="text" name="" placeholder="Certificate number"></input>
-                                        </div>
-                                        <div className="Cert_Form_input">
-                                            <input type="text" name="" placeholder="Certificate title"></input>
+                                            <input
+                                                type="text"
+                                                name="number"  // Maps to `certificate_id`
+                                                value={certificateData.number}
+                                                onChange={handleInputChange}
+                                                placeholder="Certificate ID"
+                                            />
                                         </div>
                                         <div className="Cert_Form_input">
                                             <input
                                                 type="text"
-                                                name=""
+                                                name="title"
+                                                value={certificateData.title}
+                                                onChange={handleInputChange}
+                                                placeholder="Certificate title"
+                                            />
+                                        </div>
+                                        <div className="Cert_Form_input">
+                                            <input
+                                                type="text"
+                                                name="type"
+                                                value={certificateData.type}
+                                                onChange={handleInputChange}
                                                 placeholder="Type of examination / Event (optional)"
-                                            ></input>
+                                            />
                                         </div>
                                         <div className="Cert_Form_input">
-                                            <input type="text" name="" placeholder="Issue to"></input>
+                                            <input
+                                                type="text"
+                                                name="client_name"  // Maps to `client_name`
+                                                value={certificateData.client_name}
+                                                onChange={handleInputChange}
+                                                placeholder="Issued To"
+                                            />
                                         </div>
                                         <div className="Cert_Form_input">
-                                            <input type="text" name="" placeholder="Date of issue"></input>
+                                            <input
+                                                type="date"
+                                                name="dateOfIssue"  // Maps to `issue_date`
+                                                value={certificateData.dateOfIssue}
+                                                onChange={handleInputChange}
+                                                placeholder="Date of Issue"
+                                            />
                                         </div>
                                         <div className="Cert_Form_input">
-                                            <input type="text" name="" placeholder="Issue number"></input>
+                                            <input
+                                                type="text"
+                                                name="issueNumber"
+                                                value={certificateData.issueNumber}
+                                                onChange={handleInputChange}
+                                                placeholder="Issue number"
+                                            />
                                         </div>
                                         <div className="Cert_Form_input">
-                                            <input type="text" name="" placeholder="Issued by"></input>
+                                            <input
+                                                type="text"
+                                                name="issuedBy"
+                                                value={certificateData.issuedBy}
+                                                onChange={handleInputChange}
+                                                placeholder="Issued by"
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -181,8 +295,8 @@ export default function PortalPage() {
                                         continue.
                                     </p>
 
-                                    <div
-                                        className={`Image_Upload_div ${isDragging ? 'dragging' : ''}`}
+                                    <div 
+                                        className={`Image_Upload_div ${isDragging ? 'dragging' : ''}`} 
                                         onClick={triggerFileInput}
                                         onDrop={handleDrop}
                                         onDragOver={handleDragOver}
@@ -190,18 +304,10 @@ export default function PortalPage() {
                                         onDragLeave={handleDragLeave}
                                     >
                                         {imagePreview ? (
-                                            <img
-                                                src={imagePreview}
-                                                alt="Preview"
-                                                className="uploadedImage"
-                                            />
+                                            <img src={imagePreview} alt="Preview" className="uploadedImage" />
                                         ) : (
                                             <>
-                                                <img
-                                                    src={PhotoIcon}
-                                                    className="photo_Icon"
-                                                    alt="Photo Icon"
-                                                />
+                                                <img src={PhotoIcon} className="photo_Icon" alt="Photo Icon" />
                                                 <span>Drag and drop file (pdf, Jpeg, PNG)</span>
                                             </>
                                         )}
@@ -214,7 +320,9 @@ export default function PortalPage() {
                                     />
 
                                     <div className="Submit_Sec">
-                                        <button type="submit">Submit</button>
+                                        <button type="submit" disabled={loading}>
+                                            {loading ? "Submitting..." : "Save changes"}
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -222,6 +330,7 @@ export default function PortalPage() {
                     </div>
                 </div>
             </section>
+
 
             <div className="Copy_Url_Sec">
                 <div className="Copy_Url_box" onClick={handleCopy}>
@@ -272,12 +381,12 @@ export default function PortalPage() {
                             Upload Certificate <img src={ArrowRightLit} alt="Arrow Right" />
                         </button>
 
-                        <div className="Upload_env_main_Foot">
+                            <div className="Upload_env_main_Foot">
                             <p>
-                                20 uploaded <img src={DropArrow1} alt="Drop Arrow 1" />
+                                {uploadedCount} uploaded <img src={DropArrow1} alt="Drop Arrow 1" />
                             </p>
                             <p>
-                                5 deleted <img src={DropArrow2} alt="Drop Arrow 2" />
+                                {deletedCount} deleted <img src={DropArrow2} alt="Drop Arrow 2" />
                             </p>
                         </div>
                     </div>

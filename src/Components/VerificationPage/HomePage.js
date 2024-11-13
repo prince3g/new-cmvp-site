@@ -36,12 +36,6 @@ export default function HomePage() {
         setShowResult(false);
     };
 
-
-    console.log("config")
-    console.log(config)
-    console.log("config")
-
-
     
     return (
         <div className={`hero-sec ${showResult ? 'Showresult' : ''}`}>
