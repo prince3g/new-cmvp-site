@@ -1,0 +1,539 @@
+.Landing-page{
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    z-index: 1;
+    background-color: #000;
+    color: #fff;
+    background-image: url(./Components/MainPage/Img/Landing-pageBg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.Landing-page::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1000;
+    background-image: url(./Components/MainPage/Img/gradient.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
+
+/* Landing_Nav */
+
+.Landing_Nav{
+    position:fixed;
+    width: 100%;
+    height: 150px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    top: 0;
+    left: 0;
+}
+
+.Reg-Nav{
+    height: 100px !important;
+}
+
+.nav_Contn{
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.site-logo img{
+    position: relative;
+    max-width: 100%;
+}
+
+.L_Nav_Sec{
+    position: relative;
+}
+
+.L_Nav_Sec ul{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    grid-gap: 15px;
+}
+
+.L_Nav_Sec ul li a{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    grid-gap: 10px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border:1px solid transparent;
+    transition: all 0.3s ease-in-out;
+}
+
+
+.L_Nav_Sec ul li a:hover{
+    background-color: rgba(255,255,255,0.3);
+}
+.L_Nav_Sec ul li:last-child a{
+    border-color: #fff;
+}
+@media screen and (max-width:1200px){
+    .Reg-Nav{
+        background-color: #0D2818 !important;
+    }
+    .Landing_Nav{
+        height: 60px !important;
+    }
+
+    .site-logo img{
+        max-width: 80px !important;
+    }
+    .L_Nav_Sec ul{
+        gap: 5px !important;
+        grid-gap: 5px !important;
+    }
+    .L_Nav_Sec ul li a.signup-btn{
+       display: none !important;
+    }
+    .L_Nav_Sec ul li a.login-btn{
+        border-color: #fff; 
+    }
+
+    .L_Nav_Sec ul li:first-child a span{
+        display: none !important;
+    }
+    .L_Nav_Sec ul li a{
+        padding: 5px 12px !important;
+        border-radius: 8px !important;
+    }
+}
+
+.llal_Hero_Sec{
+    position: relative;
+    width: 500px;
+    height: auto;
+    margin-top: 100px;
+}
+
+
+@media screen and (max-width:700px){
+    .llal_Hero_Sec{
+        width: 100% !important;
+        margin-top: 0px !important;
+    }
+    .llal_Hero_Sec h2{
+        font-size: 30px !important;
+    }
+    .llal_Hero_Sec p{
+        font-size: 15px !important;
+    }
+}
+@media screen and (max-width:450px){
+    .llal_Hero_Sec h2{
+        font-size: 25px !important;
+    }
+    .llal_Hero_Sec p{
+        font-size: 13px !important;
+    }
+    .llal_Hero_Sec a{
+        padding: 12px 15px !important;
+        font-size: 13px !important;
+    }
+}
+
+.llal_Hero_Sec h2{
+    font-size: 40px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.llal_Hero_Sec p{
+    font-size: 16px;
+    font-weight: 300;
+}
+.llal_Hero_Sec a{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    grid-gap: 10px;
+    padding: 13px 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+    transition: all 0.3s ease-in-out;
+    background-color: #7BF2AB;
+    color: #000;
+    font-weight: 500;
+}
+
+.llal_Hero_Sec a:hover{
+    background-color: #45c779;
+}
+
+
+.hero-foot{
+    position: absolute;
+    width: 100%;
+    height: auto;
+    padding: 20px 0px;
+    bottom: 0;
+}
+@media screen and (max-width:700px){
+    .hero-foot p{
+        font-size: 13px !important;
+    }
+}
+
+
+@media screen and (max-width:450px){
+    .hero-foot p{
+        font-size: 11px !important;
+    }
+}
+
+.hero-foot .site-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hero-foot p{
+    font-size: 14px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Get-Seecos*/
+
+.Get-Seecos{
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    padding:170px 0px;
+    padding-bottom: 50px;
+}
+@media screen and (max-width:1200px){
+    .Get-Seecos{
+        padding: 80px 0px !important;
+        padding-bottom:30px !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+.Reg_Sec{
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Reg_Box{
+    position: relative;
+    width: 450px;
+    height: auto;
+}
+@media screen and (max-width:600px){
+    .Reg_Box{
+        width: 100% !important;
+    }
+}
+.Reg_Box_Header{
+    position: relative;
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+
+.Reg_Box_Header h3{
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+@media screen and (max-width:500px){
+   .Reg_Box_Header h3{
+    font-size: 25px !important;
+   }
+}
+.Reg_Form{
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 50px;
+    display: block;
+}
+
+.Reg_Input{
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+    z-index: 1;
+}
+
+.Reg_Input textarea,
+.Reg_Input input{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border:1px solid #AEAEAE;
+    padding: 0px 20px;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+.Reg_Input textarea::placeholder,
+.Reg_Input input::placeholder{
+    color: #606060;
+}
+.Reg_Input textarea:focus,
+.Reg_Input input:focus{
+    border-color: #13793D;
+}
+.Reg_Input textarea{
+    height: 150px;
+    resize: none;
+    padding: 20px;
+}
+.Reg_Input input[type="submit"]{
+    cursor: pointer;
+    font-size: 18px;
+    background-color: #058C42 !important;
+    color: #fff !important;
+    border-color: #058C42 !important;
+}
+.Reg_Input input[type="submit"]:hover{
+    background-color: #0a6332 !important;
+    border-color: #0a6332 !important;
+}
+@media screen and (max-width:500px){
+  .Reg_Input input[type="submit"]{
+    font-size: 15px !important;
+}  
+}
+.Reg_Input a{
+    color: #13793D;
+    white-space: nowrap;
+}
+.Reg_Input p{
+    font-size: 14px !important;
+}
+.Reg_Input a:hover{
+    text-decoration: underline !important;
+}
+
+.pass-Input{
+    display: flex;
+    align-items: center;
+}
+
+.pass-Input input{
+    padding-right: 45px;
+}
+.pass-Input span{
+    position: absolute;
+    z-index: 50;
+    right: 5px;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    cursor: pointer;
+}
+
+.pass-Input span img{
+    max-width: 20px;
+}
+
+.Reg_Box_Foot{
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+.Reg_Box_Foot h6{
+    position: relative;
+    width: 100%;
+    height: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: #AEAEAE;
+}
+
+.Reg_Box_Foot h6 span{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #606060;
+}
+
+
+.google-signup-BTN{
+     position: relative;
+    width: 100%;
+    height: 60px;
+    border:1px solid #AEAEAE;
+    padding: 0px 20px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    outline: none;
+    cursor: pointer;
+}
+
+.google-signup-BTN img{
+    position: absolute;
+    left: 20px;
+    max-width: 100%;
+}
+
+.google-signup-BTN:hover{
+    background: #F9F9F9;
+}
+
+.Reg_Box_Foot p{
+    margin-top: 20px;
+}
+.Reg_Box_Foot p a{
+    color: #13793D;
+}
+.Reg_Box_Foot p a:hover{
+    text-decoration: underline !important;
+}
+
+.OO-D-flex{
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    grid-gap: 30px;
+}
+
+@media screen and (max-width:500px){
+    .OO-D-flex{
+        display: block !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.signup-desis::before{
+    content: '';
+    position: fixed;
+    left: 0;
+    width: 55%;
+    top: 0;
+    height: 100%;
+    background-color: #0D2818;
+    color: #fff;
+    background-image: url(./Components/MainPage/Img/signup-banner.png);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+}
+.login-desis::before{
+    content: '';
+    position: fixed;
+    left: 0;
+    width: 55%;
+    top: 0;
+    height: 100%;
+    background-color: #0D2818;
+    color: #fff;
+    background-image: url(./Components/MainPage/Img/login-banner.png);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+}
+
+
+.login-desis,
+.signup-desis {
+    padding-left: 55% !important;
+    padding-top: 130px !important;
+}
+@media screen and (max-width:1200px){
+    .login-desis::before,
+   .signup-desis::before{
+    display: none !important;
+   } 
+   .login-desis,
+   .signup-desis {
+    padding-left: 0% !important;
+    padding: 100px 0px !important;
+    padding-bottom:30px !important;
+    }
+}
+
