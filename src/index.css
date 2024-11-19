@@ -72,21 +72,7 @@ p,ul,li,h1,h2,h3,h4,h5,h6,label,a{
   width: auto;
   height: auto;
 }
-/*p{
-  font-size: 16px;
-  line-height: 24px;
-}*/
-/* @media screen and (max-width:1000px){
-  p{
-      font-size: 15px !important;
-      line-height: 22px !important;
-  }
-} */
-.site-container{
-  position: relative;
-  width: 95%;
-  margin-left: 2.5%;
-}
+
 
 .Box-Show{
   background-color: #fff;
