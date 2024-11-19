@@ -1,4 +1,6 @@
 import './App.css';
+import React from 'react';
+
 
 import VerificationPage from './Components/VerificationPage/Verification';
 
@@ -14,13 +16,7 @@ function App() {
 
       {/* <VerificationPage /> */}
 
-      {/* <CompanyDashbaord /> */}
-
-      {/* <LandingPage /> */}
-
-      {/* <LoginPage /> */}
-
-      <SignupPage />
+      <CompanyDashbaord />
     
     </div>
   );
