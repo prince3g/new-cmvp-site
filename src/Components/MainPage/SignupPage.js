@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import RegNavBar from "./RegNavBar";
 
+import { Link } from "react-router-dom"; 
+
 import ShowPassIcon from "./Img/showPass-icon.svg";
 import HidePassIcon from "./Img/hidePass-icon.svg";
 
@@ -77,7 +79,7 @@ const SignupPage = () => {
                 </div>
 
                 <div className="Reg_Input">
-             <p>By clicking "Sign Up," you agree to our <a href="terms.html">Terms of Use</a> and our <a href="privacy.html">Privacy Policy</a>.</p>
+             <p>By clicking "Sign Up," you agree to our <Link to="/terms">Terms of Use</Link> and our <Link to="/privacy">Privacy Policy</Link>.</p>
            </div>
            
                 <div className="Reg_Input">
@@ -90,7 +92,7 @@ const SignupPage = () => {
               </form>
 
               <div className="Reg_Box_Foot">
-              <p>Already have an account? <a href="login.html">Log in</a></p>
+              <p>Already have an account? <Link to="/login">Log in</Link></p>
           </div>
             </div>
           </div>

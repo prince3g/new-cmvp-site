@@ -1,37 +1,34 @@
 import './App.css';
 import React from 'react';
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import VerificationPage from './Components/VerificationPage/Verification';
-
 import CompanyDashbaord from './Components/CompanyDashboard/CompanyDashbaord';
-
 import LandingPage from './Components/MainPage/LandingPage';
 import LoginPage from './Components/MainPage/LoginPage';
 import SignupPage from './Components/MainPage/SignupPage';
 import Terms from './Components/MainPage/Terms';
 import Privacy from './Components/MainPage/Privacy';
-
+import ForgotPassPage from './Components/MainPage/ForgotPassPage';
+import HelpPage from './Components/MainPage/HelpPage';
 
 function App() {
   return (
-    <div className="App">
-
-      {/* <VerificationPage /> */}
-
-      {/* <CompanyDashbaord /> */}
-
-      {/* <LandingPage /> */}
-
-      {/* <LoginPage  /> */}
-
-      {/* <SignupPage /> */}
-
-      {/* <Terms /> */}
-
-      <Privacy />
-    
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/forgot-password" element={<ForgotPassPage />} /> 
+          <Route path="/help" element={<HelpPage />} /> 
+          <Route path="/verification" element={<VerificationPage />} />
+          <Route path="/dashboard" element={<CompanyDashbaord />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

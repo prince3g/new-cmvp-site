@@ -5,12 +5,7 @@ import { Link } from "react-router-dom";
 import ShowPassIcon from "./Img/showPass-icon.svg";
 import HidePassIcon from "./Img/hidePass-icon.svg";
 
-const LoginPage = () => {
-  const [passwordType, setPasswordType] = useState("password");
-
-  const togglePasswordVisibility = () => {
-    setPasswordType((prevType) => (prevType === "password" ? "text" : "password"));
-  };
+const ForgotPassPage = () => {
 
   return (
     <div>
@@ -21,8 +16,8 @@ const LoginPage = () => {
           <div className="Reg_Sec">
             <div className="Reg_Box">
               <div className="Reg_Box_Header">
-                <h3>Welcome Back</h3>
-                <p>Log in to your CMVP account</p>
+                <h3>Forgot Password?</h3>
+                <p>Enter your email address below</p>
               </div>
               <form className="Reg_Form">
                 <div className="Reg_Input">
@@ -32,24 +27,7 @@ const LoginPage = () => {
                     placeholder="Email"
                   />
                 </div>
-                <div className="Reg_Input pass-Input">
-                  <input
-                    type={passwordType}
-                    id="passwordField"
-                    placeholder="Password"
-                  />
-                  <span id="togglePassword" onClick={togglePasswordVisibility}>
-                    <img
-                      src={passwordType === "password" ? ShowPassIcon : HidePassIcon}
-                      id="toggleIcon"
-                      alt={passwordType === "password" ? "Show Password" : "Hide Password"}
-                    />
-                  </span>
-                </div>
 
-                <div className="Reg_Input">
-                <Link to="/forgot-password">Forgot your password?</Link>
-           </div>
            
                 <div className="Reg_Input">
                   <input
@@ -61,7 +39,7 @@ const LoginPage = () => {
               </form>
 
               <div className="Reg_Box_Foot">
-            <p>Don't have an account? <Link to="/signup">Sign up</Link></p>
+            <p><Link to="/Login">Login</Link> instead !</p>
           </div>
             </div>
           </div>
@@ -71,4 +49,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default ForgotPassPage;

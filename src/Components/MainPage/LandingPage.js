@@ -1,26 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom"; // Import Link for routing
 import SiteNavBar from './SiteNavBar';
-
 
 export default function LandingPage() {
     const currentYear = new Date().getFullYear(); // Get the current year
-    return(
+    return (
         <div className="Landing-page">
             <SiteNavBar />
             <div className="site-container">
                 <div className="llal_Hero_Sec">
                     <h2>Certificate Management and Verification Portal</h2>
-                    <p>Efficiently validate, issue, and manage your digital certificates with our secure and user-friendly verification and management portal.</p>
-                    <a href="#">Signup for free</a>
+                    <p>
+                        Efficiently validate, issue, and manage your digital certificates with our secure and user-friendly verification and management portal.
+                    </p>
+                    <Link to="/signup" className="signup-btn">Signup for free</Link>
                 </div>
-           
             </div>
             <div className="hero-foot">
-            <div className="site-container">
-                    <p>Powered by <a href="#">Proliance LTD</a></p>
+                <div className="site-container">
+                    <p>Powered by <a href="https://prolianceltd.com" target="_blank" rel="noopener noreferrer">Proliance LTD</a></p>
                     <p>© {currentYear}</p>
-                    </div>
                 </div>
+            </div>
         </div>
-    )
+    );
 }
