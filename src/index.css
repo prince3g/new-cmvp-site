@@ -62,7 +62,7 @@ a,button{
   outline: none;
   font-family: "Poppins", sans-serif;
 }
-p,ul,li,h1,h2,h3,h4,h5,h6,label,a{
+p,ul,li,h1,h2,h3,h4,h5,h6,label,a,ol{
   margin: 0;
   padding: 0;
   list-style: none;
@@ -81,4 +81,21 @@ p,ul,li,h1,h2,h3,h4,h5,h6,label,a{
   box-shadow: 0 0 40px rgb(0 0 0 / 5%);
   padding: 20px;
   border-radius: 0.625rem;
+}
+
+
+.big-text{
+  font-size: 50px;
+  font-weight: 500;
+}
+
+@media screen and (max-width:1000px){
+  .big-text{
+      font-size: 40px !important;
+  }
+}
+@media screen and (max-width:500px){
+  .big-text{
+      font-size: 30px !important;
+  }
 }

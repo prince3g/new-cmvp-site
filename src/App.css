@@ -36,7 +36,7 @@
 /* Landing_Nav */
 
 .Landing_Nav{
-    position:fixed;
+    position:absolute;
     width: 100%;
     height: 150px;
     z-index: 1000;
@@ -44,6 +44,7 @@
     align-items: center;
     top: 0;
     left: 0;
+    color: #fff;
 }
 
 .Reg-Nav{
@@ -195,6 +196,11 @@
     height: auto;
     padding: 20px 0px;
     bottom: 0;
+}
+.MMha-page .hero-foot{
+    position: relative !important;
+    margin-top: 30px !important;
+    background-color: #F9F9F9 !important;
 }
 @media screen and (max-width:700px){
     .hero-foot p{
@@ -537,3 +543,102 @@
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* MMha-page */
+
+.MMha-page{
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.MMha-page-header{
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 100px;
+    background-color: #13793D;
+    color: #fff;
+    padding: 50px 0px;
+    padding-top: 200px;
+}
+
+@media screen and (max-width:1000px){
+    .MMha-page-header{
+        padding-top: 100px !important;
+    }
+}
+
+.hero-Blam{
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+
+
+/* hagsh-sec */
+
+.hagsh-sec{
+    position: relative;
+    width: 100%;
+    margin-top: 50px;
+}
+
+
+.hagsh-main{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.hagsh-Box{
+    position: relative;
+    width: 1000px;
+}
+@media screen and (max-width:1000px){
+    .hagsh-Box{
+        width: 100% !important;
+    }
+}
+.hagsh-Box h4{
+    font-size: 16px;
+    font-weight: 700;
+    margin: 10px 0px;
+}
+
+.hagsh-Box p{
+    margin-top: 10px;
+}
+
+.hagsh-Box ol,
+.hagsh-Box ul{
+    margin-left: 20px;
+}
+
+.hagsh-Box ul li{
+    list-style: disc;
+    margin-top: 10px;
+}
+
+.hagsh-Box ol li{
+    list-style: decimal;
+    margin-top: 10px;
+}
