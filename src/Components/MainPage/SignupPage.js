@@ -85,7 +85,7 @@ const SignupPage = () => {
                 <div className="Reg_Input">
                   <input
                     type="submit"
-                    value="Log In"
+                    value="Sign up"
                     className="primary-background-color"
                   />
                 </div>
