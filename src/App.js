@@ -12,23 +12,31 @@ import Privacy from './Components/MainPage/Privacy';
 import ForgotPassPage from './Components/MainPage/ForgotPassPage';
 import HelpPage from './Components/MainPage/HelpPage';
 
+import AdminDashbaord from './Components/AdminDashboard/AdminDashboard';
+
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/forgot-password" element={<ForgotPassPage />} /> 
-          <Route path="/help" element={<HelpPage />} /> 
-          <Route path="/verification" element={<VerificationPage />} />
-          <Route path="/dashboard" element={<CompanyDashbaord />} />
-        </Routes>
-      </div>
-    </Router>
+    // <Router>
+    //   <div className="App">
+    //     <Routes>
+    //       <Route path="/" element={<LandingPage />} />
+    //       <Route path="/login" element={<LoginPage />} />
+    //       <Route path="/signup" element={<SignupPage />} />
+    //       <Route path="/terms" element={<Terms />} />
+    //       <Route path="/privacy" element={<Privacy />} />
+    //       <Route path="/forgot-password" element={<ForgotPassPage />} /> 
+    //       <Route path="/help" element={<HelpPage />} /> 
+    //       <Route path="/verification" element={<VerificationPage />} />
+    //       <Route path="/dashboard" element={<CompanyDashbaord />} />
+    //     </Routes>
+    //   </div>
+    // </Router>
+
+    <div>
+      <AdminDashbaord />
+    </div>
+
+
   );
 }
 

@@ -1,0 +1,50 @@
+/* AdminDashbaord  */
+.AdminDashbaord {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    background-color: #161616;
+    color: #fff;
+    padding-left: 276px;
+    padding-top: 65px;
+}
+@media screen and (max-width:1200px){
+    .AdminDashbaord {
+        padding-left: 0px !important;
+    }
+}
+
+.AdminDashbaord  .Main_Top_NaV,
+.AdminDashbaord .Left_Dash_Nav{
+    background-color: #1C1C1C !important;
+    border-color: #1C1C1C !important;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.AdminDashbaord .search-sec{
+    background-color: transparent !important;
+}
+
+.AdminDashbaord .Search_Sec input{
+    background-color: transparent !important;
+    border:1px solid #313131 !important;
+    color: #fff !important;
+}
+
+.AdminDashbaord .Search_Sec input::placeholder{
+    color: #858585 !important;
+}
+
+.Search_Sec input:focus{
+    border:2px solid #fff !important;
+}
+
+.AdminDashbaord .Pricing_Btn_Sec a{
+   background-color: #16DB65 !important;
+   border-color: #16DB65 !important;
+   color: #000 !important;
+}
+.Pricing_Btn_Sec a:hover{
+    background-color: #F6F6F6;
+}
