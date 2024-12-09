@@ -325,6 +325,7 @@
     z-index: 1;
 }
 
+.Reg_Input button,
 .Reg_Input textarea,
 .Reg_Input input{
     position: relative;
@@ -348,19 +349,23 @@
     resize: none;
     padding: 20px;
 }
-.Reg_Input input[type="submit"]{
+.Reg_Input button{
     cursor: pointer;
     font-size: 18px;
     background-color: #058C42 !important;
     color: #fff !important;
     border-color: #058C42 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
-.Reg_Input input[type="submit"]:hover{
+.Reg_Input button:hover{
     background-color: #0a6332 !important;
     border-color: #0a6332 !important;
 }
 @media screen and (max-width:500px){
-  .Reg_Input input[type="submit"]{
+  .Reg_Input button{
     font-size: 15px !important;
 }  
 }

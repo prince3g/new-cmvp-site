@@ -162,14 +162,7 @@ const SignupPage = () => {
                   </p>
                 </div>
 
-                <div className="Reg_Input">
-                  <input
-                    type="submit"
-                    value="Sign up"
-                    className="primary-background-color"
-                  />
-                </div>
-{/* 
+
                 <div className="Reg_Input">
                   <button
                     type="submit"
@@ -178,7 +171,7 @@ const SignupPage = () => {
                   >
                     {isLoading ? "Signing Up..." : "Sign Up"}
                   </button>
-                </div> */}
+                </div>
 
               </form>
 

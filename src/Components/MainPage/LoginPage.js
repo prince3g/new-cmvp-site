@@ -183,15 +183,8 @@ const LoginPage = () => {
                   <Link to="/forgot-password">Forgot your password?</Link>
                 </div>
 
-                 <div className="Reg_Input">
-                  <input
-                    type="submit"
-                    value="Log In"
-                    className="primary-background-color"
-                  />
-                </div>
 
-                {/* <div className="Reg_Input">
+                <div className="Reg_Input">
                   <button
                     type="submit"
                     className="primary-background-color"
@@ -199,7 +192,7 @@ const LoginPage = () => {
                   >
                     {isLoading ? "Logging In..." : "Log In"}
                   </button>
-                </div> */}
+                </div>
 
               </form>
 

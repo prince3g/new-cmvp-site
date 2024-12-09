@@ -61,15 +61,8 @@ const ForgotPassPage = () => {
                   />
                 </div>
 
-                <div className="Reg_Input">
-                  <input
-                    type="submit"
-                    value="Log In"
-                    className="primary-background-color"
-                  />
-                </div>
 
-                {/* <div className="Reg_Input">
+                <div className="Reg_Input">
                   <button
                     type="submit"
                     className="primary-background-color"
@@ -77,7 +70,7 @@ const ForgotPassPage = () => {
                   >
                     {isSubmitting ? "Sending..." : "Send Reset Link"}
                   </button>
-                </div> */}
+                </div>
 
               </form>
 
