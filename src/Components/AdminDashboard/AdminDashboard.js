@@ -2,6 +2,15 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './Css/Dash.css';
 import NavBar from './NavBar';
+import AdminFooter from './AdminFooter';
+import AdminHome from './AdminHome';
+import SubscriptionPage from './SubscriptionPage';
+import RegUsers from './RegUsers';
+import Notification from './Notification';
+import UserProfile from './UserProfile';
+import AddSubScript from './AddSubScript';
+import EditSubScript from './EditSubScript';
+
 
 export default function AdminDashbaord() {
 
@@ -13,18 +22,21 @@ export default function AdminDashbaord() {
            <div className="Large-container">
      
             <Routes>
-                {/* <Route path="/" element={<Pricing />} /> */}
-                {/* <Route path="/pricing" element={<Pricing />} />
-                <Route path="/portal" element={<PortalPage />} />
-                <Route path="/uploaded-certificates" element={<UploadedCert />} />
-                <Route path="/deleted-certificates" element={<DeletedUploadedCert />} />
-                <Route path="/logon-info" element={<LogonInfo />} />
-                <Route path="/profile" element={<Profile />} /> */}
+                <Route path="/" element={<AdminHome />} />
+                <Route path="/subscriptions" element={<SubscriptionPage />} />
+                <Route path="/users" element={<RegUsers />} />
+                <Route path="/notification" element={<Notification />} />
+                <Route path="/user-profile" element={<UserProfile />} />
+                <Route path="/add-subscription-plan" element={<AddSubScript />} />
+                <Route path="/edit-plan" element={<EditSubScript/>} />
+
           </Routes>
 
 
 
            </div>
+          <AdminFooter />
+
 
            <Routes>
 

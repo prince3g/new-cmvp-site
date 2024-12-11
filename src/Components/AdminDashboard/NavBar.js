@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import './Css/Dash.css';
 
-import DashLogo from './Img/DashLogo.png';
+import DashLogo from './Img/liteDashLogo.png';
 
 import LitDashLogo from './Img/liteDashLogo.png';
 
@@ -61,47 +61,62 @@ export default function NavBar() {
                     <button className="Side_Nav_Toggler" onClick={closeSidebar}><img src={CloseIcon} alt="Close Icon"></img></button>
                 </div>
                 <div className="Nav_Main">
-                    <ul>
-                        <li>
-                            <Link to="/" className={location.pathname === '/' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/')}>
-                                <img src={HomeIcon} alt="Home Icon"></img>
-                                <span>Admin</span>
-                            </Link>
-                        </li>
+                <ul>
+                    <li>
+                    <Link
+                        to="/"
+                        className={location.pathname === '/' ? 'ActiveLNav_Icon' : ''}
+                        onClick={() => handleLinkClick('/')}
+                    >
+                        <span className="material-icons">home</span>
+                        <span>Admin</span>
+                    </Link>
+                    </li>
 
+                    <li>
+                    <Link
+                        to="/subscriptions"
+                        className={location.pathname === '/subscriptions' ? 'ActiveLNav_Icon' : ''}
+                        onClick={() => handleLinkClick('/subscriptions')}
+                    >
+                        <span className="material-icons">subscriptions</span>
+                        <span>Subscription</span>
+                    </Link>
+                    </li>
 
+                    <li>
+                    <Link
+                        to="/users"
+                        className={location.pathname === '/users' ? 'ActiveLNav_Icon' : ''}
+                        onClick={() => handleLinkClick('/users')}
+                    >
+                        <span className="material-icons">group</span>
+                        <span>Registered users</span>
+                    </Link>
+                    </li>
 
-                        <li>
-                            <Link to="/users" className={location.pathname === '/users' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/profile')}>
-                                <img src={ProfileIcon}></img>
-                                <span>Registered users</span>
-                            </Link>
-                        </li>
+                    <li>
+                    <Link
+                        to="/notification"
+                        className={location.pathname === '/notification' ? 'ActiveLNav_Icon' : ''}
+                        onClick={() => handleLinkClick('/notification')}
+                    >
+                        <span className="material-icons">notifications</span>
+                        <span>Notification</span>
+                    </Link>
+                    </li>
 
-                        
-                        <li>
-                            <Link to="/subscriptions" className={location.pathname === '/subscriptions' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/profile')}>
-                                <img src={PortalIcon}></img>
-                                <span>Subscriptions</span>
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link to="/notification" className={location.pathname === '/notification' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/notification')}>
-                                <img src={NoticIcon} alt="Notification Icon"></img>
-                                <span>Notification</span>
-                            </Link>
-                        </li>
-
-
-
-                        <li>
-                            <Link to="/logout" className={location.pathname === '/logout' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/logout')}>
-                                <img src={LogoutIcon} alt="Logout Icon"></img>
-                                <span>Log out</span>
-                            </Link>
-                        </li>
-                    </ul>
+                    <li>
+                    <Link
+                        to="/logout"
+                        className={location.pathname === '/logout' ? 'ActiveLNav_Icon' : ''}
+                        onClick={() => handleLinkClick('/logout')}
+                    >
+                        <span className="material-icons">logout</span>
+                        <span>Log out</span>
+                    </Link>
+                    </li>
+                </ul>
                 </div>
             </nav>
 
@@ -121,7 +136,9 @@ export default function NavBar() {
                     <div className="Large-container">
                         <div className="L_NN_V_Sec">
                             <div className="Mobile_IcoNs">
-                                <button className="Side_Nav_toggler" onClick={toggleSidebar}><img src={MenuIcon} alt="Menu Icon"></img></button>
+                            <button className="Side_Nav_toggler" onClick={toggleSidebar}>
+                            <span className="material-icons">menu</span>
+                            </button>
 
                                 <Link to="/" onClick={() => handleLinkClick('/')}>
                                     <img src={DashLogo} alt="Dashboard Logo"></img>
