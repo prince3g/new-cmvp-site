@@ -178,6 +178,7 @@
     height: auto;
     margin-top: 7px;
 }
+.Nav_Main ul li button,
 .Nav_Main ul li a{
     position: relative;
     width: 100%;
@@ -185,21 +186,29 @@
     display: flex;
     align-items: center;
     padding: 10px 0px;
+    background-color: transparent;
+    color: inherit;
+    outline: none;
+    border:none;
+    cursor: pointer;
     gap: 10px;
     grid-gap: 10px;
     font-size: 16px;
     font-weight: 500;
     transition: all 0.3s ease-in-out;
 }
+.Nav_Main ul li button span,
 .Nav_Main ul li a span{
     opacity: 1;
     transition: all 0.3s ease-in-out;
 }
+.Nav_Main ul li button img,
 .Nav_Main ul li a img{
     max-width: 15px;
     opacity: 1;
     transition: all 0.3s ease-in-out;
 }
+.Nav_Main ul li button:hover span,
 .Nav_Main ul li a.ActiveLNav_Icon span,
 .Nav_Main ul li a:hover span{
     opacity: 1;
