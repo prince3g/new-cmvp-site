@@ -40,7 +40,8 @@ const SignupPage = () => {
     e.preventDefault();
     setErrorMessage(null);
     setSuccessMessage(null);
-
+    setIsLoading(true); // Start loading
+  
     try {
       const response = await axios.post(
         `${config.API_BASE_URL}/api/accounts/auth/users/`,
@@ -52,9 +53,9 @@ const SignupPage = () => {
           password: formData.password,
         }
       );
-
+  
       setSuccessMessage("Account created successfully. Please check your email to confirm your account.");
-
+  
       // Clear form
       setFormData({
         email: "",
@@ -63,7 +64,7 @@ const SignupPage = () => {
         address: "",
         password: "",
       });
-
+  
       // Redirect to login after 3 seconds
       setTimeout(() => {
         navigate("/login");
@@ -73,8 +74,11 @@ const SignupPage = () => {
         error.response?.data?.detail ||
         "Failed to create an account. Please try again."
       );
+    } finally {
+      setIsLoading(false); // End loading
     }
   };
+  
 
   return (
     <div>

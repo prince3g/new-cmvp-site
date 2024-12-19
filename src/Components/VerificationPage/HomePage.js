@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useParams } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Css/Main.css';
@@ -17,18 +18,96 @@ import config from '../../config.js'
 import CengGlobalLogo from './Img/cenglobal_logo.png';
 
 export default function HomePage() {
+    const { orgId } = useParams(); // Get orgId from URL
+
+    const [responseData, setResponseData] = useState(null); // New state for API response
+
+
+    const [loading, setLoading] = useState(false); // State for loader
     const [certificateNumber, setCertificateNumber] = useState('');
     const [issuedDate, setIssuedDate] = useState(null);
     const [showResult, setShowResult] = useState(false);
 
-    const handleFormSubmit = (event) => {
+    // const handleFormSubmit = async (event) => {
+    //     event.preventDefault();
+    //     if (certificateNumber && issuedDate) {
+    //         try {
+    //             // Format issued_date to 'YYYY-MM-DD'
+    //             const formattedDate = issuedDate.toISOString().split('T')[0]; // Convert to 'YYYY-MM-DD'
+    
+    //             //console.log(`${config.API_BASE_URL}/api/certificates/verify-certificate/${orgId}/`);
+    
+    //             // Call API to verify the certificate
+    //             const response = await fetch(`${config.API_BASE_URL}/api/certificates/verify-certificate/${orgId}/`, {
+    //                 method: 'POST',
+    //                 headers: { 'Content-Type': 'application/json' },
+    //                 body: JSON.stringify({
+    //                     certificate_id: certificateNumber,
+    //                     issued_date: formattedDate, // Use the formatted date
+    //                 }),
+    //             });
+    
+    //             const data = await response.json();
+    //             if (response.ok) {
+    //                 console.log('Certificate Verified:', data);
+    //                 setResponseData(data); // Save the response data
+    //                 setShowResult(true);
+    //             } else {
+    //                 console.error('Verification Failed:', data.message);
+    //             }
+    //         } catch (error) {
+    //             console.error('Error verifying certificate:', error);
+    //         }
+    //     }
+    // };
+   
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
+
         if (certificateNumber && issuedDate) {
-            setShowResult(true);
-        } else {
-            setShowResult(false);
+            setLoading(true); // Start the loader
+            try {
+                // Format issued_date to 'YYYY-MM-DD' in local time
+                const formattedDate = issuedDate.getFullYear() + '-' + 
+                                      String(issuedDate.getMonth() + 1).padStart(2, '0') + '-' + 
+                                      String(issuedDate.getDate()).padStart(2, '0');
+    
+                // Call API to verify the certificate
+                const response = await fetch(`${config.API_BASE_URL}/api/certificates/verify-certificate/${orgId}/`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        certificate_id: certificateNumber,
+                        issued_date: formattedDate, // Use the locally formatted date
+                    }),
+                });
+    
+                const data = await response.json();
+                if (response.ok) {
+                    setResponseData(data); // Save the response data
+                    setShowResult(true);
+                } else {
+                    console.error('Verification Failed:', data.message);
+                }
+            } catch (error) {
+                console.error('Error verifying certificate:', error);
+            } finally {
+                setLoading(false); // Stop the loader
+            }
         }
     };
+
+
+
+   
+    // const handleFormSubmit = (event) => {
+    //     event.preventDefault();
+    //     if (certificateNumber && issuedDate) {
+    //         setShowResult(true);
+    //     } else {
+    //         setShowResult(false);
+    //     }
+    // };
 
     const handleGoBackClick = () => {
         setCertificateNumber('');
@@ -46,7 +125,9 @@ export default function HomePage() {
             <section className="Search_Reasult_Sec">
           
                 <div className="Site-container">
-                    <SearchReasult />
+                    {/* <SearchReasult data={responseData} /> */}
+                    {showResult && responseData && <SearchReasult data={responseData} />}
+
                     <div className='Cont_btn_Sec'>
                         <button className="Go_Back_Sch_Btn" onClick={handleGoBackClick}>
                             Search for a verified certificate <img src={CertIcon1} alt="Cert Icon"/>
@@ -95,7 +176,9 @@ export default function HomePage() {
                                         />
                                     </div>
                                     <div className="V_Form_Input">
-                                        <button type="submit">See certificate</button>
+                                        <button type="submit" disabled={loading}>
+                                                {loading ? "Verifying..." : "See certificate"}
+                                        </button>
                                     </div>
                                 </form>
                             </div>

@@ -12,12 +12,16 @@ import Profile from "./Profile";
 import Pricing from "./Pricing";
 
 export default function CompanyDashbaord() {
-    
+
   return (
+
     <div className="CompanyDashbaord">
       <NavBar />
+
       <div className="MainPage_Content">
+
         <div className="Large-container">
+
           <Routes>
             <Route path="/" element={<Pricing />} />
             <Route path="/pricing" element={<Pricing />} />
@@ -28,13 +32,16 @@ export default function CompanyDashbaord() {
             <Route path="/profile" element={<Profile />} />
           </Routes>
         </div>
+
         <Routes>
           <Route path="/notification" element={<Notification />} />
         </Routes>
       </div>
+
       <div className="Large-container">
         <DashFooter />
       </div>
     </div>
+    
   );
 }

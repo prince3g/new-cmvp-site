@@ -26,9 +26,9 @@ export default function PortalPage() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [certificateData, setCertificateData] = useState({
         
-        organization_id: 1,
+        organization_id: "1c321d22-c526-4879-a3fa-555a401f7ed6",
         certificate_id: "",
-        title: "",
+        certificate_title: "",
         type: "",
         client_name: "",
         dateOfIssue: "",
@@ -233,8 +233,8 @@ export default function PortalPage() {
                                         <div className="Cert_Form_input">
                                             <input
                                                 type="text"
-                                                name="title"
-                                                value={certificateData.title}
+                                                name="certificate_title"
+                                                value={certificateData.certificate_title}
                                                 onChange={handleInputChange}
                                                 placeholder="Certificate title"
                                             />

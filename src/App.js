@@ -26,7 +26,7 @@ function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/forgot-password" element={<ForgotPassPage />} />
         <Route path="/help" element={<HelpPage />} />
-        <Route path="/verification" element={<VerificationPage />} />
+        <Route path="/verification/:orgId" element={<VerificationPage />} />
         <Route path="/dashboard/*" element={<CompanyDashbaord />} />
       </Routes>
       </div>
@@ -34,6 +34,9 @@ function App() {
 
     // <div>
     //   <AdminDashbaord />
+    // </div>
+    // <div>
+    //   <VerificationPage />
     // </div>
 
 
