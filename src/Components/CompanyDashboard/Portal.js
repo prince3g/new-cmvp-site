@@ -25,6 +25,7 @@ export default function PortalPage() {
     const [loading, setLoading] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
     const [certificateData, setCertificateData] = useState({
+        
         organization_id: 1,
         certificate_id: "",
         title: "",

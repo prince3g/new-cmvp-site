@@ -36,7 +36,8 @@ export default function CompanyDashbaord() {
 
            <Routes>
 
-             <Route path="/notification" element={<Notification />} />
+            <Route path="/notification" element={<Notification />} />
+
            </Routes>
 
        
