@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link, useLocation } from "react-router-dom";
 import './Css/Dash.css';
 
@@ -55,12 +56,25 @@ export default function NavBar() {
         setShowSearch(false);
     };
 
+
+    const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      // Redirect to login if no token
+      navigate("/");
+    }
+  }, [navigate]);
+
+
+
     return (
         <div className={`Dash_NavBar ${isSidebarOpen ? 'Toggle_NavBar' : ''}`}>
             <div className="NavBar_Body" onClick={closeSidebar}></div>
             <nav className="Left_Dash_Nav">
                 <div className="Top_Dash_nav">
-                    <Link to="/" onClick={() => handleLinkClick('/')}>
+                    <Link to="/dashboard/" onClick={() => handleLinkClick('/')}>
                         <img src={LitDashLogo} alt="Dashboard Logo"></img>
                     </Link>
                     <button className="Side_Nav_Toggler" onClick={closeSidebar}><img src={CloseIcon} alt="Close Icon"></img></button>
@@ -68,14 +82,14 @@ export default function NavBar() {
                 <div className="Nav_Main">
                     <ul>
                         <li>
-                            <Link to="/" className={location.pathname === '/' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/')}>
+                            <Link to="/dashboard/" className={location.pathname === '/' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/')}>
                                 <img src={HomeIcon} alt="Home Icon"></img>
                                 <span>Home</span>
                             </Link>
                         </li>
 
                         <li>
-                            <Link to="/portal" className={location.pathname === '/portal' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/portal')}>
+                            <Link to="/dashboard/portal" className={location.pathname === '/portal' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/portal')}>
                                 <img src={PortalIcon} alt="Portal Icon"></img>
                                 <span>My portal</span>
                             </Link>
@@ -95,12 +109,12 @@ export default function NavBar() {
                         {isDropdownOpen && (
                             <ul className="Dropdown_Menu">
                                 <li>
-                                    <Link to="/uploaded-certificates" className={location.pathname === '/uploaded-certificates' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/uploaded-certificates')}>
+                                    <Link to="/dashboard/uploaded-certificates" className={location.pathname === '/uploaded-certificates' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/uploaded-certificates')}>
                                         Uploaded Certificates
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/deleted-certificates" className={location.pathname === '/deleted-certificates' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/deleted-certificates')}>
+                                    <Link to="/dashboard/deleted-certificates" className={location.pathname === '/deleted-certificates' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/deleted-certificates')}>
                                         Deleted Certificates
                                     </Link>
                                 </li>
@@ -108,28 +122,28 @@ export default function NavBar() {
                         )}
 
                         <li>
-                            <Link to="/notification" className={location.pathname === '/notification' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/notification')}>
+                            <Link to="/dashboard/notification" className={location.pathname === '/notification' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/notification')}>
                                 <img src={NoticIcon} alt="Notification Icon"></img>
                                 <span>Notification</span>
                             </Link>
                         </li>
 
                         <li>
-                            <Link to="/logon-info" className={location.pathname === '/logon-info' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/logon-info')}>
+                            <Link to="/dashboard/logon-info" className={location.pathname === '/logon-info' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/logon-info')}>
                                 <img src={LogonIcon} alt="Logon Icon"></img>
                                 <span>Logon information</span>
                             </Link>
                         </li>
 
                         <li>
-                            <Link to="/profile" className={location.pathname === '/profile' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/profile')}>
+                            <Link to="/dashboard/profile" className={location.pathname === '/profile' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/profile')}>
                                 <img src={ProfileIcon} alt="Profile Icon"></img>
                                 <span>Profile</span>
                             </Link>
                         </li>
 
                         <li className="Mobile_LI">
-                            <Link to="/pricing" className={`mobile_Price_Btn ${location.pathname === '/pricing' ? 'ActiveLNav_Icon' : ''}`} onClick={() => handleLinkClick('/pricing')}>
+                            <Link to="/dashboard/pricing" className={`mobile_Price_Btn ${location.pathname === '/pricing' ? 'ActiveLNav_Icon' : ''}`} onClick={() => handleLinkClick('/pricing')}>
                                 Pricing
                             </Link>
                         </li>
@@ -137,7 +151,7 @@ export default function NavBar() {
                         <div className="upload_Add">
                             <h3>Upgrade to Pro</h3>
                             <p>Upload up to 100 certificates a day</p>
-                            <Link to="/pricing" className={location.pathname === '/upgrade' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/upgrade')}>Upgrade</Link>
+                            <Link to="/dashboard/pricing" className={location.pathname === '/upgrade' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/upgrade')}>Upgrade</Link>
                         </div>
 
                         <li>
@@ -148,10 +162,13 @@ export default function NavBar() {
                         </li>
 
                         <li>
-                            <Link to="/logout" className={location.pathname === '/logout' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/logout')}>
-                                <img src={LogoutIcon} alt="Logout Icon"></img>
-                                <span>Log out</span>
-                            </Link>
+                        <button onClick={() => {
+                            localStorage.removeItem("authToken"); // Clear token
+                            navigate("/"); // Redirect to login
+                        }}>
+                             <img src={LogoutIcon} alt="Logout Icon"></img>
+                           <span>Logout</span>
+                        </button>
                         </li>
                     </ul>
                 </div>
@@ -175,7 +192,7 @@ export default function NavBar() {
                             <div className="Mobile_IcoNs">
                                 <button className="Side_Nav_toggler" onClick={toggleSidebar}><img src={MenuIcon} alt="Menu Icon"></img></button>
 
-                                <Link to="/" onClick={() => handleLinkClick('/')}>
+                                <Link to="/dashboard/" onClick={() => handleLinkClick('/')}>
                                     <img src={DashLogo} alt="Dashboard Logo"></img>
                                 </Link>
                             </div>
@@ -201,7 +218,7 @@ export default function NavBar() {
                                 <p><b>days left</b> in your subscription</p>
                             </div>
                             <div className="Pricing_Btn_Sec">
-                                <Link to="/pricing" className={location.pathname === '/pricing' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/pricing')}>Pricing</Link>
+                                <Link to="/dashboard/pricing" className={location.pathname === '/pricing' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/pricing')}>Pricing</Link>
                             </div>
                             <div className="Profile_Img_Sec">
                                 <img src={DashLogo} alt="Profile"></img>

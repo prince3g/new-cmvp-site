@@ -127,7 +127,7 @@ const LoginPage = () => {
       localStorage.setItem("authToken", token); // Store token for future use
 
       // Redirect to the dashboard or home page
-      navigate("/");
+      navigate("/dashboard/");
     } catch (error) {
       setErrorMessage(
         error.response?.data?.detail || "Failed to log in. Please try again."
