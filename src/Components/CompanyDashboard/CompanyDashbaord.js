@@ -12,6 +12,7 @@ import Profile from "./Profile";
 import Pricing from "./Pricing";
 
 export default function CompanyDashbaord() {
+    
   return (
     <div className="CompanyDashbaord">
       <NavBar />
