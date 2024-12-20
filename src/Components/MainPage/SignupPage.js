@@ -139,6 +139,15 @@ const SignupPage = () => {
                   />
                 </div>
 
+                <div className="Reg_Input Upload-input">
+                  <label>Upload Company Logo</label>
+                  <input
+                    type="file"
+                    name=""
+                    required
+                  />
+                  </div>
+
                 <div className="Reg_Input pass-Input">
                   <input
                     type={passwordType}

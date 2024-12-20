@@ -5,7 +5,11 @@ import './Css/Dash.css';
 
 import DashLogo from './Img/DashLogo.png';
 
+import SampleImage from './Img/CompLogo.png';
+
 import LitDashLogo from './Img/liteDashLogo.png';
+
+
 
 import HomeIcon from './Img/Homeicon.svg';
 import PortalIcon from './Img/portalicon.svg';
@@ -69,6 +73,7 @@ export default function NavBar() {
 
 
 
+
     return (
         <div className={`Dash_NavBar ${isSidebarOpen ? 'Toggle_NavBar' : ''}`}>
             <div className="NavBar_Body" onClick={closeSidebar}></div>
@@ -81,12 +86,7 @@ export default function NavBar() {
                 </div>
                 <div className="Nav_Main">
                     <ul>
-                        {/* <li>
-                            <Link to="/dashboard/" className={location.pathname === '/' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/')}>
-                                <img src={HomeIcon} alt="Home Icon"></img>
-                                <span>Home</span>
-                            </Link>
-                        </li> */}
+
 
                         <li>
                             <Link to="/dashboard/" className={location.pathname === '/portal' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/portal')}>
@@ -154,12 +154,6 @@ export default function NavBar() {
                             <Link to="/dashboard/pricing" className={location.pathname === '/upgrade' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/upgrade')}>Upgrade</Link>
                         </div>
 
-                        {/* <li>
-                            <Link to="/help" className={location.pathname === '/help' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/help')}>
-                                <img src={HelpIcon1} alt="Help Icon"></img>
-                                <span>Help & support</span>
-                            </Link>
-                        </li> */}
 
                         <li>
                         <button onClick={() => {
@@ -221,8 +215,10 @@ export default function NavBar() {
                                 <Link to="/dashboard/pricing" className={location.pathname === '/pricing' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/pricing')}>Pricing</Link>
                             </div>
                             <div className="Profile_Img_Sec">
-                                <img src={DashLogo} alt="Profile"></img>
+                                <img  src={SampleImage}  alt="Sample"></img>
                                 <span></span>
+
+                              
                             </div>
                         </div>
                     </div>

@@ -12,11 +12,15 @@ import Privacy from './Components/MainPage/Privacy';
 import ForgotPassPage from './Components/MainPage/ForgotPassPage';
 import HelpPage from './Components/MainPage/HelpPage';
 
+import ScrollToTop from './Components/ScrollToTop';
+
 import AdminDashbaord from './Components/AdminDashboard/AdminDashboard';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
+      
       <div className="App">
       <Routes>
         <Route path="/" element={<LandingPage />} />

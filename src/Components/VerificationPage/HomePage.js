@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Css/Main.css';
+import { ColorContext } from "../ColorContext";
 
 import NavBar from './NavBar';
 import HeroBanner1 from './Img/heroImg.png';
@@ -18,6 +19,10 @@ import config from '../../config.js'
 import CengGlobalLogo from './Img/cenglobal_logo.png';
 
 export default function HomePage() {
+
+    const { backgroundColor } = useContext(ColorContext);
+
+
     const { orgID } = useParams(); // Get orgId from URL
 
     const [responseData, setResponseData] = useState(null); // New state for API response
@@ -84,7 +89,19 @@ export default function HomePage() {
 
     
     return (
-        <div className={`hero-sec ${showResult ? 'Showresult' : ''}`}>
+        <div className={`hero-sec ${showResult ? 'Showresult' : ''}`}
+
+        style={{
+            height: "100vh",
+            backgroundColor,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "#FFF",
+            transition: "background-color 0.5s ease", // Smooth transition for color change
+          }}
+        
+        >
             <NavBar />
             <button className="Go_Back_Sch_Btn Close_Search_Btn" onClick={handleGoBackClick}>
                            <img src={ArrowIcon} alt="Cert Icon"/>
