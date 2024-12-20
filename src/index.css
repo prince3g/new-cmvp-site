@@ -92,14 +92,32 @@ input{
   font-size: 50px;
   font-weight: 500;
 }
+.large-text{
+  font-size: 60px;
+  font-weight: 500;
+  line-height: 100px;
+}
+
 
 @media screen and (max-width:1000px){
+  .large-text,
   .big-text{
       font-size: 40px !important;
+      line-height: 170% !important;
   }
 }
 @media screen and (max-width:500px){
+  .large-text,
   .big-text{
       font-size: 30px !important;
   }
+}
+
+
+
+.error-message{
+  color: #ff4000;
+  font-size: 12px !important;
+  font-style: italic !important;
+  margin-top: 8px;
 }
