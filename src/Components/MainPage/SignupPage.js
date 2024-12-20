@@ -13,7 +13,7 @@ const SignupPage = () => {
   const [passwordType, setPasswordType] = useState("password");
   const [formData, setFormData] = useState({
     email: "",
-    companyName: "",
+    name: "",
     phone: "",
     address: "",
     password: "",
@@ -44,10 +44,10 @@ const SignupPage = () => {
   
     try {
       const response = await axios.post(
-        `${config.API_BASE_URL}/api/accounts/auth/users/`,
+        `${config.API_BASE_URL}/api/accounts/auth/organization/`,
         {
           email: formData.email,
-          company_name: formData.companyName,
+          name: formData.companyName,
           phone: formData.phone,
           address: formData.address,
           password: formData.password,
