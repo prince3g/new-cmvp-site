@@ -81,15 +81,15 @@ export default function NavBar() {
                 </div>
                 <div className="Nav_Main">
                     <ul>
-                        <li>
+                        {/* <li>
                             <Link to="/dashboard/" className={location.pathname === '/' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/')}>
                                 <img src={HomeIcon} alt="Home Icon"></img>
                                 <span>Home</span>
                             </Link>
-                        </li>
+                        </li> */}
 
                         <li>
-                            <Link to="/dashboard/portal" className={location.pathname === '/portal' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/portal')}>
+                            <Link to="/dashboard/" className={location.pathname === '/portal' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/portal')}>
                                 <img src={PortalIcon} alt="Portal Icon"></img>
                                 <span>My portal</span>
                             </Link>
@@ -154,12 +154,12 @@ export default function NavBar() {
                             <Link to="/dashboard/pricing" className={location.pathname === '/upgrade' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/upgrade')}>Upgrade</Link>
                         </div>
 
-                        <li>
+                        {/* <li>
                             <Link to="/help" className={location.pathname === '/help' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/help')}>
                                 <img src={HelpIcon1} alt="Help Icon"></img>
                                 <span>Help & support</span>
                             </Link>
-                        </li>
+                        </li> */}
 
                         <li>
                         <button onClick={() => {
