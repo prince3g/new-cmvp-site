@@ -22,7 +22,7 @@ export default function UploadedCert() {
     const [certificateData, setCertificateData] = useState({
         organization_id: 1,
         certificate_id: "",
-        title: "",
+        certificate_title: "",
         type: "",
         client_name: "",
         dateOfIssue: "",
@@ -239,8 +239,8 @@ const handleSoftDelete = async (certificate_id) => {
                                         <div className="Cert_Form_input">
                                             <input
                                                 type="text"
-                                                name="title"
-                                                value={certificateData.title}
+                                                name="certificate_title"
+                                                value={certificateData.certificate_title}
                                                 onChange={handleInputChange}
                                                 placeholder="Certificate title"
                                             />
