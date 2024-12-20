@@ -12,6 +12,10 @@ import PhotoIcon from './Img/photo-icon.svg';
 import config from '../../config.js';
 
 export default function PortalPage() {
+
+    const organizationID =  localStorage.getItem("authUserId");
+    const organizationName =  localStorage.getItem("authName");
+
     const [uploadedCount, setUploadedCount] = useState(0);
     const [deletedCount, setDeletedCount] = useState(0);
     const [copyMessage, setCopyMessage] = useState('Copy verification Url');
@@ -26,7 +30,7 @@ export default function PortalPage() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [certificateData, setCertificateData] = useState({
         
-        organization_id: "1c321d22-c526-4879-a3fa-555a401f7ed6",
+        organization_id: organizationID,
         certificate_id: "",
         certificate_title: "",
         type: "",
@@ -340,7 +344,7 @@ export default function PortalPage() {
                         <input
                             id="portalUrl"
                             type="text"
-                            value="https://cmvp.net/cenglobalservices"
+                            value={`${config.WEB_PAGE_BASE_URL}/${organizationID}/`}
                             readOnly
                         />
                     </div>

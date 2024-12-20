@@ -123,8 +123,15 @@ const LoginPage = () => {
       );
 
       // Assuming the API sends back a token or some user data on success
-      const { token } = response.data;
-      localStorage.setItem("authToken", token); // Store token for future use
+      const token  = response.data;
+
+      localStorage.setItem("authToken", token.access); // Store token for future use
+      localStorage.setItem("authEmail", token.email); // Store token for future use
+      localStorage.setItem("authUserId", token.unique_subscriber_id); // Store token for future use
+      localStorage.setItem("authName", token.name); // Store token for future use
+      localStorage.setItem("authPhone", token.phone); // Store token for future use
+      localStorage.setItem("authAddress", token.address); // Store token for future use
+
 
       // Redirect to the dashboard or home page
       navigate("/dashboard/");

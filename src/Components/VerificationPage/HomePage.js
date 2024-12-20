@@ -18,7 +18,7 @@ import config from '../../config.js'
 import CengGlobalLogo from './Img/cenglobal_logo.png';
 
 export default function HomePage() {
-    const { orgId } = useParams(); // Get orgId from URL
+    const { orgID } = useParams(); // Get orgId from URL
 
     const [responseData, setResponseData] = useState(null); // New state for API response
 
@@ -28,39 +28,6 @@ export default function HomePage() {
     const [issuedDate, setIssuedDate] = useState(null);
     const [showResult, setShowResult] = useState(false);
 
-    // const handleFormSubmit = async (event) => {
-    //     event.preventDefault();
-    //     if (certificateNumber && issuedDate) {
-    //         try {
-    //             // Format issued_date to 'YYYY-MM-DD'
-    //             const formattedDate = issuedDate.toISOString().split('T')[0]; // Convert to 'YYYY-MM-DD'
-    
-    //             //console.log(`${config.API_BASE_URL}/api/certificates/verify-certificate/${orgId}/`);
-    
-    //             // Call API to verify the certificate
-    //             const response = await fetch(`${config.API_BASE_URL}/api/certificates/verify-certificate/${orgId}/`, {
-    //                 method: 'POST',
-    //                 headers: { 'Content-Type': 'application/json' },
-    //                 body: JSON.stringify({
-    //                     certificate_id: certificateNumber,
-    //                     issued_date: formattedDate, // Use the formatted date
-    //                 }),
-    //             });
-    
-    //             const data = await response.json();
-    //             if (response.ok) {
-    //                 console.log('Certificate Verified:', data);
-    //                 setResponseData(data); // Save the response data
-    //                 setShowResult(true);
-    //             } else {
-    //                 console.error('Verification Failed:', data.message);
-    //             }
-    //         } catch (error) {
-    //             console.error('Error verifying certificate:', error);
-    //         }
-    //     }
-    // };
-   
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
@@ -73,7 +40,7 @@ export default function HomePage() {
                                       String(issuedDate.getDate()).padStart(2, '0');
     
                 // Call API to verify the certificate
-                const response = await fetch(`${config.API_BASE_URL}/api/certificates/verify-certificate/${orgId}/`, {
+                const response = await fetch(`${config.API_BASE_URL}/api/certificates/verify-certificate/${orgID}/`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
