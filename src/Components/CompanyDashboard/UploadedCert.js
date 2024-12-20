@@ -351,7 +351,8 @@ const handleSoftDelete = async (certificate_id) => {
                 </div>
             </div>
 
-            <div className={`Upload_env_main ${isUploadEnvHidden ? 'Hide_Envi_Box' : ''}`}>
+
+    <div className={`Upload_env_main ${isUploadEnvHidden ? 'Hide_Envi_Box' : ''}`}>
     <div className="Cert_Carti_Sel_Sec">
         <h3>Training certificate</h3>
         <div className="Cart_select_Sec">
@@ -362,6 +363,7 @@ const handleSoftDelete = async (certificate_id) => {
             </select>
         </div>
     </div>
+
 
     <div className="Table_Sec">
         <table className="Upload_Table">
