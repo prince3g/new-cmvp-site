@@ -26,7 +26,7 @@ function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/forgot-password" element={<ForgotPassPage />} />
         <Route path="/help" element={<HelpPage />} />
-        <Route path="/verification/:orgId" element={<VerificationPage />} />
+        <Route path="/verification/:orgID" element={<VerificationPage />} />
         <Route path="/dashboard/*" element={<CompanyDashbaord />} />
       </Routes>
       </div>
