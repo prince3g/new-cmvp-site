@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -27,7 +27,7 @@ export default function HomePage() {
 
     const [responseData, setResponseData] = useState(null); // New state for API response
 
-
+    const [organizationData, setOrganizationData] = useState(null); // For organization data
     const [loading, setLoading] = useState(false); // State for loader
     const [certificateNumber, setCertificateNumber] = useState('');
     const [issuedDate, setIssuedDate] = useState(null);
@@ -70,16 +70,26 @@ export default function HomePage() {
     };
 
 
+  // Fetch organization data
+  useEffect(() => {
+    const fetchOrganizationData = async () => {
+      try {
+        const response = await fetch(
+          `http://127.0.0.1:9090/api/accounts/auth/organizations/${orgID}/`
+        );
+        const data = await response.json();
+        if (response.ok) {
+          setOrganizationData(data);
+        } else {
+          console.error("Error fetching organization data:", data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching organization data:", error);
+      }
+    };
 
-   
-    // const handleFormSubmit = (event) => {
-    //     event.preventDefault();
-    //     if (certificateNumber && issuedDate) {
-    //         setShowResult(true);
-    //     } else {
-    //         setShowResult(false);
-    //     }
-    // };
+    fetchOrganizationData();
+  }, [orgID]);
 
     const handleGoBackClick = () => {
         setCertificateNumber('');
@@ -125,11 +135,14 @@ export default function HomePage() {
                     <div className="Hero_Dlt">
                     <div className="CEO-INtro">
                 <div className="CEO-INtro-1">
-                   <span><img src={CengGlobalLogo} alt="CEO"/></span>
+                   {/* <span><img src={CengGlobalLogo} alt="CEO"/></span> */}
+                   <span> <img  src={`${config.API_BASE_URL}${organizationData?.logo || CengGlobalLogo}`}  alt="Organization Logo" /></span>
                 </div>
                 <div className="CEO-INtro-2">
-                    <h4>Global Services Limited </h4>
-                    <p>Welcome to Global Services Limited certification verification portal by CMVP</p>
+                    {/* <h4>Global Services Limited </h4> */}
+                    <h4>{organizationData?.name || "Organization Name"}</h4>
+                    <p>Welcome to {organizationData?.name || "Organization"}{" "} certification verification portal by CMVP</p>
+                    {/* <p>Welcome to Global Services Limited certification verification portal by CMVP</p> */}
                 </div>
             </div>
 

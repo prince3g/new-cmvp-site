@@ -97,6 +97,7 @@ export default function UploadedCert() {
         const formData = new FormData();
         formData.append("organization", certificateData.organization_id); 
         formData.append("certificate_id", certificateData.number);  // `number` on frontend -> `certificate_id` on backend
+        formData.append("certificate_title", certificateData.certificate_title);  // `certificate_title` on frontend -> `certificate_title` on backend
         formData.append("client_name", certificateData.client_name);   // `issuedTo` -> `client_name`
         formData.append("issue_date", certificateData.dateOfIssue); 
         formData.append("expiry_date", "");  // Optional

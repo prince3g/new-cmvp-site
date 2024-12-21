@@ -69,10 +69,6 @@ export default function LogonInfo() {
                               
                             </tr>
 
-
-                          
-                          
-
                         </tbody>
                     </table>
                 </div>
