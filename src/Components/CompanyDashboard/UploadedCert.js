@@ -8,6 +8,8 @@ import PhotoIcon from './Img/photo-icon.svg';
 import config from '../../config.js'
 
 export default function UploadedCert() {
+
+    const organizationID = localStorage.setItem("authUserId");
     const [isUploadBoxTogglerActive, setIsUploadBoxTogglerActive] = useState(false);
     const [isUploadEnvHidden, setIsUploadEnvHidden] = useState(false);
     const [isCertificateSectionVisible, setIsCertificateSectionVisible] = useState(false);
@@ -20,7 +22,7 @@ export default function UploadedCert() {
     const [certificateList, setCertificateList] = useState([]);
 
     const [certificateData, setCertificateData] = useState({
-        organization_id: 1,
+        organization_id: organizationID,
         certificate_id: "",
         certificate_title: "",
         type: "",
@@ -130,7 +132,8 @@ export default function UploadedCert() {
         // Fetch certificate data on component mount
         const fetchCertificateData = async () => {
             try {
-                const response = await axios.get(`${config.API_BASE_URL}/api/certificates/create/`, {
+                const response = await axios.get(`${config.API_BASE_URL}/api/certificates/organization/${organizationID}/`, {
+
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem("token")}`
                     }
