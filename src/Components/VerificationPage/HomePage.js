@@ -136,7 +136,6 @@ export default function HomePage() {
             <h2>Cen Global Services Limited <br></br> <span className="anim-Hh-span">Certificate</span> Verification</h2>
         </div>
 
-<<<<<<< HEAD
       </div>
       <div className="Inputer-SecOO">
       <a href="#" className="Inputer-SecOO-Top">
@@ -150,23 +149,6 @@ export default function HomePage() {
       </a>
       <div className="has-Form">
         {/* <h3>Search for a verified certificate here</h3> */}
-=======
-            <div className="Site-container">
-                <div className="Hero_Grid">
-                    <div className="Hero_Dlt">
-                    <div className="CEO-INtro">
-                <div className="CEO-INtro-1">
-                   {/* <span><img src={CengGlobalLogo} alt="CEO"/></span> */}
-                   <span> <img  src={`${config.API_BASE_URL}${organizationData?.logo || CengGlobalLogo}`}  alt="Organization Logo" /></span>
-                </div>
-                <div className="CEO-INtro-2">
-                    {/* <h4>Global Services Limited </h4> */}
-                    <h4>{organizationData?.name || "Organization Name"}</h4>
-                    <p>Welcome to {organizationData?.name || "Organization"}{" "} certification verification portal by CMVP</p>
-                    {/* <p>Welcome to Global Services Limited certification verification portal by CMVP</p> */}
-                </div>
-            </div>
->>>>>>> 7f8b22f2b9678962d9f0511c2de1861aba081a80
 
         <form className="Verification_Search_Form" onSubmit={handleFormSubmit}>
                                     <div className="V_Form_Input F_V_Form_Input">
