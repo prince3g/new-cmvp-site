@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ColorContext } from "./ColorContext";
-import SampleImage from "./CompanyDashboard/Img/CompLogo.png"; // Import your image file
+import SampleImage from "./PageFixeImg.jpg"; 
 
 const ImageColorExtractor = () => {
   const { setBackgroundColor } = useContext(ColorContext); // Access context to update background color
@@ -35,29 +35,8 @@ const ImageColorExtractor = () => {
   };
 
   return (
-    <div style={{ textAlign: "center", padding: "20px" }}>
-      <h1>Image HEX Color Extractor</h1>
-      <img
-        src={SampleImage}
-        alt="Sample"
-        style={{ maxWidth: "100%", marginTop: "20px", borderRadius: "8px" }}
-      />
-      {hexColor && (
-        <div style={{ marginTop: "20px" }}>
-          <h2>Dominant HEX Color:</h2>
-          <div
-            style={{
-              width: "100px",
-              height: "100px",
-              backgroundColor: hexColor,
-              margin: "0 auto",
-              borderRadius: "8px",
-            }}
-          ></div>
-          <p>{hexColor}</p>
-        </div>
-      )}
-    </div>
+   
+    <div></div>
   );
 };
 
