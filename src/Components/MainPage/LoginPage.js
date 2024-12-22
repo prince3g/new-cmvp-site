@@ -1,81 +1,3 @@
-// import React, { useState } from "react";
-// import RegNavBar from "./RegNavBar";
-// import config from "../../config.js";
-// import { Link } from "react-router-dom";
-// import axios from "axios";
-// import ShowPassIcon from "./Img/showPass-icon.svg";
-// import HidePassIcon from "./Img/hidePass-icon.svg";
-
-// const LoginPage = () => {
-//   const [passwordType, setPasswordType] = useState("password");
-
-//   const togglePasswordVisibility = () => {
-//     setPasswordType((prevType) => (prevType === "password" ? "text" : "password"));
-//   };
-
-
-//   //  `${config.API_BASE_URL}/api/accounts/auth/login/`
-
-//   return (
-//     <div>
-//       <RegNavBar />
-
-//       <section className="Get-Seecos login-desis">
-//         <div className="site-container">
-//           <div className="Reg_Sec">
-//             <div className="Reg_Box">
-//               <div className="Reg_Box_Header">
-//                 <h3>Welcome Back</h3>
-//                 <p>Log in to your CMVP account</p>
-//               </div>
-//               <form className="Reg_Form">
-//                 <div className="Reg_Input">
-//                   <input
-//                     type="text"
-//                     name="email"
-//                     placeholder="Email"
-//                   />
-//                 </div>
-//                 <div className="Reg_Input pass-Input">
-//                   <input
-//                     type={passwordType}
-//                     id="passwordField"
-//                     placeholder="Password"
-//                   />
-//                   <span id="togglePassword" onClick={togglePasswordVisibility}>
-//                     <img
-//                       src={passwordType === "password" ? ShowPassIcon : HidePassIcon}
-//                       id="toggleIcon"
-//                       alt={passwordType === "password" ? "Show Password" : "Hide Password"}
-//                     />
-//                   </span>
-//                 </div>
-
-//                 <div className="Reg_Input">
-//                 <Link to="/forgot-password">Forgot your password?</Link>
-//            </div>
-           
-//                 <div className="Reg_Input">
-//                   <input
-//                     type="submit"
-//                     value="Log In"
-//                     className="primary-background-color"
-//                   />
-//                 </div>
-//               </form>
-
-//               <div className="Reg_Box_Foot">
-//             <p>Don't have an account? <Link to="/signup">Sign up</Link></p>
-//           </div>
-//             </div>
-//           </div>
-//         </div>
-//       </section>
-//     </div>
-//   );
-// };
-
-// export default LoginPage;
 
 
 import React, { useState } from "react";
@@ -113,26 +35,34 @@ const LoginPage = () => {
     setErrorMessage(null);
     setIsLoading(true);
 
+    // Create FormData for the login request
+    const formDataToSend = new FormData();
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("password", formData.password);
+
     try {
       const response = await axios.post(
         `${config.API_BASE_URL}/api/accounts/auth/login/`,
+        formDataToSend,
         {
-          email: formData.email,
-          password: formData.password,
+          headers: {
+            "Content-Type": "multipart/form-data", // Ensure correct content type
+          },
         }
       );
 
       // Assuming the API sends back a token or some user data on success
-      const token  = response.data;
+      const token = response.data;
 
-      localStorage.setItem("authToken", token.access); // Store token for future use
-      localStorage.setItem("authEmail", token.email); // Store token for future use
-      localStorage.setItem("authUserId", token.unique_subscriber_id); // Store token for future use
-      localStorage.setItem("authName", token.name); // Store token for future use
-      localStorage.setItem("authPhone", token.phone); // Store token for future use
-      localStorage.setItem("authAddress", token.address); // Store token for future use
-
-
+      // Store the token and other user details in localStorage
+      localStorage.setItem("authToken", token.access);
+      localStorage.setItem("authEmail", token.email);
+      localStorage.setItem("authUserId", token.unique_subscriber_id);
+      localStorage.setItem("authName", token.name);
+      localStorage.setItem("authPhone", token.phone);
+      localStorage.setItem("authAddress", token.address);
+      // localStorage.setItem("authImageUrl", token.logo_url);
+      // console.log("Response Data: ", token)
       // Redirect to the dashboard or home page
       navigate("/dashboard/");
     } catch (error) {
@@ -190,7 +120,6 @@ const LoginPage = () => {
                   <Link to="/forgot-password">Forgot your password?</Link>
                 </div>
 
-
                 <div className="Reg_Input">
                   <button
                     type="submit"
@@ -200,7 +129,6 @@ const LoginPage = () => {
                     {isLoading ? "Logging In..." : "Log In"}
                   </button>
                 </div>
-
               </form>
 
               {errorMessage && <p className="error-message">{errorMessage}</p>}

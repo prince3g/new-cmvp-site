@@ -13,14 +13,15 @@ const SignupPage = () => {
   const [passwordType, setPasswordType] = useState("password");
   const [formData, setFormData] = useState({
     email: "",
-    name: "",
+    companyName: "",
     phone: "",
     address: "",
     password: "",
+    logo: null, // Initialize logo as null for file handling
   });
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
-  const [isLoading, setIsLoading] = useState(false); // State for loader
+  const [isLoading, setIsLoading] = useState(false);
 
   const togglePasswordVisibility = () => {
     setPasswordType((prevType) =>
@@ -29,10 +30,10 @@ const SignupPage = () => {
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, files } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: type === "file" ? files[0] : value, // Handle file uploads
     }));
   };
 
@@ -40,50 +41,56 @@ const SignupPage = () => {
     e.preventDefault();
     setErrorMessage(null);
     setSuccessMessage(null);
-    setIsLoading(true); // Start loading
-  
+    setIsLoading(true);
+
+    // Prepare FormData
+    const formDataToSend = new FormData();
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("name", formData.companyName);
+    formDataToSend.append("phone", formData.phone);
+    formDataToSend.append("address", formData.address);
+    formDataToSend.append("password", formData.password);
+
+    if (formData.logo) {
+      formDataToSend.append("logo", formData.logo); // Add file to FormData
+    }
+
     try {
       const response = await axios.post(
         `${config.API_BASE_URL}/api/accounts/auth/organization/`,
+        formDataToSend,
         {
-          email: formData.email,
-          name: formData.companyName,
-          phone: formData.phone,
-          address: formData.address,
-          password: formData.password,
+          headers: {
+            "Content-Type": "multipart/form-data", // Ensure correct content type
+          },
         }
       );
-  
+
       setSuccessMessage("Account created successfully. Please check your email to confirm your account.");
-  
-      // Clear form
       setFormData({
         email: "",
         companyName: "",
         phone: "",
         address: "",
         password: "",
+        logo: null,
       });
-  
-      // Redirect to login after 3 seconds
+
       setTimeout(() => {
         navigate("/login");
-      }, 3000);
+      }, 1000);
     } catch (error) {
       setErrorMessage(
-        error.response?.data?.detail ||
-        "Failed to create an account. Please try again."
+        error.response?.data?.detail || "Failed to create an account. Please try again."
       );
     } finally {
-      setIsLoading(false); // End loading
+      setIsLoading(false);
     }
   };
-  
 
   return (
     <div>
       <RegNavBar />
-
       <section className="Get-Seecos signup-desis">
         <div className="site-container">
           <div className="Reg_Sec">
@@ -143,10 +150,10 @@ const SignupPage = () => {
                   <label>Upload Company Logo</label>
                   <input
                     type="file"
-                    name=""
-                    required
+                    name="logo"
+                    onChange={handleInputChange}
                   />
-                  </div>
+                </div>
 
                 <div className="Reg_Input pass-Input">
                   <input
@@ -175,17 +182,15 @@ const SignupPage = () => {
                   </p>
                 </div>
 
-
                 <div className="Reg_Input">
                   <button
                     type="submit"
                     className="primary-background-color"
-                    disabled={isLoading} // Disable button when loading
+                    disabled={isLoading}
                   >
                     {isLoading ? "Signing Up..." : "Sign Up"}
                   </button>
                 </div>
-
               </form>
 
               {errorMessage && <p className="error-message">{errorMessage}</p>}

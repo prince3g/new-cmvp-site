@@ -344,7 +344,7 @@ export default function PortalPage() {
                         <input
                             id="portalUrl"
                             type="text"
-                            value={`${config.WEB_PAGE_BASE_URL}/${organizationID}/`}
+                            value={`${config.WEB_PAGE_BASE_URL}/${organizationID}/${organizationName}/`}
                             readOnly
                         />
                     </div>
@@ -357,7 +357,7 @@ export default function PortalPage() {
             <div className="Main_Port_Sec">
                 <div className="site-container">
                     <div className="Port_into">
-                        <h4>Hi 👋 ABC Company</h4>
+                        <h4>Hi 👋{organizationName}</h4>
                         <h2>Welcome to your CMVP Portal</h2>
                         <p>
                             This portal enables you to verify all your certificates just by uploading them.

@@ -8,6 +8,9 @@ import PhotoIcon from './Img/photo-icon.svg';
 import config from '../../config.js'
 
 export default function UploadedCert() {
+
+    const organizationID = localStorage.getItem("authUserId");
+
     const [isUploadBoxTogglerActive, setIsUploadBoxTogglerActive] = useState(false);
     const [isUploadEnvHidden, setIsUploadEnvHidden] = useState(false);
     const [isCertificateSectionVisible, setIsCertificateSectionVisible] = useState(false);
@@ -20,7 +23,7 @@ export default function UploadedCert() {
     const [certificateList, setCertificateList] = useState([]);
 
     const [certificateData, setCertificateData] = useState({
-        organization_id: 1,
+        organization_id: organizationID,
         certificate_id: "",
         certificate_title: "",
         type: "",
@@ -94,6 +97,7 @@ export default function UploadedCert() {
         const formData = new FormData();
         formData.append("organization", certificateData.organization_id); 
         formData.append("certificate_id", certificateData.number);  // `number` on frontend -> `certificate_id` on backend
+        formData.append("certificate_title", certificateData.certificate_title);  // `certificate_title` on frontend -> `certificate_title` on backend
         formData.append("client_name", certificateData.client_name);   // `issuedTo` -> `client_name`
         formData.append("issue_date", certificateData.dateOfIssue); 
         formData.append("expiry_date", "");  // Optional
@@ -127,23 +131,23 @@ export default function UploadedCert() {
 
 
     useEffect(() => {
-        // Fetch certificate data on component mount
         const fetchCertificateData = async () => {
             try {
-                const response = await axios.get(`${config.API_BASE_URL}/api/certificates/create/`, {
+                const response = await axios.get(`${config.API_BASE_URL}/api/certificates/organization/${organizationID}/`, {
                     headers: {
-                        "Authorization": `Bearer ${localStorage.getItem("token")}`
-                    }
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
                 });
-                setCertificateList(response.data.results);
+                setCertificateList(response.data.results || []); // Default to an empty array
             } catch (error) {
                 console.error("Error fetching certificate data:", error);
+                setCertificateList([]); // Fallback to an empty array
             }
         };
-
+    
         fetchCertificateData();
     }, []);
-
+    
    // Soft delete certificate by id with confirmation
 const handleSoftDelete = async (certificate_id) => {
     // Ask for confirmation before proceeding with deletion

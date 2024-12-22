@@ -53,12 +53,18 @@ export default function CompanyDashbaord() {
       <div className="MainPage_Content">
         <div className="Large-container">
           <Routes>
+<<<<<<< HEAD
             <Route path="/" element={<PortalPage />} />
+=======
+
+          <Route path="/" element={<PortalPage />} />
+>>>>>>> 7f8b22f2b9678962d9f0511c2de1861aba081a80
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/uploaded-certificates" element={<UploadedCert />} />
             <Route path="/deleted-certificates" element={<DeletedUploadedCert />} />
             <Route path="/logon-info" element={<LogonInfo />} />
             <Route path="/profile" element={<Profile />} />
+            
           </Routes>
         </div>
 
