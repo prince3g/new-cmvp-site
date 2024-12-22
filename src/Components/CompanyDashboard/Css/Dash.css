@@ -495,7 +495,7 @@
 }
 .Search_Sec input:focus{
     background-color: transparent;
-    border:2px solid #16DB65;
+    border:2px solid #16DB65 !important; 
 }
 .Search_Sec input::placeholder{
     color: #000;
@@ -1899,6 +1899,7 @@
     font-weight: 500;
     display: -webkit-box;
 	-webkit-line-clamp: 1;
+    line-clamp: 1;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -1910,6 +1911,7 @@
     color: #6D7274;
     display: -webkit-box;
 	-webkit-line-clamp: 1;
+    line-clamp: 1;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -2607,4 +2609,419 @@
 .plan_table tr th h3{
     font-size: 16px;
     font-weight: 500;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* BackgroundSelecttion */
+
+.BackgroundSelecttion{
+    position: fixed !important;
+    right: 0 !important;
+    z-index: 3000 !important;
+    bottom: 0px;
+    width: auto;
+    min-width: 200px;
+    height: auto;
+    min-height: 200px;
+    display: flex;
+    gap:30px;
+    grid-gap: 30px;
+}
+
+.Close_BGG_SEC_Box{
+    position: fixed;
+    z-index: 3000;
+    transform: translateY(-50%);
+    top: 60%;
+    width: 30px;
+    height: 40px;
+    background-color: #04471C;
+    outline: none;
+    border: none;
+    right: 0;
+    color: #fff;
+    border-top-left-radius: 8px !important;
+    border-bottom-left-radius: 8px !important;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(30px);
+    -webkit-animation: DrowFrnt 0.5s ease forwards;
+    -moz-animation: DrowFrnt 0.5s ease forwards;
+    animation: DrowFrnt 0.5s ease forwards;
+}
+
+.Close_BGG_SEC_Box:hover{
+    background-color: #058C42;
+}
+
+.Close_BGG_SEC_Box img{
+    width: 20px;
+    display: inline-flex;
+    animation: RotateImg 5s linear infinite;
+    -webkit-animation: RotateImg 5s linear infinite;
+    -moz-animation: RotateImg 5s linear infinite;
+}
+
+@keyframes RotateImg {
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes RotateImg {
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes RotateImg {
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+
+.BGG_Box{
+    position: relative;
+    width: 300px;
+    height: auto;
+    min-height: 300px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 20px rgba(0 0 0 / 15%);
+    -moz-box-shadow: 0 0 20px rgba(0 0 0 / 15%);
+    box-shadow: 0 0 20px rgba(0 0 0 / 15%);
+    right: 20px;
+    border-top-left-radius:10px;
+    border-top-right-radius: 10px;
+    padding: 20px;
+    transform: translateX(30px);
+    -webkit-animation: DrowFrnt 0.5s ease forwards;
+    -moz-animation: DrowFrnt 0.5s ease forwards;
+    animation: DrowFrnt 0.5s ease forwards;
+}
+@media screen and (max-width:400px){
+    .BGG_Box{
+        width: 95% !important;
+        margin-left: 2.5% !important;
+        right: 0px !important;
+    }
+}
+.BGG_Box_Top{
+    position: relative;
+    width: 100%;
+    text-align: right;
+}
+.BGG_Box_Top span{
+    cursor: pointer;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.BGG_Box_Top span img{
+    max-width:25px;
+}
+
+.BGG_Box_Sub{
+    position: relative;
+    width: 100%;
+}
+.BGG_Box_Sub p{
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.BGG_Box_Thumbs{
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    gap:10px;
+    margin-top: 30px;
+}
+
+.BGG_Box_Thumbs button{
+    position: relative;
+    width: 100%;
+    height: 60px;
+    border:none;
+    background-color: #EFF2F6;
+    border: 2px solid transparent;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease-in-out;
+    border-radius: 3px;
+    overflow: hidden;
+    padding: 0px;
+}
+
+.BGG_Box_Thumbs_Btn_active,
+.BGG_Box_Thumbs button:hover{
+    border-color: #16DB65 !important;
+    border-width: 4px !important;
+}
+
+.BGG_Box_Thumbs button img{
+    position: relative;
+    width:inherit;
+    height:inherit;
+    object-fit: cover;
+    object-position: center;
+}
+
+.BGG_Box_Thumbs_Btn_active img{
+    opacity: 0.4;
+}
+
+.BGG_Box_Selected_Thumbs{
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 15px;
+}
+
+.BGG_Box_Selected_Thumbs p{
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.BGG_Box_Selected_Thumbs button{
+    position: relative;
+    width: 100%;
+    height: 150px;
+    border:none;
+    background-color: #EFF2F6;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease-in-out;
+    border-radius: 3px;
+    overflow: hidden;
+    border:2px dashed #c6c7c9;
+    margin-top: 10px;
+    font-size: 10px;
+    padding: 0px;
+}
+.BGG_Box_Selected_Thumbs button img{
+    position: relative;
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+    object-position: center;
+}
+
+.BGG_Box_Selected_Thumbs button span span{
+    text-decoration: underline !important;
+}
+
+.BGG_Box_Selected_Thumbs h6{
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 10px;
+    font-weight: normal;
+    color: #333232;
+}
+
+.BGG_Box_Selected_Thumbs h5{
+    font-size: 10px;
+    font-weight: normal;
+    font-style: italic;
+    color: #fa2020;
+    margin-top: 5px;
+    display: block;
+}
+
+.BGG_Box_PUb_Btn{
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 15px;
+}
+
+.BGG_Box_PUb_Btn button{
+    position: relative;
+    width: 100%;
+    height: 45px;
+    border:none;
+    background-color: #058C42;
+    color: #fff;
+    border: 2px solid transparent;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease-in-out;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.BGG_Box_PUb_Btn button:hover{
+    background-color: #04471C;
+}
+
+
+/* BGG_Prev */
+
+.BGG_Prev{
+    position: relative;
+    width: 450px;
+    height: 270px;
+    background-color: #04471C;
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 1;
+    padding:20px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #fff;
+    user-select: none;
+    transform: translateX(30px);
+    opacity: 0;
+    -webkit-animation: DrowFrnt 0.5s ease forwards;
+    -moz-animation: DrowFrnt 0.5s ease forwards;
+    animation: DrowFrnt 0.5s ease forwards;
+}
+@media screen and (max-width:900px){
+    .BGG_Prev{
+        display: none !important;
+    }
+}
+@keyframes DrowFrnt{
+    from{
+        transform: translateX(30px);  
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+@-webkit-keyframes DrowFrnt{
+    from{
+        transform: translateX(30px);  
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+@-moz-keyframes DrowFrnt{
+    from{
+        transform: translateX(30px);  
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+.BGG_Prev img.BGG_Prev_BG{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: -100;
+    top: 0;
+    left: 0;
+}
+
+.BGG_Prev_Gradi{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: -50; 
+    top:0;
+    left: 0;
+    opacity: 0.8;
+}
+
+.ggg_1{
+    position: relative;
+    width: 100%;
+}
+
+.ggg_1 img{
+    max-width: 50px;
+}
+
+.ggg_2{
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.ggg_2 h3{
+    font-size: 18px;
+    font-weight: 500;
+    display: -webkit-box; 
+  -webkit-box-orient: vertical; 
+  text-overflow: ellipsis; 
+  -webkit-line-clamp: 2; 
+  line-clamp: 2; 
+  overflow: hidden;
+}
+.ggg_2 h3 span{
+    position: relative;
+    display: inline-flex;
+    padding: 10px;
+    background: url(../Img/rounded-line.svg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.ggg_2 p{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 9px;
+    padding: 5px 10px;
+    background-color: #42CA67;
+    color: #fff;
+    margin-top: 10px;
+    border-radius: 3px;
+    border:1px solid rgba(255,255,255,0.5);
+}
+
+.ggg_3{
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.ggg_3 p{
+    font-size: 9px;
+    display: -webkit-box; 
+    -webkit-box-orient: vertical; 
+    text-overflow: ellipsis; 
+    -webkit-line-clamp: 1; 
+    line-clamp: 1; 
+    text-decoration: underline;
+    overflow: hidden;
 }

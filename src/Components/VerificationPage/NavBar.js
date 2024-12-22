@@ -16,8 +16,7 @@ export default function NavBar() {
                     <img src={Logo2} className="Logo_2"></img>
                 </a>
                 <ul className="Nav_Ul">
-                    <li><a href="#"><img src={Globe} className="GlobeIcon_1"></img> <img src={Globe1} className="GlobeIcon_2"></img>  <span>Company website</span></a></li>
-                    <li><a href="#" className="support_btn">Support</a></li>
+                    <li><a href="#"><img src={Globe} className="GlobeIcon_1"></img> <img src={Globe1} className="GlobeIcon_2"></img>  <span>CMVP Official Site</span></a></li>
                 </ul>
             </div>
         </nav>

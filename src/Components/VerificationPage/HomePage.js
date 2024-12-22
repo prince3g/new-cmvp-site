@@ -12,15 +12,20 @@ import CertIcon from './Img/cert-icon.svg';
 import CertIcon1 from './Img/cert-icon1.svg';
 import ArrowIcon from './Img/arrow.svg';
 
+import VerifiedBadge1 from './Img/verified-badge1.svg';
+
 import SearchReasult from './Search_Reasult';
 // import config from '../config';
 import config from '../../config.js'
 
-import CengGlobalLogo from './Img/cenglobal_logo.png';
+import SampleImage from "../CompanyDashboard/Img/CompLogo.png"; 
+
+
+import PageFixeImg from '../PageFixeImg.jpg';
 
 export default function HomePage() {
 
-    const { backgroundColor } = useContext(ColorContext);
+    const currentYear = new Date().getFullYear(); // Get the current year
 
 
     const { orgID } = useParams(); // Get orgId from URL
@@ -97,66 +102,62 @@ export default function HomePage() {
         setShowResult(false);
     };
 
+
+    const { backgroundColor } = useContext(ColorContext);
+
+    const calculateForegroundColor = (hex) => {
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+      return luminance > 128 ? "#000000" : "#FFFFFF"; // Black if bright, white if dim
+    };
+  
+    const textColor = calculateForegroundColor(backgroundColor);
+
     
     return (
-        <div className={`hero-sec ${showResult ? 'Showresult' : ''}`}
+        <div className={`Verification-Landing-page ${showResult ? 'Showresult' : ''}`}>
+             <NavBar />
+             <div className="Verification-Hero-sec">
+            <img src={PageFixeImg} className="Fixed-ImgBg"></img>
 
+        <div className="Fix-hero-Bg"
         style={{
-            height: "100vh",
-            backgroundColor,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "#FFF",
-            transition: "background-color 0.5s ease", // Smooth transition for color change
-          }}
-        
-        >
-            <NavBar />
-            <button className="Go_Back_Sch_Btn Close_Search_Btn" onClick={handleGoBackClick}>
-                           <img src={ArrowIcon} alt="Cert Icon"/>
-                        </button>
-            <section className="Search_Reasult_Sec">
-          
-                <div className="Site-container">
-                    {/* <SearchReasult data={responseData} /> */}
-                    {showResult && responseData && <SearchReasult data={responseData} />}
+          background: `linear-gradient(135deg, ${backgroundColor}, #0D2818)`, // Example gradient
+          color: textColor,
+          transition: "background 0.5s ease", // Smooth transition for gradient change
+        }}
+      ></div>
 
-                    <div className='Cont_btn_Sec'>
-                        <button className="Go_Back_Sch_Btn" onClick={handleGoBackClick}>
-                            Search for a verified certificate <img src={CertIcon1} alt="Cert Icon"/>
-                        </button>
-                    </div>
-                </div>
-            </section>
+      <div className="site-container">
+        <div className="hero-Tttrs">
+        <h6><img src={VerifiedBadge1} alt="Verified Badge" /> Certificate Verification Portal</h6>
+            <h2>Cen Global Services Limited <br></br> <span className="anim-Hh-span">Certificate</span> Verification</h2>
+        </div>
 
-            <div className="Site-container">
-                <div className="Hero_Grid">
-                    <div className="Hero_Dlt">
-                    <div className="CEO-INtro">
-                <div className="CEO-INtro-1">
-                   {/* <span><img src={CengGlobalLogo} alt="CEO"/></span> */}
-                   <span> <img  src={`${config.API_BASE_URL}${organizationData?.logo || CengGlobalLogo}`}  alt="Organization Logo" /></span>
-                </div>
-                <div className="CEO-INtro-2">
-                    {/* <h4>Global Services Limited </h4> */}
-                    <h4>{organizationData?.name || "Organization Name"}</h4>
-                    <p>Welcome to {organizationData?.name || "Organization"}{" "} certification verification portal by CMVP</p>
-                    {/* <p>Welcome to Global Services Limited certification verification portal by CMVP</p> */}
-                </div>
-            </div>
+      </div>
+      <div className="Inputer-SecOO">
+      <a href="#" className="Inputer-SecOO-Top">
+        <div className="dal-1">
+          <img src={SampleImage} alt="CEO" />
+        </div>
+        <div className="dal-2">
+          <h4>Cen Global Services Limited</h4>
+          <p>Certificate verification portal</p>
+        </div>
+      </a>
+      <div className="has-Form">
+        {/* <h3>Search for a verified certificate here</h3> */}
 
-                        <div className="Hero_Dlt_main">
-                            <h1>Verify any certificate with CMVP</h1>
-                            <div className="DlT_Form_Sec">
-                                <p>Search for a verified certificate here</p>
-                                <form className="Verification_Search_Form" onSubmit={handleFormSubmit}>
+        <form className="Verification_Search_Form" onSubmit={handleFormSubmit}>
                                     <div className="V_Form_Input F_V_Form_Input">
                                         <input 
                                             type="text" 
                                             placeholder="Enter certificate number" 
                                             value={certificateNumber}
                                             onChange={(e) => setCertificateNumber(e.target.value)}
+                                            // className="certNum_Inpt"
                                         />
                                         <img src={CertIcon} alt="Cert Icon"/>
                                     </div>
@@ -173,23 +174,55 @@ export default function HomePage() {
                                         />
                                     </div>
                                     <div className="V_Form_Input">
-                                        <button type="submit" disabled={loading}>
+                                        <button type="submit" disabled={loading}
+                                          style={{
+                                            background: backgroundColor, // Example gradient
+                                            color: textColor,
+                                          }}
+                                        >
                                                 {loading ? "Verifying..." : "See certificate"}
                                         </button>
                                     </div>
                                 </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="Hero_Banner">
-                        <img src={HeroBanner1} alt="Hero Banner" className="heroBan_1"/>
-                        <img src={HeroBanner2} alt="Hero Banner" className="heroBan_2"/>
-                        <p>Powered by Proliance LTD</p>
+                                
+        </div>
+      </div>
+
+      <footer className="GGf-foot">
+        <div className="Nav-Content">
+            <a href="https://prolianceltd.com" target="_blank" >Powered by Proliance LTD (ISO 9001 certifided company)</a>
+                <p>© {currentYear} CMVP </p>
+        </div>
+        </footer>
+
+
+</div>
+
+
+<button className="Go_Back_Sch_Btn Close_Search_Btn" onClick={handleGoBackClick}>
+                           <img src={ArrowIcon} alt="Cert Icon"/>
+                        </button>
+            <section className="Search_Reasult_Sec">
+          
+                <div className="Site-container">
+                    {/* <SearchReasult data={responseData} /> */}
+                    {showResult && responseData && <SearchReasult data={responseData} />}
+
+                    <div className='Cont_btn_Sec'>
+                        <button className="Go_Back_Sch_Btn" onClick={handleGoBackClick}
+                        style={{
+                            background: backgroundColor, // Example gradient
+                            color: textColor,
+                          }}
+                        >
+                            Search for a verified certificate <img src={CertIcon1} alt="Cert Icon"/>
+                        </button>
                     </div>
                 </div>
-            </div>
+            </section>
 
-          
-        </div>
+
+
+</div>
     );
 }
