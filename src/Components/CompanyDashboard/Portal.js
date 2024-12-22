@@ -44,7 +44,7 @@ export default function PortalPage() {
         // Fetch the uploaded certificates count
         const fetchUploadedCertificates = async () => {
             try {
-                const response = await axios.get(`${config.API_BASE_URL}/api/certificates/create/`, {
+                const response = await axios.get(`${config.API_BASE_URL}/api/certificates/organization/${organizationID}/`, {
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem("token")}`
                     }
@@ -58,12 +58,13 @@ export default function PortalPage() {
         // Fetch the deleted certificates count
         const fetchDeletedCertificates = async () => {
             try {
-                const response = await axios.get(`${config.API_BASE_URL}/api/certificates/soft-deleted-certificates/`, {
+                const response = await axios.get(`${config.API_BASE_URL}/api/certificates/soft-deleted-certificates/${organizationID}/`, {
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem("token")}`
                     }
                 });
-                setDeletedCount(response.data.length);
+                //console.log(response.data); // Log the response structure
+                setDeletedCount(response.data.results.length); // Update based on correct structure
             } catch (error) {
                 console.error("Error fetching deleted certificates count:", error);
             }
@@ -186,7 +187,7 @@ export default function PortalPage() {
             setLoading(false);
         }
     };
-    
+
 
     return (
         <div className="PortalPage">

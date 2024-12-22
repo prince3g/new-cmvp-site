@@ -61,6 +61,8 @@ const LoginPage = () => {
       localStorage.setItem("authName", token.name);
       localStorage.setItem("authPhone", token.phone);
       localStorage.setItem("authAddress", token.address);
+
+      localStorage.setItem("loginTime", token.login_time); // Store login time
       // localStorage.setItem("authImageUrl", token.logo_url);
       // console.log("Response Data: ", token)
       // Redirect to the dashboard or home page

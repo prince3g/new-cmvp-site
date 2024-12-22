@@ -7,6 +7,9 @@ import VerifiedIcon from './Img/verified-badge2.svg';
 import TrashIcon from './Img/trash.svg';
 
 export default function DeletedUploadedCert() {
+
+    const organizationID = localStorage.getItem("authUserId");
+
     const [isUploadBoxTogglerActive, setIsUploadBoxTogglerActive] = useState(false);
     const [isUploadEnvHidden, setIsUploadEnvHidden] = useState(false);
     const [isCertificateSectionVisible, setIsCertificateSectionVisible] = useState(false);
@@ -18,16 +21,17 @@ export default function DeletedUploadedCert() {
     useEffect(() => {
         const fetchCertificates = async () => {
             try {
-                const response = await axios.get(`${config.API_BASE_URL}/api/certificates/soft-deleted-certificates/`);
-                setCertificates(response.data);
+                const response = await axios.get(`${config.API_BASE_URL}/api/certificates/soft-deleted-certificates/${organizationID}/`);
+                setCertificates(response.data.results); // Use 'results' from the response
             } catch (error) {
                 console.error("Error fetching certificates:", error);
             }
         };
-
+    
         fetchCertificates();
-    }, []);  // Empty dependency array ensures this runs once when the component mounts
-
+    }, []);
+    
+    
     // Toggle the visibility of the upload environment section
     const toggleUploadEnvVisibility = () => {
         setIsUploadEnvHidden(!isUploadEnvHidden);
