@@ -2686,6 +2686,7 @@
     100%{
         transform: rotate(360deg);
     }
+    
 }
 
 @-moz-keyframes RotateImg {
