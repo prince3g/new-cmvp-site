@@ -4,6 +4,7 @@ import RegNavBar from "./RegNavBar";
 import config from "../../config.js";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import './SignupPage.css';
 
 import ShowPassIcon from "./Img/showPass-icon.svg";
 import HidePassIcon from "./Img/hidePass-icon.svg";
@@ -22,6 +23,8 @@ const SignupPage = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  
+  const [passwordStrength, setPasswordStrength] = useState(""); // Track password strength
 
   const togglePasswordVisibility = () => {
     setPasswordType((prevType) =>
@@ -31,11 +34,17 @@ const SignupPage = () => {
 
   const handleInputChange = (e) => {
     const { name, value, type, files } = e.target;
+
+    if (name === "password") {
+      setPasswordStrength(assessPasswordStrength(value));
+    }
+
     setFormData((prevData) => ({
       ...prevData,
-      [name]: type === "file" ? files[0] : value, // Handle file uploads
+      [name]: type === "file" ? files[0] : value,
     }));
   };
+
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -85,6 +94,35 @@ const SignupPage = () => {
       );
     } finally {
       setIsLoading(false);
+    }
+  };
+
+
+
+  const assessPasswordStrength = (password) => {
+    if (!password) return "";
+    const strengthCriteria = [
+      password.length >= 8,
+      /[A-Z]/.test(password),
+      /[a-z]/.test(password),
+      /\d/.test(password),
+      /[!@#$%^&*(),.?":{}|<>]/.test(password),
+    ];
+
+    const metCriteria = strengthCriteria.filter(Boolean).length;
+
+    switch (metCriteria) {
+      case 0:
+      case 1:
+        return "Weak";
+      case 2:
+      case 3:
+        return "Moderate";
+      case 4:
+      case 5:
+        return "Strong";
+      default:
+        return "";
     }
   };
 
@@ -183,6 +221,16 @@ const SignupPage = () => {
                 </div>
 
                 <div className="Reg_Input">
+
+                <div className="password-strength">
+                  <p>Password Strength: {passwordStrength}</p>
+                  <div
+                    className={`strength-bar ${
+                      passwordStrength.toLowerCase()
+                    }`}
+                  ></div>
+                </div>
+
                   <button
                     type="submit"
                     className="primary-background-color"

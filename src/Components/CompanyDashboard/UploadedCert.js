@@ -10,6 +10,7 @@ import config from '../../config.js'
 export default function UploadedCert() {
 
     const organizationID = localStorage.getItem("authUserId");
+    const organizationName = localStorage.getItem("authName");
 
     const [isUploadBoxTogglerActive, setIsUploadBoxTogglerActive] = useState(false);
     const [isUploadEnvHidden, setIsUploadEnvHidden] = useState(false);
@@ -30,7 +31,7 @@ export default function UploadedCert() {
         client_name: "",
         dateOfIssue: "",
         issueNumber: "",
-        issuedBy: ""
+        issuedBy: organizationName
     });
 
     const toggleUploadEnvVisibility = () => {
@@ -391,8 +392,8 @@ const handleSoftDelete = async (certificate_id) => {
                         <td>{cert.certificate_id}</td>
                         <td>{cert.client_name}</td>
                         <td>{new Date(cert.issue_date).toLocaleDateString()}</td>
-                        <td>{cert.issueNumber || "N/A"}</td>
-                        <td>{cert.issuedBy || "Proliance LTD"}</td>
+                        <td>{cert.issueNumber || cert.certificate_id}</td>
+                        <td>{cert.issuedBy  ||  cert.organization_name}</td>
                         <td>
                             <span className="Status_Respn"><img src={VerifiedIcon} alt="Verified Icon" /> Verified</span>
                         </td>

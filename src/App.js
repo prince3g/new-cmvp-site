@@ -10,6 +10,7 @@ import SignupPage from './Components/MainPage/SignupPage';
 import Terms from './Components/MainPage/Terms';
 import Privacy from './Components/MainPage/Privacy';
 import ForgotPassPage from './Components/MainPage/ForgotPassPage';
+import ForgotPassPageReset from './Components/MainPage/ForgotPassPageReset';
 import HelpPage from './Components/MainPage/HelpPage';
 
 import ScrollToTop from './Components/ScrollToTop';
@@ -29,6 +30,7 @@ function App() {
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/forgot-password" element={<ForgotPassPage />} />
+        <Route path="/forgotten_pass_reset/:uidb64/:token/" element={<ForgotPassPageReset />} />
         <Route path="/help" element={<HelpPage />} />
         <Route path="/verification/:orgID/:OrgName" element={<VerificationPage />} />
         <Route path="/dashboard/*" element={<CompanyDashbaord />} />
