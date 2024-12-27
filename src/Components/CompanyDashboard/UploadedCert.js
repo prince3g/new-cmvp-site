@@ -107,6 +107,9 @@ export default function UploadedCert() {
         }
     
         try {
+
+            console.log([...formData.entries()]);
+
             const response = await axios.post(`${config.API_BASE_URL}/api/certificates/create/`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",

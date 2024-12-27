@@ -19,28 +19,28 @@ import AdminDashbaord from './Components/AdminDashboard/AdminDashboard';
 
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
+    // <Router>
+    //   <ScrollToTop />
       
-      <div className="App">
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/forgot-password" element={<ForgotPassPage />} />
-        <Route path="/forgotten_pass_reset/:uidb64/:token/" element={<ForgotPassPageReset />} />
-        <Route path="/help" element={<HelpPage />} />
-        <Route path="/verification/:orgID/:OrgName" element={<VerificationPage />} />
-        <Route path="/dashboard/*" element={<CompanyDashbaord />} />
-      </Routes>
-      </div>
-    </Router>
+    //   <div className="App">
+    //   <Routes>
+    //     <Route path="/" element={<LandingPage />} />
+    //     <Route path="/login" element={<LoginPage />} />
+    //     <Route path="/signup" element={<SignupPage />} />
+    //     <Route path="/terms" element={<Terms />} />
+    //     <Route path="/privacy" element={<Privacy />} />
+    //     <Route path="/forgot-password" element={<ForgotPassPage />} />
+    //     <Route path="/forgotten_pass_reset/:uidb64/:token/" element={<ForgotPassPageReset />} />
+    //     <Route path="/help" element={<HelpPage />} />
+    //     <Route path="/verification/:orgID/:OrgName" element={<VerificationPage />} />
+    //     <Route path="/dashboard/*" element={<CompanyDashbaord />} />
+    //   </Routes>
+    //   </div>
+    // </Router>
 
-    // <div>
-    //   <AdminDashbaord />
-    // </div>
+    <div>
+      <AdminDashbaord />
+    </div>
     // <div>
     //   <VerificationPage />
     // </div>
