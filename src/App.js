@@ -21,8 +21,6 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-    <Router>
-      <ScrollToTop />
       
       <div className="App">
       <Routes>
