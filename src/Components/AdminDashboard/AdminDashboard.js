@@ -14,7 +14,6 @@ import EditSubScript from "./EditSubScript";
 export default function AdminDashbaord() {
   return (
     <div className="AdminDashbaord">
-      <Router>
         <NavBar />
         <div className="MainPage_Content">
           <div className="Large-container">
@@ -30,7 +29,6 @@ export default function AdminDashbaord() {
           </div>
           <AdminFooter />
         </div>
-      </Router>
     </div>
   );
 }
