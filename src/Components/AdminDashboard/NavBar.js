@@ -69,7 +69,7 @@ export default function NavBar() {
             <div className="NavBar_Body" onClick={closeSidebar}></div>
             <nav className="Left_Dash_Nav">
                 <div className="Top_Dash_nav">
-                    <Link to="/" onClick={() => handleLinkClick('/')}>
+                    <Link to="/admin-dashboard/" onClick={() => handleLinkClick('/admin-dashboard/')}>
                         <img src={LitDashLogo} alt="Dashboard Logo"></img>
                     </Link>
                     <button className="Side_Nav_Toggler" onClick={closeSidebar}><img src={CloseIcon} alt="Close Icon"></img></button>
@@ -78,9 +78,9 @@ export default function NavBar() {
                 <ul>
                     <li>
                     <Link
-                        to="admin-dahsboard/"
-                        className={location.pathname === '/' ? 'ActiveLNav_Icon' : ''}
-                        onClick={() => handleLinkClick('/')}
+                        to="/admin-dashboard/"
+                        className={location.pathname === '/admin-dashboard/' ? 'ActiveLNav_Icon' : ''}
+                        onClick={() => handleLinkClick('/admin-dashboard/')}
                     >
                         <span className="material-icons">home</span>
                         <span>Admin</span>
@@ -100,9 +100,9 @@ export default function NavBar() {
 
                     <li>
                     <Link
-                        to="/users"
-                        className={location.pathname === '/users' ? 'ActiveLNav_Icon' : ''}
-                        onClick={() => handleLinkClick('/users')}
+                        to="/admin-dashboard/users"
+                        className={location.pathname === '/admin-dashboard/users' ? 'ActiveLNav_Icon' : ''}
+                        onClick={() => handleLinkClick('/admin-dashboard/users')}
                     >
                         <span className="material-icons">group</span>
                         <span>Registered users</span>
@@ -111,9 +111,9 @@ export default function NavBar() {
 
                     <li>
                     <Link
-                        to="/notification"
-                        className={location.pathname === '/notification' ? 'ActiveLNav_Icon' : ''}
-                        onClick={() => handleLinkClick('/notification')}
+                        to="/admin-dashboard/notification"
+                        className={location.pathname === '/admin-dashboard/notification' ? 'ActiveLNav_Icon' : ''}
+                        onClick={() => handleLinkClick('/admin-dashboard/notification')}
                     >
                         <span className="material-icons">notifications</span>
                         <span>Notification</span>
@@ -122,9 +122,9 @@ export default function NavBar() {
 
                     <li>
                     <Link
-                        to="/logout"
-                        className={location.pathname === '/logout' ? 'ActiveLNav_Icon' : ''}
-                        onClick={() => handleLinkClick('/logout')}
+                        to="/admin-dashboard/logout"
+                        className={location.pathname === '/admin-dashboard/logout' ? 'ActiveLNav_Icon' : ''}
+                        onClick={() => handleLinkClick('/admin-dashboard/logout')}
                     >
                         <span className="material-icons">logout</span>
                         <span>Log out</span>
@@ -154,7 +154,7 @@ export default function NavBar() {
                             <span className="material-icons">menu</span>
                             </button>
 
-                                <Link to="/" onClick={() => handleLinkClick('/')}>
+                                <Link to="/admin-dashboard/" onClick={() => handleLinkClick('/')}>
                                     <img src={DashLogo} alt="Dashboard Logo"></img>
                                 </Link>
                             </div>

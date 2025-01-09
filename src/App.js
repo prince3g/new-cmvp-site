@@ -34,6 +34,8 @@ function App() {
         <Route path="/help" element={<HelpPage />} />
         <Route path="/verification/:orgID/:OrgName" element={<VerificationPage />} />
         <Route path="/dashboard/*" element={<CompanyDashbaord />} />
+        <Route path="/admin-dashboard/*" element={<AdminDashbaord />} />
+        <Route path="/verification-page/*" element={<VerificationPage />} />
         
         <Route path="/admin-dashboard/*" element={<AdminDashbaord />} />
         <Route path="/verification/*" element={<VerificationPage />} />
@@ -41,13 +43,6 @@ function App() {
       </div>
     </Router>
 
-    // <div>
-    //   <AdminDashbaord />
-    // </div>
-    
-    // <div>
-    //   <VerificationPage />
-    // </div>
 
 
   );
