@@ -11,12 +11,10 @@ import HeroBanner2 from './Img/heroImg2.png';
 import CertIcon from './Img/cert-icon.svg';
 import CertIcon1 from './Img/cert-icon1.svg';
 import ArrowIcon from './Img/arrow.svg';
-
+import config from "../../config.js";
 import VerifiedBadge1 from './Img/verified-badge1.svg';
 
 import SearchReasult from './Search_Reasult';
-// import config from '../config';
-import config from '../../config.js'
 
 import SampleImage from "../CompanyDashboard/Img/CompLogo.png"; 
 
@@ -33,6 +31,7 @@ export default function HomePage() {
     const [responseData, setResponseData] = useState(null); // New state for API response
 
     const [organizationData, setOrganizationData] = useState(null); // For organization data
+    const [organizationData_name, setOrganizationData_name] = useState(null); // For organization data
     const [loading, setLoading] = useState(false); // State for loader
     const [certificateNumber, setCertificateNumber] = useState('');
     const [issuedDate, setIssuedDate] = useState(null);
@@ -80,11 +79,12 @@ export default function HomePage() {
     const fetchOrganizationData = async () => {
       try {
         const response = await fetch(
-          `http://127.0.0.1:9090/api/accounts/auth/organizations/${orgID}/`
+          `${config.API_BASE_URL}/api/accounts/auth/organizations/${orgID}/`
         );
         const data = await response.json();
         if (response.ok) {
           setOrganizationData(data);
+          setOrganizationData_name(data.name);
         } else {
           console.error("Error fetching organization data:", data.message);
         }
@@ -115,7 +115,8 @@ export default function HomePage() {
   
     const textColor = calculateForegroundColor(backgroundColor);
 
-    
+
+
     return (
         <div className={`Verification-Landing-page ${showResult ? 'Showresult' : ''}`}>
              <NavBar />
@@ -133,17 +134,22 @@ export default function HomePage() {
       <div className="site-container">
         <div className="hero-Tttrs">
         <h6><img src={VerifiedBadge1} alt="Verified Badge" /> Certificate Verification Portal</h6>
-            <h2>Cen Global Services Limited <br></br> <span className="anim-Hh-span">Certificate</span> Verification</h2>
+            <h2>{organizationData_name} <br></br> <span className="anim-Hh-span">Certificate</span> Verification</h2>
         </div>
 
       </div>
       <div className="Inputer-SecOO">
       <a href="#" className="Inputer-SecOO-Top">
         <div className="dal-1">
-          <img src={SampleImage} alt="CEO" />
+        <img 
+            src={`${config.API_BASE_URL}/media/organization_logos/Creative_Contact__App.png`} 
+            alt="CEO" 
+            onError={(e) => { e.target.onerror = null; e.target.src = SampleImage; }}
+        />
+          {/* <img src={SampleImage} alt="CEO" /> */}
         </div>
         <div className="dal-2">
-          <h4>Cen Global Services Limited</h4>
+          <h4>{organizationData_name} </h4>
           <p>Certificate verification portal</p>
         </div>
       </a>

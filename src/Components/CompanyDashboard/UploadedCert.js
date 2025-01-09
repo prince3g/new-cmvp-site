@@ -26,13 +26,14 @@ export default function UploadedCert() {
     const [certificateData, setCertificateData] = useState({
         organization_id: organizationID,
         certificate_id: "",
-        certificate_title: "",
+        certificate_title: "", // Ensure this field is included
         type: "",
         client_name: "",
         dateOfIssue: "",
         issueNumber: "",
         issuedBy: organizationName
     });
+    
 
     const toggleUploadEnvVisibility = () => {
         setIsUploadEnvHidden(!isUploadEnvHidden);
@@ -94,13 +95,20 @@ export default function UploadedCert() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         setLoading(true);
+
+        console.log("certificateData.certificate_title")
+        console.log(certificateData.certificate_title)
+        console.log("certificateData.certificate_title")
     
         const formData = new FormData();
         formData.append("organization", certificateData.organization_id); 
         formData.append("certificate_id", certificateData.number);  // `number` on frontend -> `certificate_id` on backend
-        formData.append("certificate_title", certificateData.certificate_title);  // `certificate_title` on frontend -> `certificate_title` on backend
         formData.append("client_name", certificateData.client_name);   // `issuedTo` -> `client_name`
         formData.append("issue_date", certificateData.dateOfIssue); 
+        formData.append("certificate_title", certificateData.certificate_title); // Ensure this line is present
+
+        formData.append("issuedBy", certificateData.issuedBy); 
+
         formData.append("expiry_date", "");  // Optional
         if (selectedFile) {
             formData.append("pdf_file", selectedFile);
@@ -108,7 +116,6 @@ export default function UploadedCert() {
     
         try {
 
-            console.log([...formData.entries()]);
 
             const response = await axios.post(`${config.API_BASE_URL}/api/certificates/create/`, formData, {
                 headers: {
@@ -245,13 +252,14 @@ const handleSoftDelete = async (certificate_id) => {
                                             />
                                         </div>
                                         <div className="Cert_Form_input">
-                                            <input
-                                                type="text"
-                                                name="certificate_title"
-                                                value={certificateData.certificate_title}
-                                                onChange={handleInputChange}
-                                                placeholder="Certificate title"
-                                            />
+                                        <input
+                                            type="text"
+                                            name="certificate_title" // Ensure this matches the state property
+                                            value={certificateData.certificate_title}
+                                            onChange={handleInputChange}
+                                            placeholder="Certificate title"
+                                        />
+
                                         </div>
                                         <div className="Cert_Form_input">
                                             <input

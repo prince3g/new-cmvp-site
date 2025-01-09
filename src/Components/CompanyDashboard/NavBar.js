@@ -29,6 +29,7 @@ import CloseIcon from './Img/close_icon.svg';
 import './Css/Dash.css';
 
 export default function NavBar() {
+    
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const [isSidebarOpen, setSidebarOpen] = useState(false);
     const [showSearch, setShowSearch] = useState(false); // State to manage search visibility

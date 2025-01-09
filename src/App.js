@@ -34,6 +34,9 @@ function App() {
         <Route path="/help" element={<HelpPage />} />
         <Route path="/verification/:orgID/:OrgName" element={<VerificationPage />} />
         <Route path="/dashboard/*" element={<CompanyDashbaord />} />
+        
+        <Route path="/admin-dashboard/*" element={<AdminDashbaord />} />
+        <Route path="/verification/*" element={<VerificationPage />} />
       </Routes>
       </div>
     </Router>

@@ -167,6 +167,11 @@ export default function PortalPage() {
         formData.append("certificate_id", certificateData.number);
         formData.append("client_name", certificateData.client_name);
         formData.append("issue_date", certificateData.dateOfIssue); 
+
+        formData.append("certificate_title", certificateData.certificate_title); // Ensure this line is present
+
+        formData.append("issuedBy", certificateData.issuedBy); 
+        
         formData.append("expiry_date", "");  // Optional
         if (selectedFile) {
             formData.append("pdf_file", selectedFile);

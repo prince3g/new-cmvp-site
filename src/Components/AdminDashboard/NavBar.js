@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import './Css/Dash.css';
 
@@ -19,6 +19,17 @@ import UserPlaceholder from './Img/user-placeholder.png';
 import './Css/Dash.css';
 
 export default function NavBar() {
+
+
+        const [isLoggedIn, setIsLoggedIn] = useState(false);
+    
+        useEffect(() => {
+            const token = localStorage.getItem("authToken");
+            setIsLoggedIn(!!token);
+        }, []);
+    
+
+
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const [isSidebarOpen, setSidebarOpen] = useState(false);
     const [showSearch, setShowSearch] = useState(false); // State to manage search visibility
@@ -40,6 +51,8 @@ export default function NavBar() {
 
     const handleLinkClick = (path) => {
         closeSidebar();
+        localStorage.clear();
+        setIsLoggedIn(false);
     };
 
     const toggleSearch = () => {
@@ -51,6 +64,7 @@ export default function NavBar() {
     };
 
     return (
+
         <div className={`Dash_NavBar ${isSidebarOpen ? 'Toggle_NavBar' : ''}`}>
             <div className="NavBar_Body" onClick={closeSidebar}></div>
             <nav className="Left_Dash_Nav">
@@ -64,7 +78,7 @@ export default function NavBar() {
                 <ul>
                     <li>
                     <Link
-                        to="/"
+                        to="admin-dahsboard/"
                         className={location.pathname === '/' ? 'ActiveLNav_Icon' : ''}
                         onClick={() => handleLinkClick('/')}
                     >
@@ -75,7 +89,7 @@ export default function NavBar() {
 
                     <li>
                     <Link
-                        to="/subscriptions"
+                        to="admin-dashboard/subscriptions"
                         className={location.pathname === '/subscriptions' ? 'ActiveLNav_Icon' : ''}
                         onClick={() => handleLinkClick('/subscriptions')}
                     >
@@ -160,8 +174,21 @@ export default function NavBar() {
                             </div>
                            
                             <div className="Pricing_Btn_Sec">
-                                <a href="#">Logout</a>
+
+
+                            <Link
+                                to="/logout"
+                                className={location.pathname === '/logout' ? 'ActiveLNav_Icon' : ''}
+                                onClick={() => handleLinkClick('/logout')}
+                            >
+                                <span className="material-icons">logout</span>
+                                <span>Log out</span>
+                            </Link>
+
+
+                                {/* <a href="#">Logout</a> */}
                             </div>
+
                             <div className="Profile_Img_Sec">
                                 <img src={UserPlaceholder} alt="Profile"></img>
                                 <span></span>
