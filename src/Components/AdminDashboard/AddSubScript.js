@@ -54,9 +54,9 @@ export default function AddSubScript() {
         };
     
         try {
-            console.log("requestPayload")
-            console.log(requestPayload)
-            console.log("requestPayload")
+            // console.log("requestPayload")
+            // console.log(requestPayload)
+            // console.log("requestPayload")
 
             const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/subscription-plans/`, {
                 method: "POST",
@@ -67,7 +67,7 @@ export default function AddSubScript() {
             });
     
             if (response.ok) {
-                navigate("/subscriptions"); // Redirect to subscription list after success
+                navigate("/admin-dashboard/subscriptions"); // Redirect to subscription list after success
             } else {
                 const errorData = await response.json();
                 console.error("Error:", errorData);
