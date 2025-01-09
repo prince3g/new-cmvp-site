@@ -62,7 +62,7 @@ export default function SubscriptionPage() {
                                     <div className="plan_box_Top_1">
                                         <h3 className="plan_price">${plan.price}</h3>
                                         <Link 
-                                            to={`/edit-plan?id=${plan.id}&price=${plan.price}&name=${encodeURIComponent(plan.name)}
+                                            to={`/admin-dashboard/edit-plan?id=${plan.id}&price=${plan.price}&name=${encodeURIComponent(plan.name)}
                                             &storage=${encodeURIComponent(plan.features.storage || '')}
                                             &num_certificate_categories=${encodeURIComponent(plan.features.num_certificate_categories || '')}
                                             &num_daily_certificate_upload=${encodeURIComponent(plan.features.num_daily_certificate_upload || '')}

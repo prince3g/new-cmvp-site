@@ -155,7 +155,7 @@ export default function RegUsers() {
                     <div className="action-btns">
                     <Link
                         to={{
-                          pathname: "/user-profile",
+                          pathname: "/admin-dashboard/user-profile",
                           search: `?name=${organization.name}
                           &phone=${organization.phone}
                           &logo=${organization.logo}

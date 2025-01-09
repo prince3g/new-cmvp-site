@@ -176,7 +176,7 @@ const SubscriptionTable = () => {
                   <div className="action-btns">
                     <Link
                       to={{
-                        pathname: "/user-profile",
+                        pathname: "/admin-dashboard/user-profile",
                         search: `?name=${encodeURIComponent(organization.name)}&phone=${encodeURIComponent(
                           organization.phone
                         )}&logo=${encodeURIComponent(organization.logo)}&address=${encodeURIComponent(
