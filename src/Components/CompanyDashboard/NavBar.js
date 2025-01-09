@@ -80,7 +80,7 @@ export default function NavBar() {
             <div className="NavBar_Body" onClick={closeSidebar}></div>
             <nav className="Left_Dash_Nav">
                 <div className="Top_Dash_nav">
-                    <Link to="/dashboard/" onClick={() => handleLinkClick('/')}>
+                    <Link to="/" onClick={() => handleLinkClick('/')}>
                         <img src={LitDashLogo} alt="Dashboard Logo"></img>
                     </Link>
                     <button className="Side_Nav_Toggler" onClick={closeSidebar}><img src={CloseIcon} alt="Close Icon"></img></button>
@@ -158,11 +158,11 @@ export default function NavBar() {
 
                         <li>
                         <button onClick={() => {
-                            localStorage.removeItem("authToken"); // Clear token
+                            localStorage.clear(); // Clear token
                             navigate("/"); // Redirect to login
                         }}>
                              <img src={LogoutIcon} alt="Logout Icon"></img>
-                           <span>Logout</span>
+                           <span>Logout </span>
                         </button>
                         </li>
                     </ul>
