@@ -51,6 +51,9 @@ export default function NavBar() {
 
     const handleLinkClick = (path) => {
         closeSidebar();
+    };
+    const handleLinkClick1 = (path) => {
+        closeSidebar();
         localStorage.clear();
         setIsLoggedIn(false);
     };
@@ -89,7 +92,7 @@ export default function NavBar() {
 
                     <li>
                     <Link
-                        to="admin-dashboard/subscriptions"
+                        to="/admin-dashboard/subscriptions"
                         className={location.pathname === '/subscriptions' ? 'ActiveLNav_Icon' : ''}
                         onClick={() => handleLinkClick('/subscriptions')}
                     >
@@ -122,9 +125,9 @@ export default function NavBar() {
 
                     <li>
                     <Link
-                        to="/admin-dashboard/logout"
-                        className={location.pathname === '/admin-dashboard/logout' ? 'ActiveLNav_Icon' : ''}
-                        onClick={() => handleLinkClick('/admin-dashboard/logout')}
+                        to="/"
+                        className={location.pathname === '' ? 'ActiveLNav_Icon' : ''}
+                        onClick={() => handleLinkClick1('/')}
                     >
                         <span className="material-icons">logout</span>
                         <span>Log out</span>
@@ -177,9 +180,9 @@ export default function NavBar() {
 
 
                             <Link
-                                to="/logout"
-                                className={location.pathname === '/logout' ? 'ActiveLNav_Icon' : ''}
-                                onClick={() => handleLinkClick('/logout')}
+                                to="/"
+                                className={location.pathname === '/' ? 'ActiveLNav_Icon' : ''}
+                                onClick={() => handleLinkClick1('/')}
                             >
                                 <span className="material-icons">logout</span>
                                 <span>Log out</span>
