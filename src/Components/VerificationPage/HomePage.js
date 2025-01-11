@@ -30,8 +30,11 @@ export default function HomePage() {
 
     const [responseData, setResponseData] = useState(null); // New state for API response
 
-    const [organizationDatalogo, setOrganizationDataLogo] = useState(null); // For organization data
+   
     const [organizationData, setOrganizationData] = useState(null); // For organization data
+    const [organizationDatalogo, setOrganizationDataLogo] = useState(null); // For organization data
+  
+    
     const [organizationData_name, setOrganizationData_name] = useState(null); // For organization data
     const [loading, setLoading] = useState(false); // State for loader
     const [certificateNumber, setCertificateNumber] = useState('');
@@ -86,7 +89,7 @@ export default function HomePage() {
         if (response.ok) {
           setOrganizationData(data);
           setOrganizationData_name(data.name);
-          setOrganizationDataLogo(data.logo)
+          
         } else {
           console.error("Error fetching organization data:", data.message);
         }

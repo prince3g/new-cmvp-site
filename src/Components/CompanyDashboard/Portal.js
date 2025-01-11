@@ -30,6 +30,10 @@ export default function PortalPage() {
     const [categoryName, setCategoryName] = useState('');
     const [loading, setLoading] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
+
+              
+    
+    const [organizationDatalogo, setOrganizationDataLogo] = useState(null); // For organization data
     const [certificateData, setCertificateData] = useState({
         
         organization_id: organizationID,
@@ -85,6 +89,7 @@ export default function PortalPage() {
                     }
                 });
                 setUploadedCount(response.data.count);
+                setOrganizationDataLogo(response.data.logo)
             } catch (error) {
                 console.error("Error fetching uploaded certificates count:", error);
             }
@@ -292,6 +297,7 @@ return (
                                                 onChange={handleInputChange}
                                                 placeholder="Certificate ID"
                                             />
+
                                         </div>
                                         <div className="Cert_Form_input">
                                             <input

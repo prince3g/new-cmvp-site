@@ -96,9 +96,9 @@ export default function UploadedCert() {
         event.preventDefault();
         setLoading(true);
 
-        console.log("certificateData.certificate_title")
-        console.log(certificateData.certificate_title)
-        console.log("certificateData.certificate_title")
+        // console.log("certificateData.certificate_title")
+        // console.log(certificateData.certificate_title)
+        // console.log("certificateData.certificate_title")
     
         const formData = new FormData();
         formData.append("organization", certificateData.organization_id); 
@@ -124,6 +124,7 @@ export default function UploadedCert() {
                 }
             });
             alert("Certificate created successfully!");
+            window.location.reload();
         } catch (error) {
             console.error("Error creating certificate:", error);
             alert("Failed to create certificate. Please try again.");
