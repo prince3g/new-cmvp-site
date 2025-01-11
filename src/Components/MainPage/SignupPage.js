@@ -279,8 +279,10 @@ const SignupPage = () => {
     phone: "",
     address: "",
     password: "",
-    logo: null, // Initialize logo as null for file handling
+    confirmPassword: "", // New state for confirm password
+    logo: null,
   });
+  
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -309,12 +311,70 @@ const SignupPage = () => {
     }));
   };
 
+  // const handleFormSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setErrorMessage(null);
+  //   setSuccessMessage(null);
+  //   setIsLoading(true);
+
+  //   // Prepare FormData
+  //   const formDataToSend = new FormData();
+  //   formDataToSend.append("email", formData.email);
+  //   formDataToSend.append("name", formData.companyName);
+  //   formDataToSend.append("phone", formData.phone);
+  //   formDataToSend.append("address", formData.address);
+  //   formDataToSend.append("password", formData.password);
+
+  //   if (formData.logo) {
+  //     formDataToSend.append("logo", formData.logo); // Add file to FormData
+  //   }
+
+  //   try {
+  //     const response = await axios.post(
+  //       `${config.API_BASE_URL}/api/accounts/auth/organization/`,
+  //       formDataToSend,
+  //       {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data", // Ensure correct content type
+  //         },
+  //       }
+  //     );
+
+  //     setSuccessMessage("Account created successfully. Please check your email to confirm your account.");
+  //     setFormData({
+  //       email: "",
+  //       companyName: "",
+  //       phone: "",
+  //       address: "",
+  //       password: "",
+  //       logo: null,
+  //     });
+
+  //     setTimeout(() => {
+  //       navigate("/login");
+  //     }, 1000);
+  //   } catch (error) {
+  //     setErrorMessage(
+  //       error.response?.data?.detail || "Failed to create an account. Please try again."
+  //     );
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage(null);
     setSuccessMessage(null);
+  
+    // Check if passwords match
+    if (formData.password !== formData.confirmPassword) {
+      setErrorMessage("Passwords do not match");
+      return;
+    }
+  
     setIsLoading(true);
-
+  
     // Prepare FormData
     const formDataToSend = new FormData();
     formDataToSend.append("email", formData.email);
@@ -322,22 +382,22 @@ const SignupPage = () => {
     formDataToSend.append("phone", formData.phone);
     formDataToSend.append("address", formData.address);
     formDataToSend.append("password", formData.password);
-
+  
     if (formData.logo) {
-      formDataToSend.append("logo", formData.logo); // Add file to FormData
+      formDataToSend.append("logo", formData.logo);
     }
-
+  
     try {
       const response = await axios.post(
         `${config.API_BASE_URL}/api/accounts/auth/organization/`,
         formDataToSend,
         {
           headers: {
-            "Content-Type": "multipart/form-data", // Ensure correct content type
+            "Content-Type": "multipart/form-data",
           },
         }
       );
-
+  
       setSuccessMessage("Account created successfully. Please check your email to confirm your account.");
       setFormData({
         email: "",
@@ -345,9 +405,10 @@ const SignupPage = () => {
         phone: "",
         address: "",
         password: "",
+        confirmPassword: "", // Reset confirm password
         logo: null,
       });
-
+  
       setTimeout(() => {
         navigate("/login");
       }, 1000);
@@ -359,7 +420,7 @@ const SignupPage = () => {
       setIsLoading(false);
     }
   };
-
+  
   const assessPasswordStrength = (password) => {
     if (!password) return "";
     const strengthCriteria = [
@@ -472,6 +533,23 @@ const SignupPage = () => {
                     />
                   </span>
                 </div>
+                <div className="Reg_Input pass-Input">
+                <input
+                  type={passwordType}
+                  name="confirmPassword"
+                  placeholder="Confirm Password"
+                  value={formData.confirmPassword}
+                  onChange={handleInputChange}
+                  required
+                />
+                <span id="togglePassword" onClick={togglePasswordVisibility}>
+                  <img
+                    src={passwordType === "password" ? ShowPassIcon : HidePassIcon}
+                    alt={passwordType === "password" ? "Show Password" : "Hide Password"}
+                  />
+                </span>
+              </div>
+
 
                 <div className="Reg_Input">
                   <p>
