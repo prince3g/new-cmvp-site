@@ -396,7 +396,7 @@ const SignupPage = () => {
             <div className="Reg_Box">
               <div className="Reg_Box_Header">
                 <h3>Get started with CMVP</h3>
-                <p>Account creation is exclusively for companies</p>
+                <p>For business</p>
               </div>
               <form className="Reg_Form" onSubmit={handleFormSubmit}>
                 <div className="Reg_Input">
@@ -488,8 +488,11 @@ const SignupPage = () => {
                       className={`strength-bar ${
                         passwordStrength.toLowerCase()
                       }`}
-                    ></div>
+                    >
+                      
+                    </div>
                   </div>
+
 
                   <button
                     type="submit"

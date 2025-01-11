@@ -134,6 +134,8 @@ import ChatIcon from './Img/contact-chat-icon.svg';
 import LocationIcon from './Img/location-icon.svg';
 import CallIcon from './Img/call-icon.svg';
 
+import MainFooter from './MainFooter';
+
 export default function HelpPage() {
     const currentYear = new Date().getFullYear(); // Get the current year
 
@@ -217,7 +219,7 @@ export default function HelpPage() {
                                 </span>
                                 <div className="DDl_Div">
                                     <h3>Email us</h3>
-                                    <h4><a href="mailto:info@cmvp.com">info@cmvp.com</a></h4>
+                                    <h4><a href="mailto:info@cmvp.com">info@cmvp.net</a></h4>
                                 </div>
                             </li>
                             <li>
@@ -312,14 +314,7 @@ export default function HelpPage() {
                 </div>
             </div>
 
-            <div className="hero-foot">
-                <div className="site-container">
-                    <p>
-                        Powered by <a href="https://prolianceltd.com" target="_blank" rel="noopener noreferrer">Proliance LTD (ISO 9001 certified company)</a>
-                    </p>
-                    <p>© {currentYear}</p>
-                </div>
-            </div>
+           <MainFooter />
         </div>
     );
 }

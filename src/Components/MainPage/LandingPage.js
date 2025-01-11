@@ -8,6 +8,8 @@ import OnSetImg from './Img/OnSetImg.png';
 import MinusIcon from './Img/minus-icon.svg';
 import CheckIcon from './Img/check-icon.svg';
 
+import MainFooter from './MainFooter';
+
 export default function LandingPage() {
     const [plans, setPlans] = useState([]);
     const navigate = useNavigate();
@@ -123,6 +125,7 @@ export default function LandingPage() {
                 <div className="site-container">
                     <div className="HHh_Hero_Sec">
                         <h1 className="large-text">Certificate <span>Management</span> and Verification Portal</h1>
+                        <p>Experience secure and efficient digital certificate verification and management with our advanced and user-friendly portal.</p>
                         <Link to="signup">Get started with CMVP <img src={StyleArrow} alt="Arrow" /></Link>
                     </div>
                 </div>
@@ -131,15 +134,21 @@ export default function LandingPage() {
             <div className="site-container">
                 <div className="TopTt_Geta">
                     <div className="TopTt_Geta_1">
-                        <h2 className="big-text">Digital certificate verification</h2>
+                        <h2 className="big-text">Digital certificate verification system</h2>
                     </div>
                     <div className="TopTt_Geta_2">
-                        <p>Efficiently validate, issue, and manage your digital certificates with our secure and user-friendly verification and management portal.</p>
-                        <p>Experience secure and efficient digital certificate verification and management with our advanced and user-friendly portal.</p>
-                        <Link to="/signup">Get started with CMVP</Link>
+                        <p>Manage and create unique certificate verification link for;</p>
+                        <ul>
+                            <li>Inspection Certificates</li>
+                            <li>Calibration Certificates</li>
+                            <li>Training Certificates</li>
+                            <li>School results</li>
+                            <li>All generated and issued certificates requiring verification</li>
+                        </ul>
                     </div>
                 </div>
-
+                
+                
                 <div className="Pricing_Sec">
                     <div className="Pricing_top">
                         <h2 className="big-text">Subscription Plans</h2>
@@ -313,12 +322,7 @@ export default function LandingPage() {
                 </div>
             </div>
 
-            <div className="hero-foot">
-                <div className="site-container">
-                    <p>Powered by <a href="https://prolianceltd.com" target="_blank" rel="noopener noreferrer">Proliance LTD (ISO 9001 certified company)</a></p>
-                    <p>© {currentYear}</p>
-                </div>
-            </div>
+           <MainFooter />
         </div>
     );
 }
