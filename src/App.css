@@ -1181,3 +1181,11 @@
         padding:20px 0px !important;
     }
 }
+
+.strength-bar{
+    height: 4px !important;
+}
+
+.password-strength p{
+    font-size: 12px !important;
+}
