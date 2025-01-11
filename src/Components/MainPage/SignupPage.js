@@ -396,7 +396,7 @@ const SignupPage = () => {
             <div className="Reg_Box">
               <div className="Reg_Box_Header">
                 <h3>Get started with CMVP</h3>
-                <p>For business</p>
+                <p>FOR BUSINESS</p>
               </div>
               <form className="Reg_Form" onSubmit={handleFormSubmit}>
                 <div className="Reg_Input">
