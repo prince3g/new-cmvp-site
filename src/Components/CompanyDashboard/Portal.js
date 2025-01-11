@@ -16,6 +16,8 @@ export default function PortalPage() {
     const organizationID =  localStorage.getItem("authUserId");
     const organizationName =  localStorage.getItem("authName");
 
+    const [subscriptionDetails, setSubscriptionDetails] = useState(null); // Store subscription details
+    const [numDailyCertificateUpload, setNumDailyCertificateUpload] = useState(0); // State to store num_daily_certificate_upload
     const [uploadedCount, setUploadedCount] = useState(0);
     const [deletedCount, setDeletedCount] = useState(0);
     const [copyMessage, setCopyMessage] = useState('Copy verification Url');
@@ -40,6 +42,39 @@ export default function PortalPage() {
         issuedBy: ""
     });
 
+
+    useEffect(() => {
+        // Check if the user is logged in and fetch subscription details
+        const fetchSubscriptionDetails = async () => {
+            const authToken = localStorage.getItem("authToken");
+            const authUserId = localStorage.getItem("authUserId");
+    
+            if (authToken && authUserId) {
+                try {
+                    const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-subscription/${authUserId}/`, {
+                        method: "GET",
+                        headers: {
+                            "Authorization": `Bearer ${authToken}`,
+                        },
+                    });
+    
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch subscription details");
+                    }
+    
+                    const data = await response.json();
+                    localStorage.setItem("subscriptionDetails", JSON.stringify(data)); // Store subscription data in local storage
+                    console.log("Subscription Details: ", data);
+    
+                } catch (error) {
+                    console.error("Error fetching subscription details:", error);
+                }
+            }
+        };
+    
+        fetchSubscriptionDetails();
+    }, []); // Empty dependency array, runs on component mount
+    
     useEffect(() => {
         // Fetch the uploaded certificates count
         const fetchUploadedCertificates = async () => {
@@ -54,6 +89,8 @@ export default function PortalPage() {
                 console.error("Error fetching uploaded certificates count:", error);
             }
         };
+
+        
 
         // Fetch the deleted certificates count
         const fetchDeletedCertificates = async () => {
@@ -158,6 +195,8 @@ export default function PortalPage() {
         }));
     };
 
+
+    
     const handleSubmit = async (event) => {
         event.preventDefault();
         setLoading(true);
@@ -181,7 +220,7 @@ export default function PortalPage() {
             const response = await axios.post(`${config.API_BASE_URL}/api/certificates/create/`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                    "Authorization": `Bearer ${localStorage.getItem("authToken")}`
                 }
             });
             alert("Certificate created successfully!");
@@ -193,8 +232,22 @@ export default function PortalPage() {
         }
     };
 
+    useEffect(() => {
+        // Fetch subscription details from localStorage
+        const storedSubscriptionDetails = localStorage.getItem("subscriptionDetails");
+        if (storedSubscriptionDetails) {
+            const parsedDetails = JSON.parse(storedSubscriptionDetails);
+            setSubscriptionDetails(parsedDetails);
+            // Extract num_daily_certificate_upload
+            const numCerts = parsedDetails.subscription_plan.features.num_daily_certificate_upload;
+            setNumDailyCertificateUpload(numCerts);
+        }
+    }, []); // Runs on component mount
 
-    return (
+
+
+
+return (
         <div className="PortalPage">
             <section className={`Certificate_Sec ${isCertificateSectionVisible ? 'PopOut_Certificate_Sec' : ''}`}>
                 <div className={`Add_Cert_Carti ${isAddCertCartiVisible ? 'Active_Add_Cert_Carti' : ''}`}>
@@ -382,7 +435,7 @@ export default function PortalPage() {
                         <div className="Upload_Conunter">
                             <span>0%</span>
                             <p>
-                                You can only upload <b>50</b> certificates a day
+                            You can only upload <b>{numDailyCertificateUpload}</b> certificates a day
                             </p>
                         </div>
                     </div>
