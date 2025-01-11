@@ -245,6 +245,7 @@ export default function NavBar() {
                                 <span></span>
 
                                 <div className="Drop_gafs">
+                                <div className="Drop_gafs_main">
                                     <h3>{organizationName}</h3>
                                 <button onClick={() => {
                                         localStorage.clear(); // Clear token
@@ -252,6 +253,7 @@ export default function NavBar() {
                                     }}>
                                      Logout
                                     </button>
+                                    </div>
                                 </div>
                               
                             </div>
