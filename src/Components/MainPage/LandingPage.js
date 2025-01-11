@@ -12,6 +12,9 @@ import MainFooter from './MainFooter';
 
 export default function LandingPage() {
     const [plans, setPlans] = useState([]);
+    const [isSubscribing, setIsSubscribing] = useState(null); // Track the plan being subscribed to
+    const [isLoading, setIsLoading] = useState(false); // State to track loading status
+
     const navigate = useNavigate();
     const [flashMessage, setFlashMessage] = useState(""); // State for flash message
 
@@ -65,26 +68,77 @@ export default function LandingPage() {
 
 
 
-    const handleSubscribeClick = async (plan) => {
-        const isLoggedIn = localStorage.getItem("authToken");
+    // const handleSubscribeClick = async (plan) => {
+    //     const isLoggedIn = localStorage.getItem("authToken");
+    //     const authToken = localStorage.getItem("authToken");
+    //     const authUserId = localStorage.getItem("authUserId");
+    
+    //     if (!isLoggedIn) {
+    //         setFlashMessage("Please login or register to continue"); // Show flash message
+    //         setTimeout(() => {
+    //             setFlashMessage(""); // Clear flash message after 3 seconds
+    //             navigate("/login"); // Redirect to login
+    //         }, 3000);
+    //         return;
+    //     }
+    
+    //     const payload = {
+    //         user: authUserId,
+    //         subscription_plan: plan,
+    //         transaction_id: "your_transaction_id"
+    //     };
+    
+    //     try {
+    //         const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-subscriptions/`, {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //                 "Authorization": `Bearer ${authToken}`
+    //             },
+    //             body: JSON.stringify(payload)
+    //         });
+    
+    //         if (!response.ok) {
+    //             // Capture the detailed error message from the response
+    //             const errorData = await response.json();
+    //             throw new Error(errorData.detail || "Failed to subscribe");
+    //         }
+    
+    //         navigate("/dashboard");
+    //         const result = await response.json();
+    //         localStorage.setItem("subscription_plan", result.subscription_plan);
+
+    //     } catch (error) {
+    //         console.error("Error subscribing:", error);
+    //         // Display the error message from the backend (or generic message)
+    //         setFlashMessage(error.message || "An unexpected error occurred");
+    //         setTimeout(() => {
+    //             setFlashMessage(""); // Clear flash message after 3 seconds
+    //         }, 3000);
+    //     }
+    // };
+    
+    const handleSubscribeClick = async (planId) => {
+        setIsSubscribing(planId); // Start loader for the specific plan
         const authToken = localStorage.getItem("authToken");
         const authUserId = localStorage.getItem("authUserId");
-    
-        if (!isLoggedIn) {
-            setFlashMessage("Please login or register to continue"); // Show flash message
+
+        if (!authToken) {
+            setFlashMessage("Please login or register to continue");
             setTimeout(() => {
-                setFlashMessage(""); // Clear flash message after 3 seconds
-                navigate("/login"); // Redirect to login
+                setFlashMessage("");
+                navigate("/login");
             }, 3000);
+            setIsSubscribing(null); // Stop loader
             return;
         }
-    
+
         const payload = {
             user: authUserId,
-            subscription_plan: plan,
+            subscription_plan: planId,
             transaction_id: "your_transaction_id"
         };
-    
+
         try {
             const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-subscriptions/`, {
                 method: "POST",
@@ -94,27 +148,25 @@ export default function LandingPage() {
                 },
                 body: JSON.stringify(payload)
             });
-    
+
             if (!response.ok) {
-                // Capture the detailed error message from the response
                 const errorData = await response.json();
                 throw new Error(errorData.detail || "Failed to subscribe");
             }
-    
-            navigate("/dashboard");
+
             const result = await response.json();
             localStorage.setItem("subscription_plan", result.subscription_plan);
-
+            navigate("/dashboard");
         } catch (error) {
             console.error("Error subscribing:", error);
-            // Display the error message from the backend (or generic message)
             setFlashMessage(error.message || "An unexpected error occurred");
-            setTimeout(() => {
-                setFlashMessage(""); // Clear flash message after 3 seconds
-            }, 3000);
+            setTimeout(() => setFlashMessage(""), 3000);
+        } finally {
+            setIsSubscribing(null); // Stop loader
         }
     };
-    
+
+
     const currentYear = new Date().getFullYear(); // Get the current year
 
     return (
@@ -191,18 +243,19 @@ export default function LandingPage() {
                                             <h3>{plan.name}</h3>
                                         </div>
                                         <div className="plan_box_Top_1">
-                                            <h3 className="plan_price">${plan.price}</h3>
-                                            <Link
-                                                to="#"
-                                                onClick={(e) => {
-                                                    e.preventDefault();
-                                                    handleSubscribeClick(plan.unique_subscription_plan_id);
-                                                }}
-                                            >
-                                                Subscribe
-                                            </Link>
-                                            {flashMessage && <div className="flash-message">{flashMessage}</div>} {/* Flash message element */}
-                                        </div>
+                                    <h3 className="plan_price">${plan.price}</h3>
+                                    <Link
+                                        to="#"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            handleSubscribeClick(plan.unique_subscription_plan_id);
+                                        }}
+                                        >
+                                        {isSubscribing === plan.unique_subscription_plan_id ? "Subscribing..." : "Subscribe"}
+                                    </Link>
+                                    {flashMessage && <div className="flash-message">{flashMessage}</div>}
+                                </div>
+
                                     </div>
                                     <div className="plan_box_Body">
                                         <table className="plan_table">

@@ -20,7 +20,11 @@ export default function BackgroundSelection() {
   const [error, setError] = useState(null);
   const [showPreview, setShowPreview] = useState(false);
   const [showBackgroundSelection, setShowBackgroundSelection] = useState(true);
+
+
   const [showSettingsButton, setShowSettingsButton] = useState(false); // State for visibility of settings button
+
+
   const images = [SeltImg1, SeltImg2, SeltImg3, SeltImg4, SeltImg5, SeltImg6];
   
   const backgroundSelectRef = useRef(null);
@@ -103,6 +107,11 @@ export default function BackgroundSelection() {
     setShowBackgroundSelection(true); // Show background selection
   };
 
+  const company_name = localStorage.getItem("authName");
+  const company_unique_id = localStorage.getItem("authName");
+
+
+
   return (
     <>
       {showBackgroundSelection && (
@@ -126,7 +135,7 @@ export default function BackgroundSelection() {
               </div>
               <div className="ggg_2">
                 <h3>
-                  Cen Global Services Limited <br />
+                  {company_name} <br />
                   <span>Certificate</span> Verification
                 </h3>
                 <p
