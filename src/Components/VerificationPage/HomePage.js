@@ -89,6 +89,7 @@ export default function HomePage() {
         if (response.ok) {
           setOrganizationData(data);
           setOrganizationData_name(data.name);
+          setOrganizationDataLogo(data.logo)
           
         } else {
           console.error("Error fetching organization data:", data.message);

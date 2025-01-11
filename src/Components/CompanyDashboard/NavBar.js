@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link, useLocation } from "react-router-dom";
+import config from '../../config.js';
 import './Css/Dash.css';
 
 import DashLogo from './Img/DashLogo.png';
@@ -31,7 +32,7 @@ import './Css/Dash.css';
 export default function NavBar() {
 
     const [organizationDatalogo, setOrganizationDataLogo] = useState(null); // For organization data
-     
+    const organizationID =  localStorage.getItem("authUserId");
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const [isSidebarOpen, setSidebarOpen] = useState(false);
     const [showSearch, setShowSearch] = useState(false); // State to manage search visibility
@@ -75,6 +76,27 @@ export default function NavBar() {
   }, [navigate]);
 
 
+  // Fetch organization data
+  useEffect(() => {
+    const fetchOrganizationData = async () => {
+      try {
+        const response = await fetch(
+          `${config.API_BASE_URL}/api/accounts/auth/organizations/${organizationID}/`
+        );
+        const data = await response.json();
+        if (response.ok) {
+          setOrganizationDataLogo(data.logo)
+          
+        } else {
+          console.error("Error fetching organization data:", data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching organization data:", error);
+      }
+    };
+
+    fetchOrganizationData();
+  }, [organizationID]);
 
 
     return (
@@ -85,7 +107,7 @@ export default function NavBar() {
                     <Link to="/" onClick={() => handleLinkClick('/')}>
                         <img src={LitDashLogo} alt="Dashboard Logo"></img>
                     </Link>
-                    <button className="Side_Nav_Toggler" onClick={closeSidebar}><img src={CloseIcon} alt="Close Icon"></img></button>
+                    <button className="Side_Nav_Toggler" onClick={closeSidebar}><img src={`${config.API_BASE_URL}${organizationDatalogo}`}  alt="Close Icon"></img></button>
                 </div>
                 <div className="Nav_Main">
                     <ul>
@@ -218,7 +240,7 @@ export default function NavBar() {
                                 <Link to="/dashboard/pricing" className={location.pathname === '/pricing' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/pricing')}>Pricing</Link>
                             </div>
                             <div className="Profile_Img_Sec">
-                                <img  src={SampleImage}  alt="Sample"></img>
+                                <img  src={`${config.API_BASE_URL}${organizationDatalogo}`}  alt="Sample"></img>
                                 <span></span>
 
                               

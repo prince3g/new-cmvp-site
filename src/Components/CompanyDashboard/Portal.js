@@ -229,6 +229,7 @@ export default function PortalPage() {
                 }
             });
             alert("Certificate created successfully!");
+            
             window.location.reload();
         } catch (error) {
             console.error("Error creating certificate:", error);
