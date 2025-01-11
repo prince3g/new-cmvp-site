@@ -240,7 +240,7 @@ const handleSoftDelete = async (certificate_id) => {
                         <form className="Main_CC_Mn" onSubmit={handleSubmit}>
                             <div className="L_CC_Mn">
                                 <div className="L_CC_Mn_main">
-                                    <h3>Upload certificate</h3>
+                                    <h3>Edit certificate</h3>
                                     <div className="Certificate_Form">
                                         <div className="Cert_Form_input">
                                             <input
@@ -313,9 +313,7 @@ const handleSoftDelete = async (certificate_id) => {
                                 <div className="R_CC_Mn_Main">
                                     <h4>Upload file (optional)</h4>
                                     <p>
-                                        <b>Note:</b> File uploaded won't be displayed on user portal and it’s totally
-                                        optional. If you don’t want to upload a file click on the submit button to
-                                        continue.
+                                        <b>Note:</b> The uploaded file is solely for internal records management purposes and will not be visible to the verifier or the general public.
                                     </p>
 
                                     <div 
@@ -373,7 +371,7 @@ const handleSoftDelete = async (certificate_id) => {
         <h3>Training certificate</h3>
         <div className="Cart_select_Sec">
             <select value={selectedCategory} onChange={handleChange}>
-                <option value="">Select certificate category</option>
+                <option value="">All certificate</option>
                 <option value="training">Training certificate</option>
                 <option value="inspection">Inspection certificate</option>
             </select>
@@ -425,7 +423,7 @@ const handleSoftDelete = async (certificate_id) => {
                         </td>
                         <td>
                             <div className="td_Btns">
-                                <button onClick={handlePreviewButtonClick}>Preview</button>
+                                <button onClick={handlePreviewButtonClick}>Edit</button>
                                 <button onClick={() => handleSoftDelete(cert.certificate_id)}>Delete</button>
                             </div>
                         </td>

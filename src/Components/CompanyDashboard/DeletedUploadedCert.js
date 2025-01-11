@@ -88,7 +88,7 @@ export default function DeletedUploadedCert() {
                     <h3>Training certificate</h3>
                     <div className="Cart_select_Sec">
                         <select value={selectedCategory} onChange={handleChange}>
-                            <option value="">Select certificate category</option>
+                            <option value="">All certificate</option>
                             <option value="training">Training certificate</option>
                             <option value="inspection">Inspection certificate</option>
                         </select>

@@ -354,9 +354,7 @@ return (
                                 <div className="R_CC_Mn_Main">
                                     <h4>Upload file (optional)</h4>
                                     <p>
-                                        <b>Note:</b> File uploaded won't be displayed on user portal and it’s totally
-                                        optional. If you don’t want to upload a file click on the submit button to
-                                        continue.
+                                        <b>Note:</b> The uploaded file is solely for internal records management purposes and will not be visible to the verifier or the general public.
                                     </p>
 
                                     <div 

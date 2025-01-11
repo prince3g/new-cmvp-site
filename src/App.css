@@ -1189,3 +1189,14 @@
 .password-strength p{
     font-size: 12px !important;
 }
+
+
+.Drop_gafs{
+    position: absolute;
+    width: 200px;
+    height: auto;
+    background-color: red;
+    right: 0px;
+    top: 100%;
+    padding: 10px;
+}

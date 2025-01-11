@@ -29,7 +29,8 @@ import CloseIcon from './Img/close_icon.svg';
 import './Css/Dash.css';
 
 export default function NavBar() {
-    
+    const organizationID =  localStorage.getItem("authUserId");
+    const organizationName =  localStorage.getItem("authName");
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const [isSidebarOpen, setSidebarOpen] = useState(false);
     const [showSearch, setShowSearch] = useState(false); // State to manage search visibility
@@ -92,7 +93,7 @@ export default function NavBar() {
                         <li>
                             <Link to="/dashboard/" className={location.pathname === '/portal' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/portal')}>
                                 <img src={PortalIcon} alt="Portal Icon"></img>
-                                <span>My portal</span>
+                                <span>Upload Certificate</span>
                             </Link>
                         </li>
 
@@ -219,6 +220,15 @@ export default function NavBar() {
                                 <img  src={SampleImage}  alt="Sample"></img>
                                 <span></span>
 
+                                <div className="Drop_gafs">
+                                    <h3>{organizationName}</h3>
+                                <button onClick={() => {
+                                        localStorage.clear(); // Clear token
+                                        navigate("/"); // Redirect to login
+                                    }}>
+                                     Logout
+                                    </button>
+                                </div>
                               
                             </div>
                         </div>
