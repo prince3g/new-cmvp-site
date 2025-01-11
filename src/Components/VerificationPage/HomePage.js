@@ -30,7 +30,11 @@ export default function HomePage() {
 
     const [responseData, setResponseData] = useState(null); // New state for API response
 
+   
     const [organizationData, setOrganizationData] = useState(null); // For organization data
+    const [organizationDatalogo, setOrganizationDataLogo] = useState(null); // For organization data
+  
+    
     const [organizationData_name, setOrganizationData_name] = useState(null); // For organization data
     const [loading, setLoading] = useState(false); // State for loader
     const [certificateNumber, setCertificateNumber] = useState('');
@@ -85,6 +89,8 @@ export default function HomePage() {
         if (response.ok) {
           setOrganizationData(data);
           setOrganizationData_name(data.name);
+          setOrganizationDataLogo(data.logo)
+          
         } else {
           console.error("Error fetching organization data:", data.message);
         }
@@ -142,9 +148,9 @@ export default function HomePage() {
       <a href="#" className="Inputer-SecOO-Top">
         <div className="dal-1">
         <img 
-            src={`${config.API_BASE_URL}/media/organization_logos/Creative_Contact__App.png`} 
+            src={`${config.API_BASE_URL}${organizationDatalogo}`} 
             alt="CEO" 
-            onError={(e) => { e.target.onerror = null; e.target.src = SampleImage; }}
+            // onError={(e) => { e.target.onerror = null; e.target.src = SampleImage; }}
         />
           {/* <img src={SampleImage} alt="CEO" /> */}
         </div>
