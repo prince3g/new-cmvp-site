@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import SiteNavBar from './SiteNavBar';
 
+import MainFooter from './MainFooter';
+
 
 export default function Privacy() {
     const currentYear = new Date().getFullYear(); // Get the current year
@@ -82,12 +84,7 @@ export default function Privacy() {
                 </div>
             </div>
 
-            <div className="hero-foot">
-            <div className="site-container">
-            <p>Powered by <a href="https://prolianceltd.com" target="_blank" rel="noopener noreferrer">Proliance LTD (ISO 9001 certifided company)</a></p>
-                    <p>© {currentYear}</p>
-                    </div>
-                </div>
+         <MainFooter />
 
                 
         </div>
