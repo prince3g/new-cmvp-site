@@ -147,8 +147,26 @@ export default function LandingPage() {
                         </ul>
                     </div>
                 </div>
+
+                <div className="haggs-sec">
+                    <div className="haggs-Box">
+                        <p>GENERATE UNIQUE CERTIFICATE VERIFICATION URL LINK</p>
+                    </div>
+
+                    <div className="haggs-Box">
+                        <p>CREATE MULTIPLE CERTIFICATE CATEGORIES</p>
+                    </div>
+
+                    <div className="haggs-Box">
+                        <p>UPLOAD CERTIFICATE DETAILS FOR VERFIFICATION</p>
+                    </div>
+
+                    <div className="haggs-Box">
+                        <p>CUSTOMISE YOUR VERIFICATION PAGE</p>
+                    </div>
+                </div>
                 
-                
+
                 <div className="Pricing_Sec">
                     <div className="Pricing_top">
                         <h2 className="big-text">Subscription Plans</h2>
