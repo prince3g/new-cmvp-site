@@ -24,6 +24,8 @@ export default function SubscriptionPage() {
         fetchPlans();
     }, []);
 
+
+    
     return (
         <div className="DDD-Seco">
             <div className="Pricing_Sec">
