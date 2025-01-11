@@ -1154,7 +1154,7 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 20px;
     grid-template-rows: auto;
-    margin-bottom: 20px !important;
+    margin-bottom: 80px !important;
 }
 
 .haggs-Box{
