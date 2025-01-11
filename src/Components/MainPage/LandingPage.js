@@ -8,6 +8,9 @@ import OnSetImg from './Img/OnSetImg.png';
 import MinusIcon from './Img/minus-icon.svg';
 import CheckIcon from './Img/check-icon.svg';
 
+
+import DirectArrow from './Img/direct-arrow.png';
+
 import MainFooter from './MainFooter';
 
 export default function LandingPage() {
@@ -202,18 +205,22 @@ export default function LandingPage() {
 
                 <div className="haggs-sec">
                     <div className="haggs-Box">
+                        <img src={DirectArrow}></img>
                         <p>GENERATE UNIQUE CERTIFICATE VERIFICATION URL LINK</p>
                     </div>
 
                     <div className="haggs-Box">
+                    <img src={DirectArrow}></img>
                         <p>CREATE MULTIPLE CERTIFICATE CATEGORIES</p>
                     </div>
 
                     <div className="haggs-Box">
+                    <img src={DirectArrow}></img>
                         <p>UPLOAD CERTIFICATE DETAILS FOR VERFIFICATION</p>
                     </div>
 
                     <div className="haggs-Box">
+                    <img src={DirectArrow}></img>
                         <p>CUSTOMISE YOUR VERIFICATION PAGE</p>
                     </div>
                 </div>

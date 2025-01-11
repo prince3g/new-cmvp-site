@@ -1154,7 +1154,7 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 20px;
     grid-template-rows: auto;
-    margin-bottom: 20px !important;
+    margin-bottom: 80px !important;
 }
 
 .haggs-Box{
@@ -1162,16 +1162,30 @@
     width: 100%;
     height: auto;
     padding: 30px;
-    text-align: center;
-    background-color: #F3F6F7 !important;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    background-color: #0D2818;
+    color: #fff;
+    gap: 12px;
+    grid-gap: 12px;
 }
 .haggs-Box p{
-    font-size: 14px !important;
+    font-size: 13px !important;
 }
-
+.haggs-Box img{
+    width: 17px;
+}
 
 @media screen and (max-width:1000px){
     .HHh_Hero_Sec p{
         padding:20px 0px !important;
     }
+}
+
+.strength-bar{
+    height: 4px !important;
+}
+
+.password-strength p{
+    font-size: 12px !important;
 }

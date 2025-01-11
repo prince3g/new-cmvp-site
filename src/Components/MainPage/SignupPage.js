@@ -150,14 +150,14 @@ const SignupPage = () => {
             <div className="Reg_Box">
               <div className="Reg_Box_Header">
                 <h3>Get started with CMVP</h3>
-                <p>For business</p>
+                <p>FOR BUSINESS</p>
               </div>
               <form className="Reg_Form" onSubmit={handleFormSubmit}>
                 <div className="Reg_Input">
                   <input
                     type="email"
                     name="email"
-                    placeholder="Work Email"
+                    placeholder=" Company Email"
                     value={formData.email}
                     onChange={handleInputChange}
                     required
@@ -187,6 +187,16 @@ const SignupPage = () => {
                     />
                   </div>
                 </div>
+
+                <div className="Reg_Input">
+                  <input
+                    type="text"
+                    name=""
+                    placeholder="Company Registration Number"
+                    required
+                  />
+                </div>
+
 
                 <div className="Reg_Input">
                   <input

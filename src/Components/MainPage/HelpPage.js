@@ -219,7 +219,7 @@ export default function HelpPage() {
                                 </span>
                                 <div className="DDl_Div">
                                     <h3>Email us</h3>
-                                    <h4><a href="mailto:info@cmvp.com">info@cmvp.net</a></h4>
+                                    <h4><a href="mailto:info@cmvp.net">info@cmvp.net</a></h4>
                                 </div>
                             </li>
                             <li>
