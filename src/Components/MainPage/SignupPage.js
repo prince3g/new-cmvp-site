@@ -157,7 +157,7 @@ const SignupPage = () => {
                   <input
                     type="email"
                     name="email"
-                    placeholder="Work Email"
+                    placeholder=" Company Email"
                     value={formData.email}
                     onChange={handleInputChange}
                     required
@@ -187,6 +187,16 @@ const SignupPage = () => {
                     />
                   </div>
                 </div>
+
+                <div className="Reg_Input">
+                  <input
+                    type="text"
+                    name=""
+                    placeholder="Company Registration Number"
+                    required
+                  />
+                </div>
+
 
                 <div className="Reg_Input">
                   <input
