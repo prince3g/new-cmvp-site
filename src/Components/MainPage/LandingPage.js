@@ -67,6 +67,7 @@ export default function LandingPage() {
 
 
 
+
     const handleSubscribeClick = async (plan) => {
         const isLoggedIn = localStorage.getItem("authToken");
         const authToken = localStorage.getItem("authToken");
@@ -106,7 +107,7 @@ export default function LandingPage() {
             navigate("/dashboard");
             const result = await response.json();
             localStorage.setItem("subscription_plan", result.subscription_plan);
-            
+
         } catch (error) {
             console.error("Error subscribing:", error);
             // Display the error message from the backend (or generic message)
@@ -117,7 +118,6 @@ export default function LandingPage() {
         }
     };
     
-
     const currentYear = new Date().getFullYear(); // Get the current year
 
     return (
