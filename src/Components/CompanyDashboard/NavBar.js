@@ -33,7 +33,6 @@ export default function NavBar() {
 
     const [organizationDatalogo, setOrganizationDataLogo] = useState(null); // For organization data
     const organizationID =  localStorage.getItem("authUserId");
-    const organizationID =  localStorage.getItem("authUserId");
     const organizationName =  localStorage.getItem("authName");
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const [isSidebarOpen, setSidebarOpen] = useState(false);
