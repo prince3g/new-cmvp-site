@@ -10,6 +10,9 @@ import config from '../../config.js'
 export default function UploadedCert() {
 
     const organizationID = localStorage.getItem("authUserId");
+
+
+
     const organizationName = localStorage.getItem("authName");
 
     const [isUploadBoxTogglerActive, setIsUploadBoxTogglerActive] = useState(false);
@@ -17,6 +20,7 @@ export default function UploadedCert() {
     const [isCertificateSectionVisible, setIsCertificateSectionVisible] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
     const [imagePreview, setImagePreview] = useState(null);
+    const [certificateID, setCertificateID] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
     const [loading, setLoading] = useState(false); // Loader state
     const [loadingDownload, setLoadingDownload] = useState(false); // Loader state for download
@@ -31,7 +35,10 @@ export default function UploadedCert() {
         client_name: "",
         dateOfIssue: "",
         issueNumber: "",
-        issuedBy: organizationName
+        issuedBy: organizationName,
+        issue_date: "",
+        examination_type: "",
+        issuedNumber: ""
     });
     
 
@@ -44,9 +51,31 @@ export default function UploadedCert() {
         setIsCertificateSectionVisible(false);
     };
 
-    const handlePreviewButtonClick = () => {
-        setIsCertificateSectionVisible(true);
+    const handlePreviewButtonClick = async (certificate_id) => {
+        try {
+            const response = await axios.get(`${config.API_BASE_URL}/api/certificates/create/${certificate_id}/`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            });
+    
+            setCertificateData(response.data); // Populate the form with the fetched certificate data
+            
+            // Prepopulate the image preview if cert.image exists
+            if (response.data.pdf_file) {
+                setImagePreview(response.data.pdf_file);
+                setCertificateID(response.data.id);
+            } else {
+                setImagePreview(null); // Reset if no image is present
+            }
+    
+            setIsCertificateSectionVisible(true); // Show the form for editing
+        } catch (error) {
+            console.error("Error fetching certificate details:", error);
+            alert("Failed to fetch certificate details. Please try again.");
+        }
     };
+    
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
@@ -96,16 +125,21 @@ export default function UploadedCert() {
         event.preventDefault();
         setLoading(true);
 
-        // console.log("certificateData.certificate_title")
-        // console.log(certificateData.certificate_title)
-        // console.log("certificateData.certificate_title")
+        const organizationID = localStorage.getItem("authUserId");
+         
+
+        console.log("organizationID")
+        console.log(organizationID)
+        console.log("organizationID")
     
         const formData = new FormData();
-        formData.append("organization", certificateData.organization_id); 
-        formData.append("certificate_id", certificateData.number);  // `number` on frontend -> `certificate_id` on backend
+        formData.append("organization", organizationID); 
+        formData.append("certificate_id", certificateData.certificate_id);  // `number` on frontend -> `certificate_id` on backend
         formData.append("client_name", certificateData.client_name);   // `issuedTo` -> `client_name`
-        formData.append("issue_date", certificateData.dateOfIssue); 
+        formData.append("issue_date", certificateData.issue_date); 
         formData.append("certificate_title", certificateData.certificate_title); // Ensure this line is present
+        formData.append("examination_type", certificateData.examination_type); // Ensure this line is present
+        formData.append("issuedNumber", certificateData.issuedNumber); // Ensure this line is present
 
         formData.append("issuedBy", certificateData.issuedBy); 
 
@@ -116,15 +150,16 @@ export default function UploadedCert() {
     
         try {
 
-
-            const response = await axios.post(`${config.API_BASE_URL}/api/certificates/create/`, formData, {
+            const response = await axios.patch(`${config.API_BASE_URL}/api/certificates/create/${certificateID}/`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                    "Authorization": `Bearer ${localStorage.getItem("authUserId")}`
                 }
             });
-            alert("Certificate created successfully!");
+            alert("Certificate Updated successfully!");
+
             window.location.reload();
+
         } catch (error) {
             console.error("Error creating certificate:", error);
             alert("Failed to create certificate. Please try again.");
@@ -147,7 +182,7 @@ export default function UploadedCert() {
             try {
                 const response = await axios.get(`${config.API_BASE_URL}/api/certificates/organization/${organizationID}/`, {
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                     },
                 });
                 setCertificateList(response.data.results || []); // Default to an empty array
@@ -230,6 +265,8 @@ const handleSoftDelete = async (certificate_id) => {
 
     return (
         <div className="Uploaded_Cert_page">
+
+
             <section className={`Certificate_Sec ${isCertificateSectionVisible ? 'PopOut_Certificate_Sec' : ''}`}>
                 <div className="Certificate_Sec_Main">
                     <div className="site-container">
@@ -238,6 +275,8 @@ const handleSoftDelete = async (certificate_id) => {
                                 <img src={ArrowLeft} alt="Arrow Left" />
                             </button>
                         </div>
+
+                        
                         <form className="Main_CC_Mn" onSubmit={handleSubmit}>
                             <div className="L_CC_Mn">
                                 <div className="L_CC_Mn_main">
@@ -246,27 +285,29 @@ const handleSoftDelete = async (certificate_id) => {
                                         <div className="Cert_Form_input">
                                             <input
                                                 type="text"
-                                                name="number"  // Maps to `certificate_id`
-                                                value={certificateData.number}
+                                                name="certificate_id"  // Maps to `certificate_id`
+                                                value={certificateData.certificate_id}
                                                 onChange={handleInputChange}
                                                 placeholder="Certificate ID"
                                             />
                                         </div>
                                         <div className="Cert_Form_input">
+
                                         <input
                                             type="text"
-                                            name="certificate_title" // Ensure this matches the state property
-                                            value={certificateData.certificate_title}
+                                            name="certificate_title"
+                                            value={certificateData.certificate_title || ""}
                                             onChange={handleInputChange}
                                             placeholder="Certificate title"
                                         />
+
 
                                         </div>
                                         <div className="Cert_Form_input">
                                             <input
                                                 type="text"
                                                 name="type"
-                                                value={certificateData.type}
+                                                value={certificateData.examination_type}
                                                 onChange={handleInputChange}
                                                 placeholder="Type of examination / Event (optional)"
                                             />
@@ -284,7 +325,7 @@ const handleSoftDelete = async (certificate_id) => {
                                             <input
                                                 type="date"
                                                 name="dateOfIssue"  // Maps to `issue_date`
-                                                value={certificateData.dateOfIssue}
+                                                value={certificateData.issue_date}
                                                 onChange={handleInputChange}
                                                 placeholder="Date of Issue"
                                             />
@@ -292,8 +333,8 @@ const handleSoftDelete = async (certificate_id) => {
                                         <div className="Cert_Form_input">
                                             <input
                                                 type="text"
-                                                name="issueNumber"
-                                                value={certificateData.issueNumber}
+                                                name="issuedNumber"
+                                                value={certificateData.issuedNumber}
                                                 onChange={handleInputChange}
                                                 placeholder="Issue number"
                                             />
@@ -343,7 +384,7 @@ const handleSoftDelete = async (certificate_id) => {
 
                                     <div className="Submit_Sec">
                                         <button type="submit" disabled={loading}>
-                                            {loading ? "Submitting..." : "Save changes"}
+                                            {loading ? "Updating Certificate..." : "Save changes"}
                                         </button>
                                     </div>
                                 </div>
@@ -352,6 +393,9 @@ const handleSoftDelete = async (certificate_id) => {
                     </div>
                 </div>
             </section>
+
+
+
 
             <div className="ToP_Upload_env">
                 <h3 
@@ -424,7 +468,10 @@ const handleSoftDelete = async (certificate_id) => {
                         </td>
                         <td>
                             <div className="td_Btns">
-                                <button onClick={handlePreviewButtonClick}>Edit</button>
+                            <button onClick={() => handlePreviewButtonClick(cert.id)}>Edit</button>
+                                {/* <button onClick={handlePreviewButtonClick(cert.certificate_id, cert.issuedBy,
+                                     cert.issueNumber, cert.client_name,
+                                     new Date(cert.issue_date).toLocaleDateString() )}>Edit</button> */}
                                 <button onClick={() => handleSoftDelete(cert.certificate_id)}>Delete</button>
                             </div>
                         </td>

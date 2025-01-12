@@ -42,7 +42,8 @@ export default function PortalPage() {
         type: "",
         client_name: "",
         dateOfIssue: "",
-        issueNumber: "",
+        issuedNumber: "",
+        examination_type: "",
         issuedBy: ""
     });
 
@@ -68,7 +69,7 @@ export default function PortalPage() {
     
                     const data = await response.json();
                     localStorage.setItem("subscriptionDetails", JSON.stringify(data)); // Store subscription data in local storage
-                    console.log("Subscription Details: ", data);
+                    // console.log("Subscription Details: ", data);
     
                 } catch (error) {
                     console.error("Error fetching subscription details:", error);
@@ -212,6 +213,13 @@ export default function PortalPage() {
         formData.append("client_name", certificateData.client_name);
         formData.append("issue_date", certificateData.dateOfIssue); 
 
+        formData.append("examination_type", certificateData.examination_type); // Ensure this line is present
+        formData.append("issuedNumber", certificateData.issuedNumber); // Ensure this line is present
+
+        formData.append("examination_type", certificateData.examination_type); // Ensure this line is present
+        formData.append("issuedNumber", certificateData.issuedNumber); // Ensure this line is present
+        
+
         formData.append("certificate_title", certificateData.certificate_title); // Ensure this line is present
 
         formData.append("issuedBy", certificateData.issuedBy); 
@@ -313,8 +321,8 @@ return (
                                         <div className="Cert_Form_input">
                                             <input
                                                 type="text"
-                                                name="type"
-                                                value={certificateData.type}
+                                                name="examination_type"
+                                                value={certificateData.examination_type}
                                                 onChange={handleInputChange}
                                                 placeholder="Type of examination / Event (optional)"
                                             />
@@ -340,8 +348,8 @@ return (
                                         <div className="Cert_Form_input">
                                             <input
                                                 type="text"
-                                                name="issueNumber"
-                                                value={certificateData.issueNumber}
+                                                name="issuedNumber"
+                                                value={certificateData.issuedNumber}
                                                 onChange={handleInputChange}
                                                 placeholder="Issue number"
                                             />
