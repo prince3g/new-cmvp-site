@@ -21,6 +21,7 @@ export default function UploadedCert() {
     const [isDragging, setIsDragging] = useState(false);
     const [imagePreview, setImagePreview] = useState(null);
     const [certificateID, setCertificateID] = useState(null);
+    const [numCertificateUploaded, setNumCertificateUploaded] = useState("0");
     const [selectedFile, setSelectedFile] = useState(null);
     const [loading, setLoading] = useState(false); // Loader state
     const [loadingDownload, setLoadingDownload] = useState(false); // Loader state for download
@@ -126,11 +127,7 @@ export default function UploadedCert() {
         setLoading(true);
 
         const organizationID = localStorage.getItem("authUserId");
-         
 
-        console.log("organizationID")
-        console.log(organizationID)
-        console.log("organizationID")
     
         const formData = new FormData();
         formData.append("organization", organizationID); 
@@ -186,6 +183,9 @@ export default function UploadedCert() {
                     },
                 });
                 setCertificateList(response.data.results || []); // Default to an empty array
+
+
+                setNumCertificateUploaded(response.data.count); // Default to an empty array
             } catch (error) {
                 console.error("Error fetching certificate data:", error);
                 setCertificateList([]); // Fallback to an empty array
@@ -265,8 +265,6 @@ const handleSoftDelete = async (certificate_id) => {
 
     return (
         <div className="Uploaded_Cert_page">
-
-
             <section className={`Certificate_Sec ${isCertificateSectionVisible ? 'PopOut_Certificate_Sec' : ''}`}>
                 <div className="Certificate_Sec_Main">
                     <div className="site-container">
@@ -405,7 +403,7 @@ const handleSoftDelete = async (certificate_id) => {
                     Uploaded Certificates <img src={AngleDownIcon} alt="Angle Down Icon" />
                 </h3>
                 <div className="Upload_Conunter">
-                    <span>90</span>
+                    <span>{numCertificateUploaded}</span>
                     <p><b>Uploaded</b> certificates</p>
                 </div>
             </div>
