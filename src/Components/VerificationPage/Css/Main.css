@@ -985,3 +985,16 @@
         font-size: 12px !important;
     }
 }
+
+
+
+
+
+.flash-message {
+    background-color: #f44336;
+    color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-align: center;
+}

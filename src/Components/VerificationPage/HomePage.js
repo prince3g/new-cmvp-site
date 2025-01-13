@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import FlashMessage from './FlashMessage'; // Import the FlashMessage component
 import { useParams } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -40,6 +41,8 @@ export default function HomePage() {
     const [certificateNumber, setCertificateNumber] = useState('');
     const [issuedDate, setIssuedDate] = useState(null);
     const [showResult, setShowResult] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");  // New state for flash message
+
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -67,10 +70,12 @@ export default function HomePage() {
                     setResponseData(data); // Save the response data
                     setShowResult(true);
                 } else {
-                    console.error('Verification Failed:', data.message);
+                    console.error('Verification Failed :', data.message);
+                    setErrorMessage(data.message || 'An error occurred');
                 }
             } catch (error) {
                 console.error('Error verifying certificate:', error);
+                setErrorMessage('Error verifying certificate: ' + error.message);
             } finally {
                 setLoading(false); // Stop the loader
             }
@@ -122,6 +127,10 @@ export default function HomePage() {
     const textColor = calculateForegroundColor(backgroundColor);
 
 
+    const handleCloseFlashMessage = () => {
+      setErrorMessage(null);
+    };
+    
 
     return (
         <div className={`Verification-Landing-page ${showResult ? 'Showresult' : ''}`}>
@@ -161,6 +170,15 @@ export default function HomePage() {
       </a>
       <div className="has-Form">
         {/* <h3>Search for a verified certificate here</h3> */}
+
+  
+        {errorMessage && (
+          <FlashMessage
+            message={errorMessage}
+            type="error"
+            onClose={handleCloseFlashMessage}
+          />
+        )}
 
         <form className="Verification_Search_Form" onSubmit={handleFormSubmit}>
                                     <div className="V_Form_Input F_V_Form_Input">
