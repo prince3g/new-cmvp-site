@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { HashLink } from 'react-router-hash-link';
 import { Link, useLocation } from "react-router-dom";
 import config from '../../config.js';
 import './Css/Dash.css';
@@ -190,8 +191,8 @@ export default function NavBar() {
 
                         <div className="upload_Add">
                             <h3>Upgrade to Pro</h3>
-                            <p>Upload up to 100 certificates a day</p>
-                            <Link to="/dashboard/pricing" className={location.pathname === '/upgrade' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/upgrade')}>Upgrade</Link>
+                            <p>Upload up to unlimited certificates a day</p>
+                            <Link to="/" className={location.pathname === '/upgrade' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/upgrade')}>Upgrade</Link>
                         </div>
 
 
@@ -250,15 +251,16 @@ export default function NavBar() {
 
 
                             <div className="Sub_Conunter">
-                                {daysLeft >= 1 ? (
-                                    <>
-                                        <span>{daysLeft}</span>
-                                        <p><b>days left</b> for your free trial</p>
-                                    </>
-                                ) : (
-                                    <p>Your free trial period has expired</p>
-                                )}
+                            {daysLeft >= 1 ? (
+                                <>
+                                <span className={daysLeft < 4 ? "blinking-text" : ""}>{daysLeft}</span>
+                                <p><b> {daysLeft > 1 ? "days" : "day"} left</b> for your free trial</p>
+                                </>
+                            ) : (
+                                <p>Your free trial period has expired</p>
+                            )}
                             </div>
+
 
 
                             <div className="Pricing_Btn_Sec">

@@ -3028,3 +3028,15 @@
     text-decoration: underline;
     overflow: hidden;
 }
+
+/* CSS for blinking effect */
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  .blinking-text {
+    animation: blink 1s step-start infinite;
+  }
+  

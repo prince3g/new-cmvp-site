@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { HashLink } from 'react-router-hash-link';
+
 import SiteNavBar from './SiteNavBar';
 import config from "../../config.js";
 import HeroWave from './Img/hero-wave.svg';
@@ -70,57 +72,6 @@ export default function LandingPage() {
 
 
 
-
-    // const handleSubscribeClick = async (plan) => {
-    //     const isLoggedIn = localStorage.getItem("authToken");
-    //     const authToken = localStorage.getItem("authToken");
-    //     const authUserId = localStorage.getItem("authUserId");
-    
-    //     if (!isLoggedIn) {
-    //         setFlashMessage("Please login or register to continue"); // Show flash message
-    //         setTimeout(() => {
-    //             setFlashMessage(""); // Clear flash message after 3 seconds
-    //             navigate("/login"); // Redirect to login
-    //         }, 3000);
-    //         return;
-    //     }
-    
-    //     const payload = {
-    //         user: authUserId,
-    //         subscription_plan: plan,
-    //         transaction_id: "your_transaction_id"
-    //     };
-    
-    //     try {
-    //         const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-subscriptions/`, {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 "Authorization": `Bearer ${authToken}`
-    //             },
-    //             body: JSON.stringify(payload)
-    //         });
-    
-    //         if (!response.ok) {
-    //             // Capture the detailed error message from the response
-    //             const errorData = await response.json();
-    //             throw new Error(errorData.detail || "Failed to subscribe");
-    //         }
-    
-    //         navigate("/dashboard");
-    //         const result = await response.json();
-    //         localStorage.setItem("subscription_plan", result.subscription_plan);
-
-    //     } catch (error) {
-    //         console.error("Error subscribing:", error);
-    //         // Display the error message from the backend (or generic message)
-    //         setFlashMessage(error.message || "An unexpected error occurred");
-    //         setTimeout(() => {
-    //             setFlashMessage(""); // Clear flash message after 3 seconds
-    //         }, 3000);
-    //     }
-    // };
-    
     const handleSubscribeClick = async (planId) => {
         setIsSubscribing(planId); // Start loader for the specific plan
         const authToken = localStorage.getItem("authToken");
@@ -143,6 +94,7 @@ export default function LandingPage() {
         };
 
         try {
+
             const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-subscriptions/`, {
                 method: "POST",
                 headers: {
@@ -170,7 +122,6 @@ export default function LandingPage() {
     };
 
 
-    const currentYear = new Date().getFullYear(); // Get the current year
 
     return (
         <div className="Landing-page MMha-page">
@@ -226,7 +177,7 @@ export default function LandingPage() {
                 </div>
                 
 
-                <div className="Pricing_Sec">
+                <div  className="Pricing_Sec">
                     <div className="Pricing_top">
                         <h2 className="big-text">Subscription Plans</h2>
                         <p>Subscription plans for certificate management and verification portal (CMVP).</p>
