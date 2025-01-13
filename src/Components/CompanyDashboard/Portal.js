@@ -240,8 +240,13 @@ export default function PortalPage() {
             
             window.location.reload();
         } catch (error) {
+            // console.error("Error creating certificate:", error);
+            // alert("Failed to create certificate. Please try again.");
+                    // Extract and display the specific error message
+            const errorMessage = error.response?.data?.error || "Failed to create certificate. Please try again.";
             console.error("Error creating certificate:", error);
-            alert("Failed to create certificate. Please try again.");
+            alert(errorMessage);
+
         } finally {
             setLoading(false);
         }
@@ -449,7 +454,7 @@ return (
                         <div className="Upload_Conunter">
                             <span>0%</span>
                             <p>
-                            You can only upload <b>{numDailyCertificateUpload}</b> certificates a day
+                                You can only upload <b>{numDailyCertificateUpload}</b> certificates a day
                             </p>
                         </div>
                     </div>
@@ -461,7 +466,7 @@ return (
 
                             <div className="Upload_env_main_Foot">
                             <p>
-                                {uploadedCount} uploaded <img src={DropArrow1} alt="Drop Arrow 1" />
+                                {uploadedCount} uploaded<img src={DropArrow1} alt="Drop Arrow 1" />
                             </p>
                             <p>
                                 {deletedCount} deleted <img src={DropArrow2} alt="Drop Arrow 2" />

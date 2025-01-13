@@ -18,6 +18,7 @@ const SignupPage = () => {
     companyName: "",
     phone: "",
     address: "",
+    registration_number: "",
     password: "",
     confirmPassword: "",
     logo: null,
@@ -74,6 +75,7 @@ const SignupPage = () => {
     formDataToSend.append("name", formData.companyName);
     formDataToSend.append("phone", formData.phone);
     formDataToSend.append("address", formData.address);
+    formDataToSend.append("registration_number", formData.registration_number);
     formDataToSend.append("password", formData.password);
 
     if (formData.logo) {
@@ -98,6 +100,7 @@ const SignupPage = () => {
         phone: "",
         address: "",
         password: "",
+        registration_number: "",
         confirmPassword: "",
         logo: null,
       });
@@ -191,12 +194,13 @@ const SignupPage = () => {
                 <div className="Reg_Input">
                   <input
                     type="text"
-                    name=""
+                    name="registration_number"
                     placeholder="Company Registration Number"
+                    value={formData.registration_number}
+                    onChange={handleInputChange}
                     required
                   />
                 </div>
-
 
                 <div className="Reg_Input">
                   <input

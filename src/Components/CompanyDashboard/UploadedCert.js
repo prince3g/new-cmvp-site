@@ -404,7 +404,9 @@ const handleSoftDelete = async (certificate_id) => {
                 </h3>
                 <div className="Upload_Conunter">
                     <span>{numCertificateUploaded}</span>
-                    <p><b>Uploaded</b> certificates</p>
+                    <p>
+                        <b>Uploaded</b> {numCertificateUploaded > 1 ? 'certificates' : 'certificate'}
+                    </p>
                 </div>
             </div>
 

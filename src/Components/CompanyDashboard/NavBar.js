@@ -31,6 +31,8 @@ import './Css/Dash.css';
 
 export default function NavBar() {
 
+    const [daysLeft, setDaysLeft] = useState(null); // State for days left
+
     const [organizationDatalogo, setOrganizationDataLogo] = useState(null); // For organization data
     const organizationID =  localStorage.getItem("authUserId");
     const organizationName =  localStorage.getItem("authName");
@@ -80,24 +82,36 @@ export default function NavBar() {
   // Fetch organization data
   useEffect(() => {
     const fetchOrganizationData = async () => {
-      try {
-        const response = await fetch(
-          `${config.API_BASE_URL}/api/accounts/auth/organizations/${organizationID}/`
-        );
-        const data = await response.json();
-        if (response.ok) {
-          setOrganizationDataLogo(data.logo)
-          
-        } else {
-          console.error("Error fetching organization data:", data.message);
+        try {
+            const response = await fetch(`${config.API_BASE_URL}/api/accounts/auth/organizations/${organizationID}/`);
+            const data = await response.json();
+            if (response.ok) {
+                setOrganizationDataLogo(data.logo);
+                // Assuming your API returns the expiry date
+                const expiryDate = new Date(data.trial_end_date); // Log this value
+
+                // console.log('expiryDate:', expiryDate);
+                
+                if (isNaN(expiryDate)) {
+                  console.error('Invalid expiryDate:', data.expiry_date);
+                } else {
+                  const today = new Date();
+                  const timeDiff = expiryDate - today;
+                  const daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                  setDaysLeft(daysRemaining);
+                }
+                
+            } else {
+                console.error("Error fetching organization data:", data.message);
+            }
+        } catch (error) {
+            console.error("Error fetching organization data:", error);
         }
-      } catch (error) {
-        console.error("Error fetching organization data:", error);
-      }
     };
 
     fetchOrganizationData();
-  }, [organizationID]);
+}, [organizationID]);
+
 
 
     return (
@@ -233,10 +247,20 @@ export default function NavBar() {
                                     <img src={SearchIcon} alt="Search Icon"></img>
                                 </Link>
                             </div>
+
+
                             <div className="Sub_Conunter">
-                                <span>30</span>
-                                <p><b>days left</b> in your subscription</p>
+                                {daysLeft >= 1 ? (
+                                    <>
+                                        <span>{daysLeft}</span>
+                                        <p><b>days left</b> for your free trial</p>
+                                    </>
+                                ) : (
+                                    <p>Your free trial period has expired</p>
+                                )}
                             </div>
+
+
                             <div className="Pricing_Btn_Sec">
                                 <Link to="/dashboard/pricing" className={location.pathname === '/pricing' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/pricing')}>Pricing</Link>
                             </div>
