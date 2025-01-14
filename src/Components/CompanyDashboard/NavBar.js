@@ -11,8 +11,6 @@ import SampleImage from './Img/CompLogo.png';
 
 import LitDashLogo from './Img/liteDashLogo.png';
 
-
-
 import HomeIcon from './Img/Homeicon.svg';
 import PortalIcon from './Img/portalicon.svg';
 import CertIcon from './Img/Certicon.svg';
@@ -39,6 +37,7 @@ export default function NavBar() {
     const organizationName =  localStorage.getItem("authName");
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const [isSidebarOpen, setSidebarOpen] = useState(false);
+    const [isSubscribed, setIsSubscribed] = useState(false);
     const [showSearch, setShowSearch] = useState(false); // State to manage search visibility
     const [activeDropIcon, setActiveDropIcon] = useState(false); // State to manage active drop icon
     const location = useLocation();
@@ -81,37 +80,79 @@ export default function NavBar() {
 
 
   // Fetch organization data
-  useEffect(() => {
-    const fetchOrganizationData = async () => {
-        try {
-            const response = await fetch(`${config.API_BASE_URL}/api/accounts/auth/organizations/${organizationID}/`);
-            const data = await response.json();
-            if (response.ok) {
-                setOrganizationDataLogo(data.logo);
-                // Assuming your API returns the expiry date
-                const expiryDate = new Date(data.trial_end_date); // Log this value
+//   useEffect(() => {
+//     const fetchOrganizationData = async () => {
+//         try {
+//             const response = await fetch(`${config.API_BASE_URL}/api/accounts/auth/organizations/${organizationID}/`);
+//             const data = await response.json();
+//             if (response.ok) {
+//                 setOrganizationDataLogo(data.logo);
+//                 console.log("data");
+//                 console.log(data);
+//                 console.log("data");
+//                 // Assuming your API returns the expiry date
+//                 const expiryDate = new Date(data.trial_end_date); // Log this value
 
-                // console.log('expiryDate:', expiryDate);
+//                 // console.log('expiryDate:', expiryDate);
                 
-                if (isNaN(expiryDate)) {
-                  console.error('Invalid expiryDate:', data.expiry_date);
-                } else {
-                  const today = new Date();
-                  const timeDiff = expiryDate - today;
-                  const daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-                  setDaysLeft(daysRemaining);
-                }
+//                 if (isNaN(expiryDate)) {
+//                   console.error('Invalid expiryDate:', data.expiry_date);
+//                 } else {
+//                   const today = new Date();
+//                   const timeDiff = expiryDate - today;
+//                   const daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+//                   setDaysLeft(daysRemaining);
+//                 }
                 
+//             } else {
+//                 console.error("Error fetching organization data:", data.message);
+//             }
+//         } catch (error) {
+//             console.error("Error fetching organization data:", error);
+//         }
+//     };
+
+//     fetchOrganizationData();
+// }, [organizationID]);
+
+
+useEffect(() => {
+    const fetchDates = async () => {
+        try {
+            // Fetch subscription data
+            const subscriptionResponse = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-subscription/${organizationID}/`);
+            const subscriptionData = await subscriptionResponse.json();
+
+            // Fetch organization data (for trial end date)
+            const organizationResponse = await fetch(`${config.API_BASE_URL}/api/accounts/auth/organizations/${organizationID}/`);
+            const organizationData = await organizationResponse.json();
+
+            setIsSubscribed(organizationData.is_subscribed)
+            setOrganizationDataLogo(organizationData.logo)
+    
+            let endDate;
+
+            if (organizationData.is_subscribed) {
+                // User is subscribed, use subscription end date
+                endDate = new Date(subscriptionData.end_date);
             } else {
-                console.error("Error fetching organization data:", data.message);
+                // User is not subscribed, use trial end date
+                endDate = new Date(organizationData.trial_end_date);
             }
+
+            const today = new Date();
+            const timeDiff = endDate - today;
+            const daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            setDaysLeft(daysRemaining);
+
         } catch (error) {
-            console.error("Error fetching organization data:", error);
+            console.error("Error fetching dates:", error);
         }
     };
 
-    fetchOrganizationData();
+    fetchDates();
 }, [organizationID]);
+
 
 
 
@@ -250,7 +291,8 @@ export default function NavBar() {
                             </div>
 
 
-                            <div className="Sub_Conunter">
+                            {/* <div className="Sub_Conunter">
+                           
                             {daysLeft >= 1 ? (
                                 <>
                                 <span className={daysLeft < 4 ? "blinking-text" : ""}>{daysLeft}</span>
@@ -259,8 +301,18 @@ export default function NavBar() {
                             ) : (
                                 <p>Your free trial period has expired</p>
                             )}
-                            </div>
+                            </div> */}
 
+                            <div className="Sub_Conunter">
+                                {daysLeft >= 1 ? (
+                                    <>
+                                        <span className={daysLeft < 4 ? "blinking-text" : ""}>{daysLeft}</span>
+                                        <p><b>{daysLeft > 1 ? "days" : "day"} left</b> {isSubscribed ? "in your subscription" : "for your free trial"}</p>
+                                    </>
+                                ) : (
+                                    <p>Your {isSubscribed ? "subscription" : "free trial"} period has expired</p>
+                                )}
+                            </div>
 
 
                             <div className="Pricing_Btn_Sec">

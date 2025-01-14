@@ -304,7 +304,7 @@ const handleSoftDelete = async (certificate_id) => {
                                         <div className="Cert_Form_input">
                                             <input
                                                 type="text"
-                                                name="type"
+                                                name="examination_type"
                                                 value={certificateData.examination_type}
                                                 onChange={handleInputChange}
                                                 placeholder="Type of examination / Event (optional)"
