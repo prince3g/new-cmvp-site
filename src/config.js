@@ -7,11 +7,9 @@ const config = {
    WEB_PAGE_BASE_URL: 'https://new-cmvp-site.vercel.app/verification',
   // WEB_PAGE_BASE_URL: 'http://localhost:3000/verification',
   
-
   };
 
 export default config;
-
 
 
 //GETTING A USER SUBSCRIPTION DETAIL: http://127.0.0.1:9090/api/subscription/auth/api/user-subscription/896dfd14-e1c2-4383-aa15-423de602b04d/
