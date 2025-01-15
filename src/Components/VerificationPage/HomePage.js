@@ -24,6 +24,9 @@ import PageFixeImg from '../PageFixeImg.jpg';
 
 export default function HomePage() {
 
+  const [backgroundImage, setBackgroundImage] = useState(null); // State to store background image URL
+
+
     const currentYear = new Date().getFullYear(); // Get the current year
 
 
@@ -43,6 +46,30 @@ export default function HomePage() {
     const [showResult, setShowResult] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");  // New state for flash message
 
+    useEffect(() => {
+      const fetchBackgroundImage = async () => {
+          try {
+              const response = await fetch(
+                  `${config.API_BASE_URL}/api/accounts/auth/organization/background_image/selected/${orgID}/`
+              );
+              const data = await response.json();
+  
+              if (response.ok) {
+                  // Set the background image URL
+                  const backgroundImageUrl = data.background_image;
+                  setBackgroundImage(backgroundImageUrl); // Save the background image URL
+              } else {
+                  console.error("Error fetching background image:", data.message);
+              }
+          } catch (error) {
+              console.error("Error fetching background image:", error);
+          }
+      };
+  
+      fetchBackgroundImage();
+  }, [orgID]);
+
+  
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -135,8 +162,17 @@ export default function HomePage() {
     return (
         <div className={`Verification-Landing-page ${showResult ? 'Showresult' : ''}`}>
              <NavBar />
-             <div className="Verification-Hero-sec">
-            <img src={PageFixeImg} className="Fixed-ImgBg"></img>
+
+
+          {/* <div className="Verification-Hero-sec">
+        <img src={PageFixeImg} className="Fixed-ImgBg"></img> */}
+
+        <div className="Verification-Hero-sec">
+            {backgroundImage ? (
+                <img src={`${config.API_BASE_URL}${backgroundImage}`} className="Fixed-ImgBg" alt="Background" />
+            ) : (
+                <img src={PageFixeImg} className="Fixed-ImgBg" alt="Fallback Background" />
+            )}
 
         <div className="Fix-hero-Bg"
         style={{

@@ -193,7 +193,7 @@ export default function UploadedCert() {
         };
     
         fetchCertificateData();
-    }, []);
+    }, [organizationID]);
     
    // Soft delete certificate by id with confirmation
 const handleSoftDelete = async (certificate_id) => {

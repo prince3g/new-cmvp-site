@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { HashLink } from 'react-router-hash-link';
-
 import SiteNavBar from './SiteNavBar';
 import config from "../../config.js";
 import HeroWave from './Img/hero-wave.svg';
@@ -9,8 +8,6 @@ import StyleArrow from './Img/style-arrow.svg';
 import OnSetImg from './Img/OnSetImg.png';
 import MinusIcon from './Img/minus-icon.svg';
 import CheckIcon from './Img/check-icon.svg';
-
-
 import DirectArrow from './Img/direct-arrow.png';
 
 import MainFooter from './MainFooter';
@@ -121,6 +118,32 @@ export default function LandingPage() {
         }
     };
 
+
+
+    const [paymentData, setpaymentData] = useState({
+        key: "", // enter your key here
+        customerId: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        amount: null,
+        narration: "",
+      });
+      let data = {
+        ...paymentData,
+        onSuccess: function (response) {
+          // function callback when payment is successful
+          console.log("callback Successful Response", response);
+        },
+        onError: function (response) {
+          // function callback when payment fails
+          console.log("callback Error Response", response);
+        },
+        onClose: function () {
+          // function callback when payment modal is closed
+          console.log("closed");
+        },
+      };
 
 
     return (
