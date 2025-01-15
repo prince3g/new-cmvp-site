@@ -305,6 +305,8 @@ export default function BackgroundSelection() {
   const [successMessage, setSuccessMessage] = useState(null); 
   const [showSettingsButton, setShowSettingsButton] = useState(false); 
   const [images, setImages] = useState([]); // State to hold images from API
+  const [isSettingBackground, setIsSettingBackground] = useState(false);
+
 
   const backgroundSelectRef = useRef(null);
 
@@ -476,11 +478,42 @@ export default function BackgroundSelection() {
 // };
 
 
+// const handleSetBackground = async () => {
+//   if (!selectedImage) {
+//     setError("No image selected");
+//     return;
+//   }
+
+//   try {
+//     const response = await axios.post(
+//       `${config.API_BASE_URL}/api/accounts/auth/organization/background_image/${selectedImage.id}/select/`,
+//       {},
+//       {
+//         headers: {
+//           Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+//         }
+//       }
+//     );
+//     setSuccessMessage("Background image set successfully!");
+
+//     setTimeout(() => {
+//       window.location.reload();
+//     }, 1000);
+
+//   } catch (error) {
+//     console.error("Failed to set background image", error);
+//     setError("Failed to set background image.");
+//   }
+// };
+
 const handleSetBackground = async () => {
   if (!selectedImage) {
     setError("No image selected");
     return;
   }
+
+  // Set loading state to true
+  setIsSettingBackground(true);
 
   try {
     const response = await axios.post(
@@ -501,9 +534,11 @@ const handleSetBackground = async () => {
   } catch (error) {
     console.error("Failed to set background image", error);
     setError("Failed to set background image.");
+  } finally {
+    // Set loading state to false after request completion
+    setIsSettingBackground(false);
   }
 };
-
 
 
   return (
@@ -598,8 +633,18 @@ const handleSetBackground = async () => {
             </div>
 
             <div className="BGG_Box_PUb_Btn">
-              <button onClick={handleSetBackground}>Set Background</button>
-            </div>
+            <button onClick={handleSetBackground}>
+              {isSettingBackground ? (
+                <>
+                  <span>Setting Background Image...</span>
+                  <div className="loader"></div> {/* Add loader icon/spinner */}
+                </>
+              ) : (
+                "Set Background"
+              )}
+            </button>
+          </div>
+
             {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
             {error && <p style={{ color: 'red' }}>{error}</p>}
           </div>
