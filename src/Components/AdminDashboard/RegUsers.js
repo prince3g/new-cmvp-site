@@ -13,9 +13,9 @@ export default function RegUsers() {
   useEffect(() => {
     // Fetch data from the API
     axios
-      .get(`${config.API_BASE_URL}/api/accounts/auth/organization/`)
+      .get(`${config.API_BASE_URL}/api/accounts/auth/subscription/organizations/subscriptions/`)
       .then((response) => {
-        setData(response.data.results); // Access the `results` array from the response
+        setData(response.data); // Access the `results` array from the response
         setLoading(false);
       })
       .catch((err) => {
@@ -88,24 +88,30 @@ export default function RegUsers() {
                   <td>{new Date(organization.date_joined).toLocaleDateString('en-GB')}</td>
 
                   {/* Actions */}
-                  <td>{organization.contact_first_name}</td>
+                  <td>{organization.subscription_plan_name}</td>
                   <td>
                     <div className="action-btns">
-                    <Link
-                        to={{
-                          pathname: "/admin-dashboard/user-profile",
-                          search: `?name=${organization.name}
-                          &phone=${organization.phone}
-                          &logo=${organization.logo}
-                          &address=${organization.address}
-                          &id=${organization.id}
-                          &email=${organization.email}
-                          &date_joined=${organization.date_joined}`,
-                        }}
-                        className="prof-bank-btn"
-                      >
-                        View Profile
-                      </Link>
+                   <Link
+                      to={{
+                        pathname: "/admin-dashboard/user-profile",
+                        search: `?num_certificates_uploaded=${encodeURIComponent(organization.num_certificates_uploaded)}
+                        &name=${encodeURIComponent(organization.name)}
+                        &phone=${encodeURIComponent(organization.phone)}
+                        // &logo=${encodeURIComponent(organization.logo)}
+                        &address=${encodeURIComponent(organization.address )}
+                        &id=${organization.id}
+                        
+                        &subscription_start_time=${encodeURIComponent(organization.subscription_start_time)}
+                        &subscription_end_time=${encodeURIComponent(organization.subscription_end_time)}
+                        &subscription_plan_name=${encodeURIComponent(organization.subscription_plan_name)}
+                        &subscription_duration=${encodeURIComponent(organization.subscription_duration)}
+                        &email=${encodeURIComponent(organization.email)}
+                        &date_joined=${encodeURIComponent(organization.date_joined)}`,
+                      }}
+                      className="prof-bank-btn"
+                    >
+                      View Profile
+                    </Link>
                       
                       <button onClick={() => handleDelete(organization.id)}>Remove</button>
                     </div>
