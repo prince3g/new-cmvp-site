@@ -95,6 +95,9 @@ export default function HomePage() {
                 const data = await response.json();
                 if (response.ok) {
                     setResponseData(data); // Save the response data
+
+
+
                     setShowResult(true);
                 } else {
                     console.error('Verification Failed :', data.message);
@@ -158,6 +161,10 @@ export default function HomePage() {
       setErrorMessage(null);
     };
     
+
+
+
+
 
     return (
         <div className={`Verification-Landing-page ${showResult ? 'Showresult' : ''}`}>

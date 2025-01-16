@@ -10,7 +10,8 @@ export default function Search_Reasult({ data }) {
         return <p>No certificate data available.</p>;
     }
 
-    const { certificate_id, certificate_title, client_name, issue_date, organization_name } = data.certificate_details;
+
+    const { certificate_id, certificate_title, client_name, issue_date, organization_name, issuedNumber } = data.certificate_details;
     const  statusV  = data.status;
 
     return (
@@ -52,6 +53,14 @@ export default function Search_Reasult({ data }) {
                                 </span>
                             </td>
                             <td><p>{client_name}</p></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>
+                                    <img src={VerifiedBadge2} alt="Verified Badge" /> Issued Number
+                                </span>
+                            </td>
+                            <td><p>{issuedNumber}</p></td>
                         </tr>
                         <tr>
                             <td>
