@@ -186,7 +186,7 @@ const SubscriptionTable = () => {
                         search: `?num_certificates_uploaded=${encodeURIComponent(organization.num_certificates_uploaded)}
                         &name=${encodeURIComponent(organization.name)}
                         &phone=${encodeURIComponent(organization.phone)}
-                        &logo=${encodeURIComponent(organization.logo)}
+                        // &logo=${encodeURIComponent(organization.logo)}
                         &address=${encodeURIComponent(organization.address )}
                         &id=${organization.id}
                         

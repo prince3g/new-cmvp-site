@@ -141,7 +141,7 @@ export default function UserProfile() {
     subscription_duration: queryParams.get("subscription_duration") || "N/A",
     num_certificates_uploaded: queryParams.get("num_certificates_uploaded") || "N/A",
 
-    logo: queryParams.get("logo") || "N/A",
+    // logo: queryParams.get("logo") || "N/A",
     RegDate: new Date(queryParams.get("date_joined")).toLocaleDateString("en-GB") || "N/A",
   };
 
