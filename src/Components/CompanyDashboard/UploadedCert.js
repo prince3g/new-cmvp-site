@@ -446,7 +446,7 @@ const handleSoftDelete = async (certificate_id) => {
                         <td>{cert.certificate_id}</td>
                         <td>{cert.client_name}</td>
                         <td>{new Date(cert.issue_date).toLocaleDateString()}</td>
-                        <td>{cert.issueNumber || cert.certificate_id}</td>
+                        <td>{cert.issuedNumber || cert.certificate_id}</td>
                         <td>{cert.issuedBy  ||  cert.organization_name}</td>
                         <td>
                             <span className="Status_Respn"><img src={VerifiedIcon} alt="Verified Icon" /> Verified</span>
