@@ -126,6 +126,7 @@ export default function UserProfile() {
   // Parse query parameters
   const queryParams = new URLSearchParams(location.search);
 
+  const [organization, setOrganization] = useState(null);
   // Extract user details from the query parameters
   const userDetails = {
     fullName: queryParams.get("name") || "N/A",
@@ -133,13 +134,36 @@ export default function UserProfile() {
     phone: queryParams.get("phone") || "N/A",
     id: queryParams.get("id") || "N/A",
     address: queryParams.get("address") || "N/A",
+
+    subscription_start_time: queryParams.get("subscription_start_time") || "N/A",
+    subscription_end_time: queryParams.get("subscription_end_time") || "N/A",
+    subscription_plan_name: queryParams.get("subscription_plan_name") || "N/A",
+    subscription_duration: queryParams.get("subscription_duration") || "N/A",
+
     logo: queryParams.get("logo") || "N/A",
     RegDate: new Date(queryParams.get("date_joined")).toLocaleDateString("en-GB") || "N/A",
   };
 
+  useEffect(() => {
+    if (userDetails.id !== "N/A") {
+      axios
+        .get(`${config.API_BASE_URL}/api/accounts/auth/organization/${userDetails.id}`)
+        .then((response) => {
+          setOrganization(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching organization data:", error);
+        });
+    }
+  }, [userDetails.id]);
+
+
   const handleBackClick = () => {
     navigate(-1);
   };
+
+
+
 
 
      // Function to handle delete
@@ -160,6 +184,10 @@ export default function UserProfile() {
       }
     };
 
+
+
+    console.log(userDetails.num_certificates_uploaded)
+
   return (
     <div className="DDD-Seco ooiais-de">
       <div className="JJha-DhA">
@@ -167,7 +195,12 @@ export default function UserProfile() {
           <div className="profile-container" id="profile">
             <div className="profile-header">
               <h1>Profile</h1>
-              <img src={userDetails.logo} alt="User Banner" />
+              {organization ? (
+                <img src={organization.logo} alt="Organization Logo" />
+              ) : (
+                <p>Loading...</p>
+              )}
+              {/* <img src={userDetails.logo} alt="User Banner" /> */}
               {/* <img src={UserBanner} alt="User Banner" /> */}
             </div>
             <hr />
@@ -205,14 +238,17 @@ export default function UserProfile() {
                 <tbody>
                   <tr>
                     <td>1</td>
-                    <td>Basic Plan</td>
-                    <td>3 Months</td>
-                    <td>12/2/2024</td>
-                    <td>12/5/2024</td>
+                    
+                    <td>{userDetails.subscription_plan_name}</td>
+                    <td>{userDetails.subscription_duration} days </td>
+                    <td>{userDetails.subscription_start_time}</td>
+                    <td>{userDetails.subscription_end_time}</td>
+                  
                     <td className="active-BGD">Active</td>
-                    <td>100</td>
+
+                    <td>{userDetails.num_certificates_uploaded || 0}</td>
                   </tr>
-                  <tr>
+                  {/* <tr>
                     <td>2</td>
                     <td>Pro Plan</td>
                     <td>1 Months</td>
@@ -220,7 +256,7 @@ export default function UserProfile() {
                     <td>12/5/2024</td>
                     <td className="expired-BGD">Active</td>
                     <td>5</td>
-                  </tr>
+                  </tr> */}
                 </tbody>
               </table>
             </div>

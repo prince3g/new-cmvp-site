@@ -91,9 +91,11 @@ const SubscriptionTable = () => {
   useEffect(() => {
     // Fetch data from the API
     axios
-      .get(`${config.API_BASE_URL}/api/accounts/auth/organization/`)
+      //.get(`${config.API_BASE_URL}/api/accounts/auth/organization/`)
+      .get(`${config.API_BASE_URL}/api/accounts/auth/subscription/organizations/subscriptions/`)
       .then((response) => {
-        setData(response.data.results); // Access the `results` array from the response
+        setData(response.data); // Access the `results` array from the response
+        //setData(response.data.results); // Access the `results` array from the response
         setLoading(false);
       })
       .catch((err) => {
@@ -160,13 +162,17 @@ const SubscriptionTable = () => {
 
                 {/* Organization Data */}
                 <td>{organization.name}</td>
-                <td>{organization.email}</td>
-                <td>{new Date(organization.date_joined).toLocaleDateString("en-GB")}</td>
-                <td>{new Date(organization.date_joined).toLocaleDateString("en-GB")}</td>
-                <td className='active-BGD'>Active</td>
+                <td>{organization.subscription_plan_name}</td>
+                <td>{organization.subscription_duration}</td>
+                {/* <td>{new Date(organization.date_joined).toLocaleDateString("en-GB")}</td> */}
+                {/* <td>{new Date(organization.date_joined).toLocaleDateString("en-GB")}</td> */}
 
                 {/* Format Date */}
-                <td>{new Date(organization.date_joined).toLocaleDateString("en-GB")}</td>
+                <td>{new Date(organization.subscription_start_time).toLocaleDateString("en-GB")}</td>
+                <td>{new Date(organization.subscription_end_time).toLocaleDateString("en-GB")}</td>
+
+                <td className='active-BGD'>Active</td>
+
 
                 {/* Contact Name */}
                 <td>{organization.num_certificates_uploaded}</td>
@@ -177,13 +183,19 @@ const SubscriptionTable = () => {
                     <Link
                       to={{
                         pathname: "/admin-dashboard/user-profile",
-                        search: `?name=${encodeURIComponent(organization.name)}&phone=${encodeURIComponent(
-                          organization.phone
-                        )}&logo=${encodeURIComponent(organization.logo)}&address=${encodeURIComponent(
-                          organization.address
-                        )}&id=${organization.id}&email=${encodeURIComponent(organization.email)}&date_joined=${encodeURIComponent(
-                          organization.date_joined
-                        )}`,
+                        search: `?num_certificates_uploaded=${encodeURIComponent(organization.num_certificates_uploaded)}
+                        &name=${encodeURIComponent(organization.name)}
+                        &phone=${encodeURIComponent(organization.phone)}
+                        &logo=${encodeURIComponent(organization.logo)}
+                        &address=${encodeURIComponent(organization.address )}
+                        &id=${organization.id}
+                        
+                        &subscription_start_time=${encodeURIComponent(organization.subscription_start_time)}
+                        &subscription_end_time=${encodeURIComponent(organization.subscription_end_time)}
+                        &subscription_plan_name=${encodeURIComponent(organization.subscription_plan_name)}
+                        &subscription_duration=${encodeURIComponent(organization.subscription_duration)}
+                        &email=${encodeURIComponent(organization.email)}
+                        &date_joined=${encodeURIComponent(organization.date_joined)}`,
                       }}
                       className="prof-bank-btn"
                     >
