@@ -239,8 +239,8 @@ export default function UserProfile() {
                     
                     <td>{userDetails.subscription_plan_name}</td>
                     <td>{userDetails.subscription_duration} days </td>
-                    <td>{userDetails.subscription_start_time}</td>
-                    <td>{userDetails.subscription_end_time}</td>
+                    <td>{userDetails.subscription_start_time || "Not Subscribed"}</td>
+                    <td>{userDetails.subscription_end_time || "Not Subscribed"}</td>
                   
                     <td className="active-BGD">Active</td>
 
