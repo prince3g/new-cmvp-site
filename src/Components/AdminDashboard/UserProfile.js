@@ -139,6 +139,7 @@ export default function UserProfile() {
     subscription_end_time: queryParams.get("subscription_end_time") || "N/A",
     subscription_plan_name: queryParams.get("subscription_plan_name") || "N/A",
     subscription_duration: queryParams.get("subscription_duration") || "N/A",
+    num_certificates_uploaded: queryParams.get("num_certificates_uploaded") || "N/A",
 
     logo: queryParams.get("logo") || "N/A",
     RegDate: new Date(queryParams.get("date_joined")).toLocaleDateString("en-GB") || "N/A",
@@ -184,9 +185,6 @@ export default function UserProfile() {
       }
     };
 
-
-
-    console.log(userDetails.num_certificates_uploaded)
 
   return (
     <div className="DDD-Seco ooiais-de">
