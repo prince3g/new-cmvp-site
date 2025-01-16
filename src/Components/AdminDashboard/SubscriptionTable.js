@@ -131,7 +131,7 @@ const SubscriptionTable = () => {
     <div className="JJha-DhA">
       <div className="Dash-Intro subscripp-header">
         <h2>Registered Users with Their Subscription Plans</h2>
-        <Link to="/add-subscription-plan" className="add-subscription-plan">
+        <Link to="/admin-dashboard/add-subscription-plan" className="add-subscription-plan">
           <span className="material-icons">add</span>
           Add Subscription Plan
         </Link>
