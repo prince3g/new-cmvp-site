@@ -172,7 +172,7 @@ export default function UserProfile() {
       const confirmDelete = window.confirm("Are you sure you want to delete this organization?");
       if (confirmDelete) {
         axios
-          .delete(`${config.API_BASE_URL}/api/accounts/auth/organization/${id}`)
+          .delete(`${config.API_BASE_URL}/api/accounts/auth/organization/${id}/`)
           .then(() => {
             // Update the state to reflect the deletion
             // setData((prevData) => prevData.filter((organization) => organization.id !== id));
