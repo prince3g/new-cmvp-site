@@ -94,8 +94,7 @@ const SubscriptionTable = () => {
       //.get(`${config.API_BASE_URL}/api/accounts/auth/organization/`)
       .get(`${config.API_BASE_URL}/api/accounts/auth/subscription/organizations/subscriptions/`)
       .then((response) => {
-        setData(response.data); // Access the `results` array from the response
-        //setData(response.data.results); // Access the `results` array from the response
+        setData(response.data); 
         setLoading(false);
       })
       .catch((err) => {
@@ -128,6 +127,17 @@ const SubscriptionTable = () => {
   if (error) {
     return <p>Error: {error}</p>;
   }
+
+
+  const calculateDaysDifference = (endDate) => {
+    if (!endDate) return 0;
+    const currentDate = new Date();
+    const endDateObj = new Date(endDate);
+    const diffTime = endDateObj - currentDate;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays > 1 ? diffDays : 0;
+  };
+
 
   return (
     <div className="JJha-DhA">
@@ -163,13 +173,19 @@ const SubscriptionTable = () => {
                 {/* Organization Data */}
                 <td>{organization.name}</td>
                 <td>{organization.subscription_plan_name}</td>
-                <td>{organization.subscription_duration}</td>
-                {/* <td>{new Date(organization.date_joined).toLocaleDateString("en-GB")}</td> */}
-                {/* <td>{new Date(organization.date_joined).toLocaleDateString("en-GB")}</td> */}
+                <td>{calculateDaysDifference(organization.subscription_end_time)} Days</td>
+                <td>
+                  {organization.subscription_start_time 
+                    ? new Date(organization.subscription_start_time).toLocaleDateString("en-GB") 
+                    : "Not Subscribed"}
+                </td>
+                
+                <td>
+                  {organization.subscription_end_time 
+                    ? new Date(organization.subscription_end_time).toLocaleDateString("en-GB") 
+                    : "Not Subscribed"}
+                </td>
 
-                {/* Format Date */}
-                <td>{new Date(organization.subscription_start_time).toLocaleDateString("en-GB")}</td>
-                <td>{new Date(organization.subscription_end_time).toLocaleDateString("en-GB")}</td>
 
                 <td className='active-BGD'>Active</td>
 

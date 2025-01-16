@@ -185,6 +185,16 @@ export default function UserProfile() {
       }
     };
 
+    const formatDateWithoutTime = (dateString) => {
+      if (!dateString || dateString === "N/A") return "Not Subscribed";
+      
+      // If the date contains a time portion (T and Z), remove it
+      const dateOnly = dateString.split("T")[0];
+      return dateOnly;
+    };
+    
+
+    
 
   return (
     <div className="DDD-Seco ooiais-de">
@@ -238,23 +248,22 @@ export default function UserProfile() {
                     <td>1</td>
                     
                     <td>{userDetails.subscription_plan_name}</td>
+
                     <td>{userDetails.subscription_duration} days </td>
-                    <td>{userDetails.subscription_start_time || "Not Subscribed"}</td>
-                    <td>{userDetails.subscription_end_time || "Not Subscribed"}</td>
+
+                    {/* <td>{userDetails.subscription_start_time || "Not Subscribed"}</td>
+                    
+                    <td>{userDetails.subscription_end_time || "Not Subscribed"}</td> */}
+
+
+                    <td>{formatDateWithoutTime(userDetails.subscription_start_time)}</td>
+                    <td>{formatDateWithoutTime(userDetails.subscription_end_time)}</td>
                   
                     <td className="active-BGD">Active</td>
 
                     <td>{userDetails.num_certificates_uploaded || 0}</td>
                   </tr>
-                  {/* <tr>
-                    <td>2</td>
-                    <td>Pro Plan</td>
-                    <td>1 Months</td>
-                    <td>12/2/2024</td>
-                    <td>12/5/2024</td>
-                    <td className="expired-BGD">Active</td>
-                    <td>5</td>
-                  </tr> */}
+
                 </tbody>
               </table>
             </div>
