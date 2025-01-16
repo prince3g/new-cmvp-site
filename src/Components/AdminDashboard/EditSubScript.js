@@ -32,6 +32,9 @@ export default function EditSubScript() {
             twentyFourSevenSupport: queryParams.get('twentyFourSevenSupport')?.trim()
         };
 
+
+
+
         setFormData({
             id: planData.id || '',
             name: planData.name || '',
@@ -53,40 +56,49 @@ export default function EditSubScript() {
         }));
     };
 
+ 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsUpdating(true);
-
+    
         const payload = {
             name: formData.name,
             price: formData.price,
-            storage: formData.storage,
-            num_certificate_categories: formData.num_certificate_categories,
-            num_daily_certificate_upload: formData.num_daily_certificate_upload,
-            access_deleted_certificates_files: formData.access_deleted_certificates_files,
-            maximum_login_users: formData.maximum_login_users,
-            twentyFourSevenSupport: formData.twentyFourSevenSupport
+            features: {
+                storage: formData.storage,
+                num_certificate_categories: formData.num_certificate_categories,
+                num_daily_certificate_upload: formData.num_daily_certificate_upload,
+                access_deleted_certificates_files: formData.access_deleted_certificates_files,
+                maximum_login_users: formData.maximum_login_users,
+                twentyFourSevenSupport: formData.twentyFourSevenSupport
+            }
         };
 
+        // console.log('Submitted payload:', payload);
+        
+    
         try {
             const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/subscription-plans/${formData.id}/`,
                 {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization: `Bearer ${localStorage.getItem('token')}` // Replace with your token logic
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
                     },
                     body: JSON.stringify(payload)
                 }
             );
-
+    
+            console.log('API response status:', response.status);
             if (!response.ok) {
+                const errorResponse = await response.json();
+                console.error('Error response:', errorResponse);
                 throw new Error(`Failed to update subscription plan: ${response.statusText}`);
             }
-
+    
             const updatedPlan = await response.json();
-            // console.log('Successfully updated plan:', updatedPlan);
-            // alert('Subscription plan updated successfully!');
+            console.log('Successfully updated plan:', updatedPlan);
+            alert('Subscription plan updated successfully!');
         } catch (error) {
             console.error('Error updating subscription plan:', error);
             alert('Failed to update subscription plan. Please try again.');
@@ -94,6 +106,8 @@ export default function EditSubScript() {
             setIsUpdating(false);
         }
     };
+    
+
     return (
         <div className="DDD-Seco hhga-uua">
             <div className="SSS-Nbahs">

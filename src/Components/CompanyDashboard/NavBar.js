@@ -325,12 +325,15 @@ useEffect(() => {
                                 <div className="Drop_gafs">
                                 <div className="Drop_gafs_main">
                                     <h3>{organizationName}</h3>
-                                <button onClick={() => {
-                                        localStorage.clear(); // Clear token
-                                        navigate("/"); // Redirect to login
+                                    <button onClick={() => {
+                                        if (window.confirm("Are you sure you want to log out?")) {
+                                            localStorage.clear(); // Clear token
+                                            navigate("/"); // Redirect to login
+                                        }
                                     }}>
-                                     Logout
+                                        Logout
                                     </button>
+
                                     </div>
                                 </div>
                               
