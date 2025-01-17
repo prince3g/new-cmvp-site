@@ -12,7 +12,6 @@ const config = {
 
 export default config;
 
-
 //GETTING A USER SUBSCRIPTION DETAIL: http://127.0.0.1:9090/api/subscription/auth/api/user-subscription/896dfd14-e1c2-4383-aa15-423de602b04d/
 
 
